@@ -1,16 +1,41 @@
+import Room from '../rooms/types/Room';
 class PlayerLocation {
-  #location: any;
+  #location: Room;
 
-  constructor(location: any) {
+  constructor(location: Room) {
     this.#location = location;
   }
 
-  update(location: any) {
+  update(location: Room) {
     this.#location = location;
   }
 
   describe() {
     this.#location.description();
+  }
+
+  left() {
+    return this.#location.left();
+  }
+
+  right() {
+    return this.#location.right();
+  }
+
+  forward() {
+    return this.#location.forward();
+  }
+
+  back() {
+    return this.#location.back();
+  }
+
+  up() {
+    return this.#location.up();
+  }
+
+  down() {
+    return this.#location.down();
   }
 }
 

@@ -1,2 +1,7 @@
 import start from './src/start';
-start();
+
+try {
+  start();
+} catch (error) {
+  process.exit(0);
+}

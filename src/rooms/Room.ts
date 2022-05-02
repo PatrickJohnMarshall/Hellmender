@@ -1,12 +1,30 @@
-class Room {
-  constructor() {
-    if (new.target === Room) {
-      throw new Error('Cannot instantiate abstract class');
-    }
+import formatLog from '../util/formatLog';
+import TypeRoom from './types/Room';
+abstract class Room {
+  abstract description(): void;
+
+  left(): TypeRoom {
+    throw new Error('NO_CONNECTION');
   }
 
-  description(): void {
-    throw new Error('Cannot describe abstract class');
+  right(): TypeRoom {
+    throw new Error('NO_CONNECTION');
+  }
+
+  forward(): TypeRoom {
+    throw new Error('NO_CONNECTION');
+  }
+
+  back(): TypeRoom {
+    throw new Error('NO_CONNECTION');
+  }
+
+  up(): TypeRoom {
+    throw new Error('NO_CONNECTION');
+  }
+
+  down(): TypeRoom {
+    throw new Error('NO_CONNECTION');
   }
 }
 
