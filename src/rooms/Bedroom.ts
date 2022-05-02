@@ -1,5 +1,6 @@
 import Room from './Room';
 import formatLog from '../util/formatLog';
+import OutsideWindow from './OutsideWindow';
 
 class Bedroom extends Room {
   constructor() {
@@ -18,6 +19,10 @@ class Bedroom extends Room {
       'In front of you is an open window across the bedroom, the morning sky beckoning you.'
     );
     formatLog('Behind you is a wall.');
+  }
+
+  forward() {
+    return new OutsideWindow();
   }
 }
 
