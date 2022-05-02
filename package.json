@@ -2,9 +2,9 @@
   "name": "zork",
   "version": "1.0.0",
   "description": "Test Text Adventure",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
-    "start": "node index.js",
+    "start": "ts-node index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,5 +23,10 @@
     "eslint": "^8.14.0",
     "eslint-config-prettier": "^8.5.0",
     "prettier": "^2.6.2"
+  },
+  "dependencies": {
+    "@types/inquirer": "^8.2.1",
+    "inquirer": "^8.2.4",
+    "ts-node": "^10.7.0"
   }
 }
