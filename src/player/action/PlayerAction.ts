@@ -23,6 +23,7 @@ class PlayerAction {
       },
     ];
 
+    formatLog('');
     let answer = (await inquirer.prompt(input)) as InquirerResponse;
     let commands = answer.action.split(' ');
     let validAnswer = this._validateCommand(commands[0]);
