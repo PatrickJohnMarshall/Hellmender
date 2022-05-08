@@ -13,7 +13,7 @@ class Bedroom extends Room {
       'To your immediate right is a dastardly grumpkin, angry and looking to steal your hat.'
     );
     formatLog(
-      "To your left is your nightstand, your wand jammed firmly in a loaf of bread you've have left overnight...slob."
+      "To your left is a nightstand, your wand jammed firmly in a loaf of bread you've left overnight...slob."
     );
     formatLog(
       'In front of you is an open window across the bedroom, the morning sky beckoning you.'
