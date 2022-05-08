@@ -1,12 +1,9 @@
 import Room from './Room';
-import formatLog from '../util/formatLog';
+import formatLog from '../../util/formatLog';
 import OutsideWindow from './OutsideWindow';
+import SecondFloorLanding from './SecondFloorLanding';
 
 class Bedroom extends Room {
-  constructor() {
-    super();
-  }
-
   description(): void {
     formatLog('You are at the apex of your grand wizard tower.');
     formatLog(
@@ -18,11 +15,10 @@ class Bedroom extends Room {
     formatLog(
       'In front of you is an open window across the bedroom, the morning sky beckoning you.'
     );
+    formatLog(
+      'Centered in the middle of the room and the tower itself is a spiral staircase leading ever downward.'
+    );
     formatLog('Behind you is a wall.');
-  }
-
-  forward() {
-    return new OutsideWindow();
   }
 }
 

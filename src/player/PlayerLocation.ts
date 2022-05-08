@@ -1,4 +1,4 @@
-import Room from '../rooms/types/Room';
+import Room from '../layout/rooms/types/Room';
 class PlayerLocation {
   #location: Room;
 

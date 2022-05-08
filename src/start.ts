@@ -1,11 +1,13 @@
 import PlayerAction from './player/action/PlayerAction';
-import Bedroom from './rooms/Bedroom';
 import PlayerLocation from './player/PlayerLocation';
 import formatLog from './util/formatLog';
+import buildLayout from './layout/buildLayout';
 
 export default async function () {
   formatLog('You put on your robe and wizard hat.');
-  const playerLocation = new PlayerLocation(new Bedroom());
+  const layout = buildLayout();
+
+  const playerLocation = new PlayerLocation(layout.getStartingRoom());
   const playerAction = new PlayerAction(playerLocation);
 
   while (true) {
