@@ -1,6 +1,7 @@
 import inquirer from 'inquirer';
 import formatLog from '../../util/formatLog';
 import PlayerMove from './PlayerMove';
+import IPlayerLocation from '../types/IPlayerLocation';
 
 type InquirerResponse = {
   action: string;
@@ -9,7 +10,7 @@ type InquirerResponse = {
 class PlayerAction {
   #playerLocation;
 
-  constructor(playerLocation: any) {
+  constructor(playerLocation: IPlayerLocation) {
     this.#playerLocation = playerLocation;
   }
 
@@ -24,19 +25,19 @@ class PlayerAction {
 
     let answer = (await inquirer.prompt(input)) as InquirerResponse;
     let commands = answer.action.split(' ');
-    let validAnswer = this.validateCommand(commands[0]);
+    let validAnswer = this._validateCommand(commands[0]);
 
     while (!validAnswer) {
       formatLog('Follow the instructions dumbass.');
       answer = await inquirer.prompt(input);
       commands = answer.action.split(' ');
-      validAnswer = this.validateCommand(answer.action);
+      validAnswer = this._validateCommand(answer.action);
     }
 
-    this.doAction(commands[0], commands[1]);
+    this._doAction(commands[0], commands[1]);
   }
 
-  validateCommand(command: string): boolean {
+  _validateCommand(command: string): boolean {
     if (command.toLowerCase() === 'quit') {
       throw new Error('Player Exit');
     }
@@ -46,7 +47,7 @@ class PlayerAction {
     return false;
   }
 
-  doAction(command: string, secondaryCommand: string): void {
+  _doAction(command: string, secondaryCommand: string): void {
     switch (command) {
       case 'move':
         const playerMove = new PlayerMove(

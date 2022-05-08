@@ -1,8 +1,10 @@
+import IPlayerLocation from '../types/IPlayerLocation';
+
 class PlayerMove {
   #playerLocation;
   #direction;
 
-  constructor(playerLocation: any, direction: string) {
+  constructor(playerLocation: IPlayerLocation, direction: string) {
     this.#playerLocation = playerLocation;
     this.#direction = direction;
   }
