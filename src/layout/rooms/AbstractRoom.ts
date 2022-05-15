@@ -10,12 +10,17 @@ type IRoomConstructor = {
 };
 
 abstract class AbstractRoom {
+  #id: string;
   #left: TypeRoom | undefined;
   #right: TypeRoom | undefined;
   #forward: TypeRoom | undefined;
   #back: TypeRoom | undefined;
   #up: TypeRoom | undefined;
   #down: TypeRoom | undefined;
+
+  constructor(id: string) {
+    this.#id = id;
+  }
 
   addConnections({ left, right, forward, back, up, down }: IRoomConstructor) {
     this.#left = left;
@@ -27,6 +32,10 @@ abstract class AbstractRoom {
   }
 
   abstract description(): void;
+
+  getID(): string {
+    return this.#id;
+  }
 
   left(): TypeRoom {
     if (this.#left) {

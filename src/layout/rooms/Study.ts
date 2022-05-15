@@ -2,6 +2,10 @@ import AbstractRoom from './AbstractRoom';
 import formatLog from '../../util/formatLog';
 
 class Study extends AbstractRoom {
+  constructor() {
+    super('study');
+  }
+
   description(): void {
     formatLog(
       'We can be flavorful later - its a study. Books. Imp. It wants something.'

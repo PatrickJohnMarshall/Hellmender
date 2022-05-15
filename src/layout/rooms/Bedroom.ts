@@ -2,6 +2,10 @@ import AbstractRoom from './AbstractRoom';
 import formatLog from '../../util/formatLog';
 
 class Bedroom extends AbstractRoom {
+  constructor() {
+    super('bedroom');
+  }
+
   description(): void {
     formatLog('You are at the apex of your grand wizard tower.');
     formatLog(
