@@ -5,9 +5,9 @@ import buildLayout from './layout/buildLayout';
 
 export default async function () {
   formatLog('You put on your robe and wizard hat.');
-  const layout = buildLayout();
+  const startingRoom = buildLayout();
 
-  const playerLocation = new PlayerLocation(layout.getStartingRoom());
+  const playerLocation = new PlayerLocation(startingRoom);
   const playerAction = new PlayerAction(playerLocation);
 
   while (true) {

@@ -1,6 +1,7 @@
 import PlayerMove from './PlayerMove';
 
 const mockRoom = {
+  addConnections: () => {},
   description: () => {},
   left: () => mockRoom,
   right: () => mockRoom,
