@@ -1,6 +1,7 @@
 import PlayerLocation from './PlayerLocation';
 
 const mockRoom = {
+  getID: () => '',
   addConnections: () => {},
   description: () => {},
   left: () => mockRoom,

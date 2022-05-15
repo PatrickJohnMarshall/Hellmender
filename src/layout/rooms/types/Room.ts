@@ -8,6 +8,7 @@ type IRoomConstructor = {
 };
 
 interface TypeRoom {
+  getID: () => string;
   addConnections: (connections: IRoomConstructor) => void;
   description: () => void;
   left: () => TypeRoom;
