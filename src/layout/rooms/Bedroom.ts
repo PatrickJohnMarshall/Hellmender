@@ -1,9 +1,7 @@
-import Room from './Room';
+import AbstractRoom from './AbstractRoom';
 import formatLog from '../../util/formatLog';
-import OutsideWindow from './OutsideWindow';
-import SecondFloorLanding from './SecondFloorLanding';
 
-class Bedroom extends Room {
+class Bedroom extends AbstractRoom {
   description(): void {
     formatLog('You are at the apex of your grand wizard tower.');
     formatLog(
