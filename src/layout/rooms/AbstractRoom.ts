@@ -1,4 +1,3 @@
-import formatLog from '../../util/formatLog';
 import TypeRoom from './types/Room';
 
 type IRoomConstructor = {
@@ -10,7 +9,7 @@ type IRoomConstructor = {
   down?: TypeRoom | undefined;
 };
 
-abstract class Room {
+abstract class AbstractRoom {
   #left: TypeRoom | undefined;
   #right: TypeRoom | undefined;
   #forward: TypeRoom | undefined;
@@ -72,4 +71,4 @@ abstract class Room {
   }
 }
 
-export default Room;
+export default AbstractRoom;
