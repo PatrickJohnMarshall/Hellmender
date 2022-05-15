@@ -4,6 +4,7 @@ import PlayerAction from './PlayerAction';
 jest.mock('inquirer');
 
 const mockRoom = {
+  addConnections: () => {},
   description: () => {},
   left: () => mockRoom,
   right: () => mockRoom,
