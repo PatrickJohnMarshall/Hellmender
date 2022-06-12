@@ -3,7 +3,6 @@ import PlayerLocation from './player/PlayerLocation';
 import formatLog from './util/formatLog';
 import buildLayout from './tower-layout/buildLayout';
 import generateMonsters from './monsters/generateMonsters';
-import { format } from 'prettier';
 
 export default async function () {
   formatLog('You put on your robe and wizard hat.');
