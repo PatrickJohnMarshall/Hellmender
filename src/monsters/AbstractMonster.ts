@@ -1,25 +1,33 @@
 import Monster from './types/Monster';
-import TypeRoom from '../layout/rooms/types/Room';
+import TypeRoom from '../tower-layout/rooms/types/Room';
 
 abstract class AbstractMonster {
+  #id: string;
   #hp: number;
   #maxHP: number;
   #ac: number;
   #location: TypeRoom;
 
   constructor({
+    id,
     hp,
     ac,
     location,
   }: {
+    id: string;
     hp: number;
     ac: number;
     location: TypeRoom;
   }) {
+    this.#id = id;
     this.#hp = hp;
     this.#maxHP = hp;
     this.#ac = ac;
     this.#location = location;
+  }
+
+  getID(): string {
+    return this.#id;
   }
 
   abstract describe(): void;
@@ -38,6 +46,10 @@ abstract class AbstractMonster {
 
   takeDamage(damage: number): void {
     this.#hp -= damage;
+  }
+
+  getLocationId(): string {
+    return this.#location.getID();
   }
 }
 
