@@ -13,11 +13,9 @@ class ActiveMonsters {
   }
 
   getMonstersForRoom(roomId: string) {
-    const results = this.#activeMonsters.filter(
+    return this.#activeMonsters.filter(
       (monster) => monster.getLocationId() === roomId
     );
-    console.log(results);
-    return results;
   }
 }
 
