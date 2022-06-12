@@ -1,7 +1,7 @@
 import PlayerAction from './player/action/PlayerAction';
 import PlayerLocation from './player/PlayerLocation';
 import formatLog from './util/formatLog';
-import buildLayout from './layout/buildLayout';
+import buildLayout from './tower-layout/buildLayout';
 
 export default async function () {
   formatLog('You put on your robe and wizard hat.');
