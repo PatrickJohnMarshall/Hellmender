@@ -6,6 +6,10 @@ class PlayerLocation {
     this.#location = location;
   }
 
+  getID(): string {
+    return this.#location.getID();
+  }
+
   update(location: Room) {
     this.#location = location;
   }

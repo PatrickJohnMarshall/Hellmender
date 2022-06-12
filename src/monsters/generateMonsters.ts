@@ -1,7 +1,9 @@
 import Grumpkin from './creatures/Grumpkin';
 import buildLayout from '../tower-layout/buildLayout';
+import ActiveMonsters from './ActiveMonsters';
 
 export default function generateMonsters() {
+  const activeMonsters = new ActiveMonsters();
   const startingRoom = buildLayout();
   const grumpkin = new Grumpkin({
     id: 'grumpkin',
@@ -10,5 +12,6 @@ export default function generateMonsters() {
     location: startingRoom,
   });
 
-  return grumpkin;
+  activeMonsters.addMonster(grumpkin);
+  return activeMonsters;
 }
