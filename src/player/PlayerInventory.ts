@@ -3,7 +3,7 @@ import Weapon from '../items/types/weapons';
 class PlayerInventory {
   #weapons: Weapon[] = [];
 
-  addWeapons(weapon: Weapon) {
+  addWeapon(weapon: Weapon) {
     this.#weapons.push(weapon);
   }
 

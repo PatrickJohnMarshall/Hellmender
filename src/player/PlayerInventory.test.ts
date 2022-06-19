@@ -13,7 +13,7 @@ describe('PlayerInventory', () => {
   test('adds a weapon', () => {
     const playerInventory = new PlayerInventory();
 
-    playerInventory.addWeapons(mockItem);
+    playerInventory.addWeapon(mockItem);
 
     const weaponResult = playerInventory.getWeapons();
     expect(weaponResult.length).toBe(1);
