@@ -16,7 +16,7 @@ abstract class AbstractWeapons {
     return this.#id;
   }
 
-  getStats(): Stats {
+  getAttackStats(): Stats {
     return this.#stats;
   }
 
