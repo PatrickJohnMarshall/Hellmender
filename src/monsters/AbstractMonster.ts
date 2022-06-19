@@ -1,4 +1,3 @@
-import Monster from './types/Monster';
 import TypeRoom from '../tower-layout/rooms/types/Room';
 
 abstract class AbstractMonster {
