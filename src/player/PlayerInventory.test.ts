@@ -1,8 +1,17 @@
 import PlayerInventory from './PlayerInventory';
 
-const mockItem = {
-  getID: () => 'Vorpal Fist',
-  attackStats: () => ({
+const defaultWeapon = {
+  getID: () => 'doomFist',
+  getAttackStats: () => ({
+    attackBonus: 2,
+    damage: { min: 1, max: 12 },
+  }),
+  describe: () => '',
+};
+
+const mockWeapon = {
+  getID: () => 'vorpalFist',
+  getAttackStats: () => ({
     attackBonus: 0,
     damage: { min: 1, max: 5 },
   }),
@@ -11,11 +20,24 @@ const mockItem = {
 
 describe('PlayerInventory', () => {
   test('adds a weapon', () => {
-    const playerInventory = new PlayerInventory();
+    const playerInventory = new PlayerInventory(defaultWeapon);
 
-    playerInventory.addWeapon(mockItem);
+    playerInventory.addWeapon(mockWeapon);
 
     const weaponResult = playerInventory.getWeapons();
-    expect(weaponResult.length).toBe(1);
+    expect(weaponResult.length).toBe(2);
+  });
+
+  test('equips a weapon', () => {
+    const playerInventory = new PlayerInventory(defaultWeapon);
+
+    playerInventory.addWeapon(mockWeapon);
+
+    playerInventory.equipWeapon('vorpalFist');
+    const equippedResult = playerInventory.getEquippedWeaponStats();
+
+    expect(equippedResult.attackBonus).toBe(
+      mockWeapon.getAttackStats().attackBonus
+    );
   });
 });

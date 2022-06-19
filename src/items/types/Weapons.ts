@@ -2,7 +2,7 @@
 
 interface Weapon {
   getID: () => string;
-  attackStats: () => {
+  getAttackStats: () => {
     attackBonus: number;
     damage: { min: number; max: number };
   };
