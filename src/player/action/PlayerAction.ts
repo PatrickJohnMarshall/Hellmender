@@ -57,6 +57,8 @@ class PlayerAction {
         );
         playerMove.move();
         break;
+      case 'attack':
+      // Later
       default:
         throw new Error('Invalid Command');
     }
