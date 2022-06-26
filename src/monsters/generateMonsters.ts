@@ -5,6 +5,7 @@ import ActiveMonsters from './ActiveMonsters';
 export default function generateMonsters() {
   const activeMonsters = new ActiveMonsters();
   const startingRoom = buildLayout();
+
   const grumpkin = new Grumpkin({
     id: 'grumpkin',
     hp: 15,
