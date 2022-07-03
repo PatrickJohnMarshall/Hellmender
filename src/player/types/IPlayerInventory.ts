@@ -1,8 +1,8 @@
 import Weapon from '../../items/types/Weapons';
 
 type IPlayerInventory = {
-  addWeapon: (Weapon) => void;
-  getWeapon: () => Weapon[];
+  addWeapon: (weapon: Weapon) => void;
+  getWeapons: () => Weapon[];
   equipWeapon: (weaponID: string) => void;
   getEquippedWeaponStats: () => {
     attackBonus: number;
