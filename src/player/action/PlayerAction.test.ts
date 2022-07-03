@@ -26,6 +26,19 @@ const fakeLocation = {
   down: () => mockRoom,
 };
 
+const fakeInventory = {
+  addWeapon: () => {},
+  getWeapons: () => [],
+  equipWeapon: () => {},
+  getEquippedWeaponStats: () => ({
+    attackBonus: 1,
+    damage: {
+      min: 1,
+      max: 8,
+    },
+  }),
+};
+
 describe('PlayerAction', () => {
   test('performs an action', async () => {
     jest
@@ -35,8 +48,8 @@ describe('PlayerAction', () => {
     const mockForward = jest.fn(() => mockRoom);
     const location = { ...fakeLocation, forward: mockForward };
 
-    const playerAction = new PlayerAction(location);
-    await playerAction.action('');
+    const playerAction = new PlayerAction(location, fakeInventory);
+    await playerAction.action('', []);
     expect(mockForward).toHaveBeenCalled();
   });
 });

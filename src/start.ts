@@ -20,10 +20,9 @@ export default async function () {
 
   while (true) {
     const monstersInRoom = monsters.getMonstersForRoom(playerLocation.getID());
-    const validMonsterIDs = monstersInRoom.map((monster) => monster.getID());
     playerLocation.describe();
     describeAllMonstersAtLocation(monstersInRoom);
-    await playerAction.action('What now?', validMonsterIDs);
+    await playerAction.action('What now?', monstersInRoom);
   }
 }
 
