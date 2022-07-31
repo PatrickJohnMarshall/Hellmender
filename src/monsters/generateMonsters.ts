@@ -10,6 +10,7 @@ export default function generateMonsters() {
     id: 'grumpkin',
     hp: 15,
     ac: 13,
+    name: 'Grumpkin',
     location: startingRoom,
   });
 

@@ -5,23 +5,27 @@ abstract class AbstractMonster {
   #hp: number;
   #maxHP: number;
   #ac: number;
+  #name: string;
   #location: TypeRoom;
 
   constructor({
     id,
     hp,
     ac,
+    name,
     location,
   }: {
     id: string;
     hp: number;
     ac: number;
+    name: string;
     location: TypeRoom;
   }) {
     this.#id = id;
     this.#hp = hp;
     this.#maxHP = hp;
     this.#ac = ac;
+    this.#name = name;
     this.#location = location;
   }
 
@@ -41,6 +45,10 @@ abstract class AbstractMonster {
 
   getAC(): number {
     return this.#ac;
+  }
+
+  getName(): string {
+    return this.#name;
   }
 
   takeDamage(damage: number): void {

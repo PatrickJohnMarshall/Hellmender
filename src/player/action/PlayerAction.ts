@@ -44,7 +44,7 @@ class PlayerAction {
       formatLog('Follow the instructions dumbass.');
       answer = await inquirer.prompt(input);
       commands = answer.action.split(' ');
-      validAnswer = this._validateCommand(answer.action);
+      validAnswer = this._validateCommand(commands[0]);
     }
 
     return this._doAction(commands[0], commands[1], validMonsters);
@@ -88,11 +88,25 @@ class PlayerAction {
         const targetMonster = validMonsters.find(
           (monster) => monster.getID() === attackResults.id
         );
-        monsterDamage(
+        const didHit = monsterDamage(
           targetMonster,
           attackResults.attackValue,
           attackResults.damageValue
         );
+        if (didHit) {
+          formatLog(
+            `You struck the ${targetMonster.getName()} for ${
+              attackResults.damageValue
+            } damage. |${targetMonster.getName()} HP: ${targetMonster.getHP()}| |Attack: ${
+              attackResults.attackValue
+            }|`
+          );
+        } else
+          formatLog(
+            `You missed the ${targetMonster.getName()}. |Attack: ${
+              attackResults.attackValue
+            }|`
+          );
         break;
       default:
         throw new Error('Invalid Command');

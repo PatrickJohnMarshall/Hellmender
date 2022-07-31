@@ -4,6 +4,16 @@ import Weapon from '../../items/types/Weapons';
 
 jest.mock('inquirer');
 
+const mockMonster = {
+  getID: () => 'grumpkin',
+  getHP: () => 20,
+  getAC: () => 0,
+  getName: () => 'Grumpkin',
+  getLocationId: () => '',
+  takeDamage: () => {},
+  describe: () => {},
+};
+
 const mockRoom = {
   getID: () => '',
   addConnections: () => {},
@@ -41,7 +51,7 @@ const fakeInventory = {
 };
 
 describe('PlayerAction', () => {
-  test('performs an action', async () => {
+  test('performs a move', async () => {
     jest
       .spyOn(inquirer, 'prompt')
       .mockResolvedValue({ action: 'move forward' });
@@ -52,5 +62,20 @@ describe('PlayerAction', () => {
     const playerAction = new PlayerAction(location, fakeInventory);
     await playerAction.action('', []);
     expect(mockForward).toHaveBeenCalled();
+  });
+
+  test('performs an attack', async () => {
+    const mockTakeDamage = jest.fn();
+    jest
+      .spyOn(inquirer, 'prompt')
+      .mockResolvedValue({ action: 'attack grumpkin' });
+
+    const location = { ...fakeLocation };
+
+    const playerAction = new PlayerAction(location, fakeInventory);
+    await playerAction.action('', [
+      { ...mockMonster, takeDamage: mockTakeDamage },
+    ]);
+    expect(mockTakeDamage).toHaveBeenCalled();
   });
 });
