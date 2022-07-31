@@ -5,6 +5,7 @@ const mockMonster: TypeMonster = {
   getID: () => '',
   getHP: () => 69,
   getAC: () => 420,
+  getName: () => '',
   getLocationId: () => '',
   takeDamage: (damage: number) => {},
   describe: () => {},
