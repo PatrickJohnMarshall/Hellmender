@@ -1,5 +1,6 @@
 import inquirer from 'inquirer';
 import PlayerAction from './PlayerAction';
+import Weapon from '../../items/types/Weapons';
 
 jest.mock('inquirer');
 
@@ -28,7 +29,7 @@ const fakeLocation = {
 
 const fakeInventory = {
   addWeapon: () => {},
-  getWeapons: () => [],
+  getWeapons: () => [] as Weapon[],
   equipWeapon: () => {},
   getEquippedWeaponStats: () => ({
     attackBonus: 1,

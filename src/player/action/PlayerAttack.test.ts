@@ -1,9 +1,10 @@
 import PlayerAttack from './PlayerAttack';
 import IPlayerInventory from '../types/IPlayerInventory';
+import Weapon from '../../items/types/Weapons';
 
 const mockInventory = {
   addWeapon: () => {},
-  getWeapon: () => [],
+  getWeapons: () => [] as Weapon[],
   equipWeapon: () => {},
   getEquippedWeaponStats: () => ({
     attackBonus: 4,
