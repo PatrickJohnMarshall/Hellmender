@@ -22,6 +22,8 @@ export default async function () {
 
   while (true) {
     const monstersInRoom = monsters.getMonstersForRoom(playerLocation.getID());
+    formatLog('---Info---');
+    formatLog(`You are currently in your ${playerLocation.getID()}`);
     describeAllMonstersAtLocation(monstersInRoom);
     await playerAction.action('What now?', monstersInRoom);
   }
@@ -35,7 +37,6 @@ function describeAllMonstersAtLocation(monsters: any[]) {
       }
       return monsterList + monster.getName();
     }, '');
-    formatLog('---Danger---');
     formatLog(`Monsters in room: ${monstersInRoom} `);
   }
 }
