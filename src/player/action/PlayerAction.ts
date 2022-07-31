@@ -2,9 +2,10 @@ import inquirer from 'inquirer';
 import formatLog from '../../util/formatLog';
 import PlayerMove from './PlayerMove';
 import PlayerAttack from './PlayerAttack';
+import Monster from '../../monsters/types/Monster';
 import IPlayerLocation from '../types/IPlayerLocation';
-import IPlayerAttack from '../types/IPlayerAttack';
 import IPlayerInventory from '../types/IPlayerInventory';
+import monsterDamage from '../../monsters/monsterDamage';
 
 type InquirerResponse = {
   action: string;
@@ -22,7 +23,10 @@ class PlayerAction {
     this.#playerInventory = playerInventory;
   }
 
-  async action(prompt: string, validMonsterIDs: string[]): Promise<void> {
+  async action(
+    prompt: string,
+    validMonsters: Monster[]
+  ): Promise<void | { id: string; attackValue: number; damageValue: number }> {
     const input = [
       {
         type: 'input',
@@ -43,7 +47,7 @@ class PlayerAction {
       validAnswer = this._validateCommand(answer.action);
     }
 
-    this._doAction(commands[0], commands[1], validMonsterIDs);
+    return this._doAction(commands[0], commands[1], validMonsters);
   }
 
   _validateCommand(command: string): boolean {
@@ -62,8 +66,8 @@ class PlayerAction {
   _doAction(
     command: string,
     secondaryCommand: string,
-    validMonsterIDs: string[]
-  ): void {
+    validMonsters: Monster[]
+  ): void | { id: string; attackValue: number; damageValue: number } {
     switch (command) {
       case 'move':
         // secondaryCommand is a direction
@@ -75,8 +79,20 @@ class PlayerAction {
         break;
       case 'attack':
         // secondaryCommand is monsterName
+        const validMonsterIDs = validMonsters.map((monster) => monster.getID());
         const playerAttack = new PlayerAttack(this.#playerInventory);
-        playerAttack.attack(secondaryCommand, validMonsterIDs);
+        const attackResults = playerAttack.attack(
+          secondaryCommand,
+          validMonsterIDs
+        );
+        const targetMonster = validMonsters.find(
+          (monster) => monster.getID() === attackResults.id
+        );
+        monsterDamage(
+          targetMonster,
+          attackResults.attackValue,
+          attackResults.damageValue
+        );
         break;
       default:
         throw new Error('Invalid Command');
