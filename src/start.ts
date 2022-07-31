@@ -18,17 +18,25 @@ export default async function () {
   const playerInventory = new PlayerInventory(fist);
   const playerAction = new PlayerAction(playerLocation, playerInventory);
 
+  playerLocation.describe();
+
   while (true) {
     const monstersInRoom = monsters.getMonstersForRoom(playerLocation.getID());
-    playerLocation.describe();
+    formatLog('---Info---');
+    formatLog(`You are currently in your ${playerLocation.getID()}`);
     describeAllMonstersAtLocation(monstersInRoom);
     await playerAction.action('What now?', monstersInRoom);
   }
 }
 
 function describeAllMonstersAtLocation(monsters: any[]) {
-  monsters.forEach((monster) => {
-    formatLog('---Danger---');
-    monster.describe();
-  });
+  if (monsters.length) {
+    const monstersInRoom = monsters.reduce((monsterList, monster, index) => {
+      if (index !== monsters.length - 1) {
+        return monsterList + monster.getName() + ', ';
+      }
+      return monsterList + monster.getName();
+    }, '');
+    formatLog(`Monsters in room: ${monstersInRoom} `);
+  }
 }

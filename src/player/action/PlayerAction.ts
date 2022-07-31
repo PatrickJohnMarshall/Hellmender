@@ -60,6 +60,9 @@ class PlayerAction {
     if (command.toLowerCase() === 'attack') {
       return true;
     }
+    if (command.toLowerCase() === 'look') {
+      return true;
+    }
     return false;
   }
 
@@ -69,6 +72,9 @@ class PlayerAction {
     validMonsters: Monster[]
   ): void | { id: string; attackValue: number; damageValue: number } {
     switch (command) {
+      case 'look':
+        this.#playerLocation.describe();
+        break;
       case 'move':
         // secondaryCommand is a direction
         const playerMove = new PlayerMove(
@@ -76,6 +82,7 @@ class PlayerAction {
           secondaryCommand
         );
         playerMove.move();
+        this.#playerLocation.describe();
         break;
       case 'attack':
         // secondaryCommand is monsterName

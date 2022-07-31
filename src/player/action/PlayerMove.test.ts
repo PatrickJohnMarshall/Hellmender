@@ -15,6 +15,7 @@ const mockRoom = {
 const fakeLocation = {
   describe: () => {},
   update: () => {},
+  getID: () => '',
   left: () => mockRoom,
   right: () => mockRoom,
   forward: () => mockRoom,
