@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react';
-import Terminal, { ColorMode, TerminalOutput } from 'react-terminal-ui';
+import React, { useContext } from 'react';
+import Terminal, { ColorMode } from 'react-terminal-ui';
 import TerminalLogContext from '../context/TerminalLog';
 
 export function TerminalController(props = {}) {
