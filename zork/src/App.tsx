@@ -1,25 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import { TerminalController } from './components/Terminal';
+import TerminalLogContext from './context/TerminalLog';
+import { TerminalOutput } from 'react-terminal-ui';
 
 function App() {
+  const [terminalLog, setTerminalLog] = useState([
+    <TerminalOutput>You put on your robe and wizard hat.</TerminalOutput>,
+  ]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <TerminalLogContext.Provider
+      value={{
+        terminalLog,
+        add: (newLine: string) => {
+          setTerminalLog(
+            terminalLog.concat([<TerminalOutput>{newLine}</TerminalOutput>])
+          );
+        },
+      }}
+    >
+      <TerminalController />
+    </TerminalLogContext.Provider>
   );
 }
 
