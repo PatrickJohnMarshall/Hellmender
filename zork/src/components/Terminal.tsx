@@ -6,11 +6,11 @@ export function TerminalController(props = {}) {
   const terminalLogContext = useContext(TerminalLogContext);
 
   return (
-    <div className="container">
+    <div className="container rpgui-container framed-golden">
       <Terminal
         prompt=">"
         name="ZORK"
-        colorMode={ColorMode.Light}
+        colorMode={ColorMode.Dark}
         onInput={(terminalInput) => terminalLogContext.add(terminalInput)}
       >
         {terminalLogContext.terminalLog}

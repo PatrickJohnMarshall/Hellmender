@@ -10,7 +10,7 @@ class Fist extends AbstractWeapons {
     super({ id: 'fist', stats });
   }
   describe(): void {
-    formatLog('Its your hands.');
+    formatLog(['Its your hands.']);
   }
 }
 

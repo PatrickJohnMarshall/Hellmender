@@ -3,7 +3,7 @@ import PlayerMove from './PlayerMove';
 const mockRoom = {
   getID: () => '',
   addConnections: () => {},
-  description: () => {},
+  description: () => '',
   left: () => mockRoom,
   right: () => mockRoom,
   forward: () => mockRoom,

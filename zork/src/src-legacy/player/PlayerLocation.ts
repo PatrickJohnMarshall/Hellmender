@@ -14,8 +14,8 @@ class PlayerLocation {
     this.#location = location;
   }
 
-  describe() {
-    this.#location.description();
+  describe(): string {
+    return this.#location.description();
   }
 
   left() {

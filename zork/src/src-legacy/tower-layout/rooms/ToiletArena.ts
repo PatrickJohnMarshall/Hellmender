@@ -6,11 +6,11 @@ class ToiletArena extends AbstractRoom {
     super('toiletarena');
   }
 
-  description(): void {
-    formatLog(
-      'We can be flavorful later - Boss fight against *The Great and Mighty Cube*.'
-    );
-    formatLog('Up - Back to salvation');
+  description(): string {
+    return formatLog([
+      'We can be flavorful later - Boss fight against *The Great and Mighty Cube*.',
+      'Up - Back to salvation',
+    ]);
   }
 }
 

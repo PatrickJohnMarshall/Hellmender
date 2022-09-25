@@ -1,15 +1,9 @@
-import inquirer from 'inquirer';
-import formatLog from '../../util/formatLog';
-import PlayerMove from './PlayerMove';
-import PlayerAttack from './PlayerAttack';
-import Monster from '../../monsters/types/Monster';
-import IPlayerLocation from '../types/IPlayerLocation';
-import IPlayerInventory from '../types/IPlayerInventory';
-import monsterDamage from '../../monsters/monsterDamage';
-
-type InquirerResponse = {
-  action: string;
-};
+import PlayerMove from '../src-legacy/player/action/PlayerMove';
+import PlayerAttack from '../src-legacy/player/action/PlayerAttack';
+import Monster from '../src-legacy/monsters/types/Monster';
+import IPlayerLocation from '../src-legacy/player/types/IPlayerLocation';
+import IPlayerInventory from '../src-legacy/player/types/IPlayerInventory';
+import monsterDamage from '../src-legacy/monsters/monsterDamage';
 
 class PlayerAction {
   #playerLocation;
@@ -23,28 +17,15 @@ class PlayerAction {
     this.#playerInventory = playerInventory;
   }
 
-  async action(
-    prompt: string,
+  action(
+    answer: string,
     validMonsters: Monster[]
-  ): Promise<void | { id: string; attackValue: number; damageValue: number }> {
-    const input = [
-      {
-        type: 'input',
-        name: 'action',
-        message: prompt,
-      },
-    ];
+  ): string | { id: string; attackValue: number; damageValue: number } {
+    const commands = answer.split(' ');
+    const validAnswer = this._validateCommand(commands[0]);
 
-    formatLog('');
-    let answer = (await inquirer.prompt(input)) as InquirerResponse;
-    let commands = answer.action.split(' ');
-    let validAnswer = this._validateCommand(commands[0]);
-
-    while (!validAnswer) {
-      formatLog('Follow the instructions dumbass.');
-      answer = await inquirer.prompt(input);
-      commands = answer.action.split(' ');
-      validAnswer = this._validateCommand(commands[0]);
+    if (!validAnswer) {
+      return 'Follow the instructions, dumbass.';
     }
 
     return this._doAction(commands[0], commands[1], validMonsters);
@@ -70,11 +51,10 @@ class PlayerAction {
     command: string,
     secondaryCommand: string,
     validMonsters: Monster[]
-  ): void | { id: string; attackValue: number; damageValue: number } {
+  ): string | { id: string; attackValue: number; damageValue: number } {
     switch (command) {
       case 'look':
-        this.#playerLocation.describe();
-        break;
+        return this.#playerLocation.describe();
       case 'move':
         // secondaryCommand is a direction
         const playerMove = new PlayerMove(
@@ -101,23 +81,19 @@ class PlayerAction {
           attackResults.damageValue
         );
         if (didHit) {
-          formatLog(
-            `You struck the ${targetMonster.getName()} for ${
-              attackResults.damageValue
-            } damage. |${targetMonster.getName()} HP: ${targetMonster.getHP()}| |Attack: ${
-              attackResults.attackValue
-            }|`
-          );
+          return `You struck the ${targetMonster.getName()} for ${
+            attackResults.damageValue
+          } damage. |${targetMonster.getName()} HP: ${targetMonster.getHP()}| |Attack: ${
+            attackResults.attackValue
+          }|`;
         } else
-          formatLog(
-            `You missed the ${targetMonster.getName()}. |Attack: ${
-              attackResults.attackValue
-            }|`
-          );
-        break;
+          return `You missed the ${targetMonster.getName()}. |Attack: ${
+            attackResults.attackValue
+          }|`;
       default:
         throw new Error('Invalid Command');
     }
+    return '';
   }
 }
 
