@@ -1,9 +1,9 @@
-import PlayerMove from './PlayerMove';
+import PlayerMove from "./PlayerMove";
 
 const mockRoom = {
-  getID: () => '',
+  getID: () => "",
   addConnections: () => {},
-  description: () => '',
+  description: () => "",
   left: () => mockRoom,
   right: () => mockRoom,
   forward: () => mockRoom,
@@ -13,9 +13,9 @@ const mockRoom = {
 };
 
 const fakeLocation = {
-  describe: () => {},
+  describe: () => "",
   update: () => {},
-  getID: () => '',
+  getID: () => "",
   left: () => mockRoom,
   right: () => mockRoom,
   forward: () => mockRoom,
@@ -24,12 +24,12 @@ const fakeLocation = {
   down: () => mockRoom,
 };
 
-describe('PlayerMove', () => {
-  test('moves the player', () => {
+describe("PlayerMove", () => {
+  test("moves the player", () => {
     const mockUpdate = jest.fn(() => {});
     const playerLocation = { ...fakeLocation, update: mockUpdate };
 
-    const playerMove = new PlayerMove(playerLocation, 'left');
+    const playerMove = new PlayerMove(playerLocation, "left");
     playerMove.move();
     expect(mockUpdate).toHaveBeenCalled();
   });
