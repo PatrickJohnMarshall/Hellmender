@@ -1,12 +1,16 @@
-import React from 'react';
-import 'styles/_readout_grid.scss';
-import GoldenFrame from './GoldenFrame';
+import React from "react";
+import "styles/_readout_grid.scss";
+import Inventory from "./Inventory";
+import SpellRepertoire from "./SpellRepertoire";
+import InfoBlocks from "./InfoBlocks";
 
 function ReadoutGrid() {
   return (
-    <div className="rpgui-container framed-golden">
+    <div className="rpgui-container framed-golden" style={{ height: "513px" }}>
       <div className="readout-grid">
-        <GoldenFrame />
+        <Inventory />
+        <SpellRepertoire />
+        <InfoBlocks />
       </div>
     </div>
   );
