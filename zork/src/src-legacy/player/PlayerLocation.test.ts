@@ -3,7 +3,7 @@ import PlayerLocation from './PlayerLocation';
 const mockRoom = {
   getID: () => '',
   addConnections: () => {},
-  description: () => {},
+  description: () => '',
   left: () => mockRoom,
   right: () => mockRoom,
   forward: () => mockRoom,
@@ -14,7 +14,7 @@ const mockRoom = {
 
 describe('PlayerLocation', () => {
   test('describes player location', () => {
-    const mockDescribe = jest.fn(() => {});
+    const mockDescribe = jest.fn(() => '');
     const mockRoomWithDescribe = { ...mockRoom, description: mockDescribe };
 
     const playerLocation = new PlayerLocation(mockRoomWithDescribe);
@@ -24,7 +24,7 @@ describe('PlayerLocation', () => {
   });
 
   test('updates player location', () => {
-    const mockDescribe = jest.fn(() => {});
+    const mockDescribe = jest.fn(() => '');
     const mockNewRoom = { ...mockRoom, description: mockDescribe };
 
     const playerLocation = new PlayerLocation(mockRoom);

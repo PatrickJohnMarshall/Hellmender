@@ -6,8 +6,8 @@ class LibraryLanding extends AbstractRoom {
     super('librarylanding');
   }
 
-  description(): void {
-    formatLog('We can be flavorful later - Books.');
+  description(): string {
+    return formatLog(['We can be flavorful later - Books.']);
   }
 }
 

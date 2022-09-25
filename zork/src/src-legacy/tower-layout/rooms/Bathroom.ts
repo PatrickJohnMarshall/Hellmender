@@ -6,12 +6,12 @@ class Bathroom extends AbstractRoom {
     super('bathroom');
   }
 
-  description(): void {
-    formatLog(
-      'We can be flavorful later - Bathroom. Crampt. Gaudy. Gelatinous cube wants to eat you from the giant golden toilet.'
-    );
-    formatLog('Down - Down the toilet.');
-    formatLog('Back - Back to the study.');
+  description(): string {
+    return formatLog([
+      'We can be flavorful later - Bathroom. Crampt. Gaudy. Gelatinous cube wants to eat you from the giant golden toilet.',
+      'Down - Down the toilet.',
+      'Back - Back to the study.',
+    ]);
   }
 }
 

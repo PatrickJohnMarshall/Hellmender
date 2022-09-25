@@ -3,7 +3,7 @@ import Room from '../../tower-layout/rooms/types/Room';
 type IPlayerLocation = {
   update: (location: Room) => void;
   getID: () => string;
-  describe: () => void;
+  describe: () => string;
   left: () => Room;
   right: () => Room;
   forward: () => Room;

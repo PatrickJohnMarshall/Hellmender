@@ -6,8 +6,8 @@ class OutsideWindow extends AbstractRoom {
     super('outsidewindow');
   }
 
-  description(): void {
-    formatLog('Wizard falls, you die.');
+  description(): string {
+    return formatLog(['Wizard falls, you die.']);
   }
 }
 

@@ -31,7 +31,7 @@ abstract class AbstractRoom {
     this.#down = down;
   }
 
-  abstract description(): void;
+  abstract description(): string;
 
   getID(): string {
     return this.#id;

@@ -6,7 +6,7 @@ import Bathroom from './rooms/Bathroom';
 import ToiletArena from './rooms/ToiletArena';
 import LibraryLanding from './rooms/LibraryLanding';
 
-export default function () {
+export default function buildLayout() {
   const bedroom = new Bedroom();
   const outsideWindow = new OutsideWindow();
   const study = new Study();
