@@ -1,5 +1,7 @@
 .readout-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(22, 1fr);
+  grid-template-columns: repeat(2, 4fr) 2fr;
+  grid-template-rows: 100%;
+  font-family: "Press Start 2P", cursive;
+  color: white;
 }
