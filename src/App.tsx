@@ -32,8 +32,6 @@ function App() {
           setTerminalLog(
             terminalLog.concat([
               <TerminalOutput>{`${newLine}`}</TerminalOutput>,
-              // <TerminalOutput>{`${actionResult}`}</TerminalOutput>,
-              // <TerminalOutput>{playerLocation.describe()}</TerminalOutput>,
             ])
           );
         },
