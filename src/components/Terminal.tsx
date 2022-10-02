@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
-import Terminal, { ColorMode } from 'react-terminal-ui';
-import TerminalLogContext from '../context/TerminalLog';
+import React, { useContext } from "react";
+import Terminal, { ColorMode } from "react-terminal-ui";
+import TerminalLogContext from "../context/TerminalLog";
 
-export function TerminalController(props = {}) {
+export function TerminalController({ playerAction }) {
   const terminalLogContext = useContext(TerminalLogContext);
 
   return (
@@ -11,7 +11,11 @@ export function TerminalController(props = {}) {
         prompt=">"
         name="ZORK"
         colorMode={ColorMode.Dark}
-        onInput={(terminalInput) => terminalLogContext.add(terminalInput)}
+        onInput={(terminalInput) => {
+          const actionResult = playerAction.action(terminalInput, []);
+          const output = `\n>` + terminalInput + `\n\n` + actionResult;
+          terminalLogContext.add(output);
+        }}
       >
         {terminalLogContext.terminalLog}
       </Terminal>

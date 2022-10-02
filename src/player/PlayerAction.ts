@@ -1,9 +1,9 @@
-import PlayerMove from '../src-legacy/player/action/PlayerMove';
-import PlayerAttack from '../src-legacy/player/action/PlayerAttack';
-import Monster from '../src-legacy/monsters/types/Monster';
-import IPlayerLocation from '../src-legacy/player/types/IPlayerLocation';
-import IPlayerInventory from '../src-legacy/player/types/IPlayerInventory';
-import monsterDamage from '../src-legacy/monsters/monsterDamage';
+import PlayerMove from "../src-legacy/player/action/PlayerMove";
+import PlayerAttack from "../src-legacy/player/action/PlayerAttack";
+import Monster from "../src-legacy/monsters/types/Monster";
+import IPlayerLocation from "../src-legacy/player/types/IPlayerLocation";
+import IPlayerInventory from "../src-legacy/player/types/IPlayerInventory";
+import monsterDamage from "../src-legacy/monsters/monsterDamage";
 
 class PlayerAction {
   #playerLocation;
@@ -21,27 +21,27 @@ class PlayerAction {
     answer: string,
     validMonsters: Monster[]
   ): string | { id: string; attackValue: number; damageValue: number } {
-    const commands = answer.split(' ');
+    const commands = answer.split(" ");
     const validAnswer = this._validateCommand(commands[0]);
 
     if (!validAnswer) {
-      return 'Follow the instructions, dumbass.';
+      return "Follow the instructions, dumbass.";
     }
 
     return this._doAction(commands[0], commands[1], validMonsters);
   }
 
   _validateCommand(command: string): boolean {
-    if (command.toLowerCase() === 'quit') {
-      throw new Error('Player Exit');
+    if (command.toLowerCase() === "quit") {
+      throw new Error("Player Exit");
     }
-    if (command.toLowerCase() === 'move') {
+    if (command.toLowerCase() === "move") {
       return true;
     }
-    if (command.toLowerCase() === 'attack') {
+    if (command.toLowerCase() === "attack") {
       return true;
     }
-    if (command.toLowerCase() === 'look') {
+    if (command.toLowerCase() === "look") {
       return true;
     }
     return false;
@@ -53,18 +53,17 @@ class PlayerAction {
     validMonsters: Monster[]
   ): string | { id: string; attackValue: number; damageValue: number } {
     switch (command) {
-      case 'look':
+      case "look":
         return this.#playerLocation.describe();
-      case 'move':
+      case "move":
         // secondaryCommand is a direction
         const playerMove = new PlayerMove(
           this.#playerLocation,
           secondaryCommand
         );
         playerMove.move();
-        this.#playerLocation.describe();
-        break;
-      case 'attack':
+        return this.#playerLocation.describe();
+      case "attack":
         // secondaryCommand is monsterName
         const validMonsterIDs = validMonsters.map((monster) => monster.getID());
         const playerAttack = new PlayerAttack(this.#playerInventory);
@@ -91,9 +90,8 @@ class PlayerAction {
             attackResults.attackValue
           }|`;
       default:
-        throw new Error('Invalid Command');
+        throw new Error("Invalid Command");
     }
-    return '';
   }
 }
 

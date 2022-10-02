@@ -1,5 +1,4 @@
-import TypeMonster from './types/Monster';
-import TypeRoom from '../tower-layout/rooms/types/Room';
+import TypeMonster from "./types/Monster";
 
 class ActiveMonsters {
   #activeMonsters: TypeMonster[] = [];

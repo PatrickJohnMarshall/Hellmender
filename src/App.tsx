@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
-import ReadoutGrid from './components/ReadoutGrid';
-import './App.css';
-import 'styles/_containers_and_frames.scss';
-import { TerminalController } from './components/Terminal';
-import TerminalLogContext from './context/TerminalLog';
-import { TerminalOutput } from 'react-terminal-ui';
-import buildLayout from './src-legacy/tower-layout/buildLayout';
-// import generateMonsters from './src-legacy/monsters/generateMonsters';
-import Fist from './src-legacy/items/weapons/Fist';
-import PlayerAction from './player/PlayerAction';
-import PlayerLocation from './src-legacy/player/PlayerLocation';
-import PlayerInventory from './src-legacy/player/PlayerInventory';
+import React, { useState } from "react";
+import ReadoutGrid from "./components/ReadoutGrid";
+import "./App.css";
+import "styles/_containers_and_frames.scss";
+import { TerminalController } from "./components/Terminal";
+import TerminalLogContext from "./context/TerminalLog";
+import { TerminalOutput } from "react-terminal-ui";
+import buildLayout from "./src-legacy/tower-layout/buildLayout";
+import generateMonsters from "src-legacy/monsters/generateMonsters";
+import Fist from "./src-legacy/items/weapons/Fist";
+import PlayerAction from "./player/PlayerAction";
+import PlayerLocation from "./src-legacy/player/PlayerLocation";
+import PlayerInventory from "./src-legacy/player/PlayerInventory";
 
 const startingRoom = buildLayout();
-// const monsters = generateMonsters();
+const monsters = generateMonsters();
 const fist = new Fist();
 const playerLocation = new PlayerLocation(startingRoom);
 const playerInventory = new PlayerInventory(fist);
@@ -29,19 +29,18 @@ function App() {
       value={{
         terminalLog,
         add: (newLine: string) => {
-          const actionResult = playerAction.action(newLine, []);
           setTerminalLog(
             terminalLog.concat([
-              <TerminalOutput>{`>${newLine}`}</TerminalOutput>,
-              <TerminalOutput>{`${actionResult}`}</TerminalOutput>,
-              <TerminalOutput>{playerLocation.describe()}</TerminalOutput>,
+              <TerminalOutput>{`${newLine}`}</TerminalOutput>,
             ])
           );
         },
       }}
     >
-      <TerminalController />
-      <ReadoutGrid />
+      <TerminalController playerAction={playerAction} />
+      <ReadoutGrid
+        monsters={monsters.getMonstersForRoom(playerLocation.getID())}
+      />
     </TerminalLogContext.Provider>
   );
 }
