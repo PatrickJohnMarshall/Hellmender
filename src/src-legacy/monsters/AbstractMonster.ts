@@ -1,4 +1,4 @@
-import TypeRoom from '../tower-layout/rooms/types/Room';
+import TypeRoom from "../tower-layout/rooms/types/Room";
 
 abstract class AbstractMonster {
   #id: string;
@@ -33,7 +33,7 @@ abstract class AbstractMonster {
     return this.#id;
   }
 
-  abstract describe(): void;
+  abstract describe(): string;
 
   setLocation(location: TypeRoom) {
     this.#location = location;

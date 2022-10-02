@@ -4,13 +4,13 @@ import Inventory from "./Inventory";
 import SpellRepertoire from "./SpellRepertoire";
 import InfoBlocks from "./InfoBlocks";
 
-function ReadoutGrid() {
+function ReadoutGrid({ monsters }) {
   return (
     <div className="rpgui-container framed-golden" style={{ height: "513px" }}>
       <div className="readout-grid">
         <Inventory />
         <SpellRepertoire />
-        <InfoBlocks />
+        <InfoBlocks monsters={monsters} />
       </div>
     </div>
   );
