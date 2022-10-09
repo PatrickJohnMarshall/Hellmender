@@ -7,7 +7,7 @@ import TerminalLogContext from "./context/TerminalLog";
 import { TerminalOutput } from "react-terminal-ui";
 import buildLayout from "./src-legacy/tower-layout/buildLayout";
 import generateMonsters from "src-legacy/monsters/generateMonsters";
-import Fist from "./src-legacy/items/weapons/Fist";
+import Fist from "./items/weapons/Fist";
 import PlayerAction from "./player/PlayerAction";
 import PlayerLocation from "./src-legacy/player/PlayerLocation";
 import PlayerInventory from "./src-legacy/player/PlayerInventory";
