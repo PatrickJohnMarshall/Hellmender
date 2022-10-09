@@ -2,23 +2,30 @@ import React, { useState } from "react";
 import ReadoutGrid from "./components/ReadoutGrid";
 import "./App.css";
 import "styles/_containers_and_frames.scss";
+
 import { TerminalController } from "./components/Terminal";
 import TerminalLogContext from "./context/TerminalLog";
 import { TerminalOutput } from "react-terminal-ui";
+
 import buildLayout from "./tower-layout/buildLayout";
 import generateMonsters from "./monsters/generateMonsters";
+
 import Fist from "./items/weapons/Fist";
+import FireBolt from "spells/spells/FireBolt";
+
 import PlayerAction from "./player/PlayerAction";
 import PlayerLocation from "./player/PlayerLocation";
 import PlayerInventory from "./player/PlayerInventory";
 
 const startingRoom = buildLayout();
 const startingItem = new Fist();
+const startingSpell = new FireBolt();
 
 const playerLocation = new PlayerLocation(startingRoom);
 const playerInventory = new PlayerInventory(startingItem);
 const playerAction = new PlayerAction(playerLocation, playerInventory);
 
+playerInventory.learnSpell(startingSpell);
 const monsters = generateMonsters();
 
 function App() {

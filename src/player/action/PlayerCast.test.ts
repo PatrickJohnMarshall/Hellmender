@@ -1,7 +1,7 @@
-import PlayerAttack from "./PlayerAttack";
-import IPlayerInventory from "../types/IPlayerInventory";
-import Weapon from "../../items/types/Weapon";
+import PlayerCast from "./PlayerCast";
+import IPlayerInventory from "player/types/IPlayerInventory";
 import Spell from "spells/types/Spell";
+import Weapon from "items/types/Weapon";
 
 const mockInventory = {
   addWeapon: () => {},
@@ -14,7 +14,7 @@ const mockInventory = {
   learnSpell: () => {},
   getSpells: () => [] as Spell[],
   getKnownSpellStats: () => ({
-    attackBonus: 1,
+    attackBonus: 0,
     damage: { min: 6, max: 36 },
   }),
 } as IPlayerInventory;
@@ -44,24 +44,32 @@ const mockRoom = {
 
 const mockMonsterArray = ["megaGrumpkin"];
 
-describe("PlayerAttack", () => {
+describe("PlayerCast", () => {
   test("targets valid monster", () => {
-    const playerAttack = new PlayerAttack(mockInventory);
-    const result = playerAttack.attack("Mega Grumpkin", mockMonsterArray);
+    const playerAttack = new PlayerCast(mockInventory);
+    const result = playerAttack.attack(
+      "fireBall",
+      "Mega Grumpkin",
+      mockMonsterArray
+    );
 
     expect(result).toEqual(expect.objectContaining({ id: "megaGrumpkin" }));
   });
 
   test("returns attack results", () => {
-    const playerAttack = new PlayerAttack(mockInventory);
+    const playerAttack = new PlayerCast(mockInventory);
     const attackResults = playerAttack.attack(
+      "fireBall",
       "Mega Grumpkin",
       mockMonsterArray
     );
 
-    expect(attackResults.attackValue).toBeLessThan(25);
-    expect(attackResults.attackValue).toBeGreaterThan(4);
-    expect(attackResults.damageValue).toBeLessThan(9);
-    expect(attackResults.damageValue).toBeGreaterThan(0);
+    console.log(attackResults.attackValue);
+    console.log(mockInventory.getKnownSpellStats("fireBall"));
+
+    expect(attackResults.attackValue).toBeLessThan(22);
+    expect(attackResults.attackValue).toBeGreaterThan(1);
+    expect(attackResults.damageValue).toBeLessThan(37);
+    expect(attackResults.damageValue).toBeGreaterThan(5);
   });
 });

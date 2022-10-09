@@ -1,25 +1,34 @@
-import PlayerInventory from './PlayerInventory';
+import PlayerInventory from "./PlayerInventory";
+
+const mockSpell = {
+  getID: () => "fireBall",
+  getSpellStats: () => ({
+    attackBonus: 0,
+    damage: { min: 6, max: 36 },
+  }),
+  describe: () => "",
+};
 
 const defaultWeapon = {
-  getID: () => 'doomFist',
+  getID: () => "doomFist",
   getAttackStats: () => ({
     attackBonus: 2,
     damage: { min: 1, max: 12 },
   }),
-  describe: () => '',
+  describe: () => "",
 };
 
 const mockWeapon = {
-  getID: () => 'vorpalFist',
+  getID: () => "vorpalFist",
   getAttackStats: () => ({
     attackBonus: 0,
     damage: { min: 1, max: 5 },
   }),
-  describe: () => '',
+  describe: () => "",
 };
 
-describe('PlayerInventory', () => {
-  test('adds a weapon', () => {
+describe("PlayerInventory", () => {
+  test("adds a weapon", () => {
     const playerInventory = new PlayerInventory(defaultWeapon);
 
     playerInventory.addWeapon(mockWeapon);
@@ -28,16 +37,33 @@ describe('PlayerInventory', () => {
     expect(weaponResult.length).toBe(2);
   });
 
-  test('equips a weapon', () => {
+  test("equips a weapon", () => {
     const playerInventory = new PlayerInventory(defaultWeapon);
 
     playerInventory.addWeapon(mockWeapon);
 
-    playerInventory.equipWeapon('vorpalFist');
+    playerInventory.equipWeapon("vorpalFist");
     const equippedResult = playerInventory.getEquippedWeaponStats();
 
     expect(equippedResult.attackBonus).toBe(
       mockWeapon.getAttackStats().attackBonus
     );
+  });
+
+  test("learn a spell", () => {
+    const playerInventory = new PlayerInventory(defaultWeapon);
+
+    playerInventory.learnSpell(mockSpell);
+
+    expect(playerInventory.getSpells().length).toBe(1);
+  });
+
+  test("give stats of known spell", () => {
+    const playerInventory = new PlayerInventory(defaultWeapon);
+
+    playerInventory.learnSpell(mockSpell);
+    const spellStats = playerInventory.getKnownSpellStats("fireBall");
+
+    expect(spellStats.attackBonus).toBe(mockSpell.getSpellStats().attackBonus);
   });
 });
