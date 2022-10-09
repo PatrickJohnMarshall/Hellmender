@@ -1,5 +1,5 @@
 import ActiveMonsters from "./ActiveMonsters";
-import TypeMonster from "./types/Monster";
+import TypeMonster from "../monsters/types/Monster";
 
 const mockMonster: TypeMonster = {
   getID: () => "",

@@ -1,4 +1,4 @@
-import Grumpkin from "./creatures/Grumpkin";
+import Grumpkin from "../monsters/creatures/Grumpkin";
 import buildLayout from "../tower-layout/buildLayout";
 import ActiveMonsters from "./ActiveMonsters";
 

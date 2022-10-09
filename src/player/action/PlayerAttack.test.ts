@@ -1,6 +1,6 @@
-import PlayerAttack from './PlayerAttack';
-import IPlayerInventory from '../types/IPlayerInventory';
-import Weapon from '../../items/types/Weapons';
+import PlayerAttack from "./PlayerAttack";
+import IPlayerInventory from "../types/IPlayerInventory";
+import Weapon from "../../items/types/Weapons";
 
 const mockInventory = {
   addWeapon: () => {},
@@ -13,7 +13,7 @@ const mockInventory = {
 } as IPlayerInventory;
 
 const mockRoom = {
-  getID: () => '',
+  getID: () => "",
   addConnections: () => {},
   description: () => {},
   left: () => mockRoom,
@@ -35,20 +35,20 @@ const fakeLocation = {
   down: () => mockRoom,
 };
 
-const mockMonsterArray = ['megaGrumpkin'];
+const mockMonsterArray = ["megaGrumpkin"];
 
-describe('PlayerAttack', () => {
-  test('targets valid monster', () => {
+describe("PlayerAttack", () => {
+  test("targets valid monster", () => {
     const playerAttack = new PlayerAttack(mockInventory);
-    const result = playerAttack.attack('Mega Grumpkin', mockMonsterArray);
+    const result = playerAttack.attack("Mega Grumpkin", mockMonsterArray);
 
-    expect(result).toEqual(expect.objectContaining({ id: 'megaGrumpkin' }));
+    expect(result).toEqual(expect.objectContaining({ id: "megaGrumpkin" }));
   });
 
-  test('returns attack results', () => {
+  test("returns attack results", () => {
     const playerAttack = new PlayerAttack(mockInventory);
     const attackResults = playerAttack.attack(
-      'Mega Grumpkin',
+      "Mega Grumpkin",
       mockMonsterArray
     );
 

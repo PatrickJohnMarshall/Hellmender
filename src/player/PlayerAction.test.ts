@@ -1,5 +1,5 @@
 import PlayerAction from "./PlayerAction";
-import Weapon from "../src-legacy/items/types/Weapons";
+import Weapon from "../items/types/Weapons";
 
 const mockMonster = {
   getID: () => "grumpkin",

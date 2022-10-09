@@ -1,4 +1,4 @@
-import TypeRoom from './types/Room';
+import TypeRoom from "../types/Room";
 
 type IRoomConstructor = {
   left?: TypeRoom | undefined;
@@ -41,42 +41,42 @@ abstract class AbstractRoom {
     if (this.#left) {
       return this.#left;
     }
-    throw new Error('NO_CONNECTION');
+    throw new Error("NO_CONNECTION");
   }
 
   right(): TypeRoom {
     if (this.#right) {
       return this.#right;
     }
-    throw new Error('NO_CONNECTION');
+    throw new Error("NO_CONNECTION");
   }
 
   forward(): TypeRoom {
     if (this.#forward) {
       return this.#forward;
     }
-    throw new Error('NO_CONNECTION');
+    throw new Error("NO_CONNECTION");
   }
 
   back(): TypeRoom {
     if (this.#back) {
       return this.#back;
     }
-    throw new Error('NO_CONNECTION');
+    throw new Error("NO_CONNECTION");
   }
 
   up(): TypeRoom {
     if (this.#up) {
       return this.#up;
     }
-    throw new Error('NO_CONNECTION');
+    throw new Error("NO_CONNECTION");
   }
 
   down(): TypeRoom {
     if (this.#down) {
       return this.#down;
     }
-    throw new Error('NO_CONNECTION');
+    throw new Error("NO_CONNECTION");
   }
 }
 
