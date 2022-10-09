@@ -1,4 +1,4 @@
-import Weapon from '../../items/types/Weapons';
+import Weapon from "../../items/types/Weapons";
 
 type IPlayerInventory = {
   addWeapon: (weapon: Weapon) => void;

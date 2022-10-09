@@ -55,6 +55,7 @@ class PlayerAction {
     switch (command) {
       case "look":
         return this.#playerLocation.describe();
+
       case "move":
         // secondaryCommand is a direction
         const playerMove = new PlayerMove(
@@ -63,35 +64,46 @@ class PlayerAction {
         );
         playerMove.move();
         return this.#playerLocation.describe();
+
       case "attack":
-        // secondaryCommand is monsterName
-        const validMonsterIDs = validMonsters.map((monster) => monster.getID());
-        const playerAttack = new PlayerAttack(this.#playerInventory);
-        const attackResults = playerAttack.attack(
-          secondaryCommand,
-          validMonsterIDs
-        );
-        const targetMonster = validMonsters.find(
-          (monster) => monster.getID() === attackResults.id
-        );
-        const didHit = monsterDamage(
-          targetMonster,
-          attackResults.attackValue,
-          attackResults.damageValue
-        );
-        if (didHit) {
-          return `You struck the ${targetMonster.getName()} for ${
-            attackResults.damageValue
-          } damage. |${targetMonster.getName()} HP: ${targetMonster.getHP()}| |Attack: ${
-            attackResults.attackValue
-          }|`;
-        } else
-          return `You missed the ${targetMonster.getName()}. |Attack: ${
-            attackResults.attackValue
-          }|`;
+        return this._doPlayerAttack(secondaryCommand, validMonsters);
+
       default:
         throw new Error("Invalid Command");
     }
+  }
+
+  _doPlayerAttack(secondaryCommand, validMonsters) {
+    // secondaryCommand is monsterName
+    const validMonsterIDs = validMonsters.map((monster) => monster.getID());
+
+    const playerAttack = new PlayerAttack(this.#playerInventory);
+
+    const attackResults = playerAttack.attack(
+      secondaryCommand,
+      validMonsterIDs
+    );
+
+    const targetMonster = validMonsters.find(
+      (monster) => monster.getID() === attackResults.id
+    );
+
+    const didHit = monsterDamage(
+      targetMonster,
+      attackResults.attackValue,
+      attackResults.damageValue
+    );
+
+    if (didHit) {
+      return `>You struck the ${targetMonster.getName()} for ${
+        attackResults.damageValue
+      } damage. |${targetMonster.getName()} HP: ${targetMonster.getHP()}| |Attack: ${
+        attackResults.attackValue
+      }|`;
+    } else
+      return `>You missed the ${targetMonster.getName()}. |Attack: ${
+        attackResults.attackValue
+      }|`;
   }
 }
 

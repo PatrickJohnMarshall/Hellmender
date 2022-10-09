@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Terminal, { ColorMode } from "react-terminal-ui";
 import TerminalLogContext from "../context/TerminalLog";
 
-export function TerminalController({ playerAction }) {
+export function TerminalController({ playerAction, monsters }) {
   const terminalLogContext = useContext(TerminalLogContext);
 
   return (
@@ -12,7 +12,9 @@ export function TerminalController({ playerAction }) {
         name="ZORK"
         colorMode={ColorMode.Dark}
         onInput={(terminalInput) => {
-          const actionResult = playerAction.action(terminalInput, []);
+          const actionResult = playerAction.action(terminalInput, [
+            ...monsters,
+          ]);
           const output = `\n>` + terminalInput + `\n\n` + actionResult;
           terminalLogContext.add(output);
         }}

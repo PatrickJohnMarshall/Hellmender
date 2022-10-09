@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import "../styles/_containers_and_frames.scss";
 import TerminalLogContext from "context/TerminalLog";
+import getImageForMonster from "util/getImageForMonster";
 
 function InfoBlocks({ monsters }) {
   const terminalLog = useContext(TerminalLogContext);
@@ -14,12 +15,16 @@ function InfoBlocks({ monsters }) {
       {monsters.map((monster) => {
         return (
           <button
+            style={{
+              backgroundImage: `url(${getImageForMonster(monster.getID())})`,
+              backgroundSize: "50px 50px",
+              height: `50px`,
+              width: "50px",
+            }}
             onClick={() => {
               terminalLog.add("\n" + monster.describe());
             }}
-          >
-            {monster.getName()}
-          </button>
+          />
         );
       })}
     </div>

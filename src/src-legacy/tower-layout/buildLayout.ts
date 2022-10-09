@@ -1,10 +1,10 @@
-import Bedroom from './rooms/Bedroom';
-import OutsideWindow from './rooms/OutsideWindow';
-import Study from './rooms/Study';
-import Kitchen from './rooms/Kitchen';
-import Bathroom from './rooms/Bathroom';
-import ToiletArena from './rooms/ToiletArena';
-import LibraryLanding from './rooms/LibraryLanding';
+import Bedroom from "./rooms/Bedroom";
+import OutsideWindow from "./rooms/OutsideWindow";
+import Study from "./rooms/Study";
+import Kitchen from "./rooms/Kitchen";
+import Bathroom from "./rooms/Bathroom";
+import ToiletArena from "./rooms/ToiletArena";
+import LibraryLanding from "./rooms/LibraryLanding";
 
 export default function buildLayout() {
   const bedroom = new Bedroom();

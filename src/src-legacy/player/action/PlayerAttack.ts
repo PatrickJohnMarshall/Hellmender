@@ -1,4 +1,4 @@
-import IPlayerInventory from '../types/IPlayerInventory';
+import IPlayerInventory from "../types/IPlayerInventory";
 
 class PlayerAttack {
   #playerInventory;
@@ -16,7 +16,7 @@ class PlayerAttack {
     damageValue: number;
   } {
     const target = validMonsterIDs.find(
-      (id) => id.toLowerCase() === monsterName.toLowerCase().replace(' ', '')
+      (id) => id.toLowerCase() === monsterName.toLowerCase().replace(" ", "")
     );
 
     if (target) {
@@ -26,7 +26,7 @@ class PlayerAttack {
         damageValue: this._getDamageValue(),
       };
     }
-    throw new Error('Learn to read. Not a valid target.');
+    throw new Error("Learn to read. Not a valid target.");
   }
 
   _getAttackValue(): number {

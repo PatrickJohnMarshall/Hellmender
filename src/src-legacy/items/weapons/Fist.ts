@@ -1,5 +1,5 @@
-import AbstractWeapons from '../AbstractWeapons';
-import formatLog from '../../util/formatLog';
+import AbstractWeapons from "../AbstractWeapons";
+import formatLog from "../../util/formatLog";
 
 class Fist extends AbstractWeapons {
   constructor() {
@@ -7,10 +7,10 @@ class Fist extends AbstractWeapons {
       attackBonus: 0,
       damage: { min: 1, max: 4 },
     };
-    super({ id: 'fist', stats });
+    super({ id: "fist", stats });
   }
   describe(): string {
-    return formatLog(['Its your hands.']);
+    return formatLog(["Its your hands."]);
   }
 }
 
