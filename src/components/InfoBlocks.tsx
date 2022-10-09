@@ -24,9 +24,7 @@ function InfoBlocks({ monsters }) {
             onClick={() => {
               terminalLog.add("\n" + monster.describe());
             }}
-          >
-            {/* {monster.getName()} */}
-          </button>
+          />
         );
       })}
     </div>

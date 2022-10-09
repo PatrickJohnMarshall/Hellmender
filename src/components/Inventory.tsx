@@ -23,9 +23,7 @@ function Inventory({ weapons }) {
             onClick={() => {
               terminalLog.add("\n" + weapon.describe());
             }}
-          >
-            {/* {weapon.getName()} */}
-          </button>
+          />
         );
       })}
     </div>
