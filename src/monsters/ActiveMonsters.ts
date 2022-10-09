@@ -1,4 +1,4 @@
-import TypeMonster from "./types/Monster";
+import TypeMonster from "../monsters/types/Monster";
 
 class ActiveMonsters {
   #activeMonsters: TypeMonster[] = [];

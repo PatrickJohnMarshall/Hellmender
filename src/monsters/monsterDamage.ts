@@ -1,4 +1,4 @@
-import Monster from './types/Monster';
+import Monster from "../monsters/types/Monster";
 
 function monsterDamage(monster: Monster, attack: number, damage: number) {
   if (attack >= monster.getAC()) {

@@ -1,4 +1,4 @@
-import TypeRoom from "../tower-layout/rooms/types/Room";
+import TypeRoom from "../src-legacy/tower-layout/rooms/types/Room";
 
 abstract class AbstractMonster {
   #id: string;

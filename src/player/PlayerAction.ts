@@ -1,9 +1,9 @@
 import PlayerMove from "../src-legacy/player/action/PlayerMove";
 import PlayerAttack from "../src-legacy/player/action/PlayerAttack";
-import Monster from "../src-legacy/monsters/types/Monster";
+import Monster from "../monsters/types/Monster";
 import IPlayerLocation from "../src-legacy/player/types/IPlayerLocation";
 import IPlayerInventory from "../src-legacy/player/types/IPlayerInventory";
-import monsterDamage from "../src-legacy/monsters/monsterDamage";
+import monsterDamage from "../monsters/monsterDamage";
 
 class PlayerAction {
   #playerLocation;
