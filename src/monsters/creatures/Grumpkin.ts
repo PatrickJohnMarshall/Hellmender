@@ -1,5 +1,5 @@
 import AbstractMonster from "../AbstractMonster";
-import formatLog from "../../src-legacy/util/formatLog";
+import formatLog from "../../util/formatLog";
 
 class Grumpkin extends AbstractMonster {
   describe(): string {

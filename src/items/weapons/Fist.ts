@@ -1,5 +1,5 @@
 import AbstractWeapons from "../AbstractWeapons";
-import formatLog from "../../src-legacy/util/formatLog";
+import formatLog from "../../util/formatLog";
 
 class Fist extends AbstractWeapons {
   constructor() {
