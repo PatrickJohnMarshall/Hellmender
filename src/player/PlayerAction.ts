@@ -4,6 +4,7 @@ import Monster from "../monsters/types/Monster";
 import IPlayerLocation from "./types/IPlayerLocation";
 import IPlayerInventory from "./types/IPlayerInventory";
 import monsterDamage from "../monsters/monsterDamage";
+import PlayerCast from "./action/PlayerCast";
 
 class PlayerAction {
   #playerLocation;
@@ -28,7 +29,12 @@ class PlayerAction {
       return "Follow the instructions, dumbass.";
     }
 
-    return this._doAction(commands[0], commands[1], validMonsters);
+    return this._doAction({
+      primaryCommand: commands[0],
+      secondaryCommand: commands[1],
+      fourthCommand: commands[3],
+      validMonsters,
+    });
   }
 
   _validateCommand(command: string): boolean {
@@ -44,15 +50,24 @@ class PlayerAction {
     if (command.toLowerCase() === "look") {
       return true;
     }
+    if (command.toLowerCase() === "cast") {
+      return true;
+    }
     return false;
   }
 
-  _doAction(
-    command: string,
-    secondaryCommand: string,
-    validMonsters: Monster[]
-  ): string | { id: string; attackValue: number; damageValue: number } {
-    switch (command) {
+  _doAction({
+    primaryCommand,
+    secondaryCommand,
+    fourthCommand,
+    validMonsters,
+  }: {
+    primaryCommand: string;
+    secondaryCommand: string;
+    fourthCommand: string | undefined;
+    validMonsters: Monster[];
+  }): string | { id: string; attackValue: number; damageValue: number } {
+    switch (primaryCommand) {
       case "look":
         return this.#playerLocation.describe();
 
@@ -66,14 +81,21 @@ class PlayerAction {
         return this.#playerLocation.describe();
 
       case "attack":
-        return this._doPlayerAttack(secondaryCommand, validMonsters);
+        return this._doWeaponAttack(secondaryCommand, validMonsters);
+
+      case "cast":
+        return this._doSpellAttack(
+          secondaryCommand,
+          fourthCommand,
+          validMonsters
+        );
 
       default:
         throw new Error("Invalid Command");
     }
   }
 
-  _doPlayerAttack(secondaryCommand, validMonsters) {
+  _doWeaponAttack(secondaryCommand, validMonsters) {
     // secondaryCommand is monsterName
     const validMonsterIDs = validMonsters.map((monster) => monster.getID());
 
@@ -84,6 +106,25 @@ class PlayerAction {
       validMonsterIDs
     );
 
+    return this._doAttack(attackResults, validMonsters);
+  }
+
+  _doSpellAttack(secondaryCommand, spellTarget, validMonsters) {
+    // secondaryCommand is monsterName
+    const validMonsterIDs = validMonsters.map((monster) => monster.getID());
+
+    const playerCast = new PlayerCast(this.#playerInventory);
+
+    const attackResults = playerCast.attack(
+      secondaryCommand,
+      spellTarget,
+      validMonsterIDs
+    );
+
+    return this._doAttack(attackResults, validMonsters);
+  }
+
+  _doAttack(attackResults, validMonsters) {
     const targetMonster = validMonsters.find(
       (monster) => monster.getID() === attackResults.id
     );

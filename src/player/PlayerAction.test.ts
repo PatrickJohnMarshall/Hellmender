@@ -1,5 +1,6 @@
 import PlayerAction from "./PlayerAction";
-import Weapon from "../items/types/Weapons";
+import Weapon from "../items/types/Weapon";
+import Spell from "spells/types/Spell";
 
 const mockMonster = {
   getID: () => "grumpkin",
@@ -46,6 +47,12 @@ const fakeInventory = {
       max: 8,
     },
   }),
+  learnSpell: () => {},
+  getSpells: () => [] as Spell[],
+  getKnownSpellStats: () => ({
+    attackBonus: 1,
+    damage: { min: 6, max: 36 },
+  }),
 };
 
 describe("PlayerAction", () => {
@@ -64,6 +71,17 @@ describe("PlayerAction", () => {
 
     const playerAction = new PlayerAction(location, fakeInventory);
     await playerAction.action("attack grumpkin", [
+      { ...mockMonster, takeDamage: mockTakeDamage },
+    ]);
+    expect(mockTakeDamage).toHaveBeenCalled();
+  });
+
+  test("cast attack spell", async () => {
+    const mockTakeDamage = jest.fn();
+    const location = { ...fakeLocation };
+
+    const playerAction = new PlayerAction(location, fakeInventory);
+    await playerAction.action("cast fireball on grumpkin", [
       { ...mockMonster, takeDamage: mockTakeDamage },
     ]);
     expect(mockTakeDamage).toHaveBeenCalled();
