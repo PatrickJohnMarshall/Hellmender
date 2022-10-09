@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import "../styles/_containers_and_frames.scss";
 import TerminalLogContext from "context/TerminalLog";
+import getImageForItem from "util/getImageForItem";
 
 function Inventory({ weapons }) {
   const terminalLog = useContext(TerminalLogContext);
@@ -15,7 +16,8 @@ function Inventory({ weapons }) {
         return (
           <button
             style={{
-              backgroundImage: `url(https://i.imgur.com/hkA2Su1.png)`,
+              backgroundImage: `url(${getImageForItem(weapon.getID())}
+              )`,
               backgroundSize: "50px 50px",
               height: `50px`,
               width: "50px",
