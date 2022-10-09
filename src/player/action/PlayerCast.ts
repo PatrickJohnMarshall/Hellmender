@@ -31,7 +31,6 @@ class PlayerCast {
   }
 
   _getAttackValue(spellID: string): number {
-    console.log(spellID);
     const attackBonus =
       this.#playerInventory.getKnownSpellStats(spellID).attackBonus;
     return rollDice(1, 20) + attackBonus;

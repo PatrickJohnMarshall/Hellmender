@@ -31,17 +31,6 @@ const mockRoom = {
   down: () => mockRoom,
 };
 
-// const fakeLocation = {
-//   describe: () => {},
-//   update: () => {},
-//   left: () => mockRoom,
-//   right: () => mockRoom,
-//   forward: () => mockRoom,
-//   back: () => mockRoom,
-//   up: () => mockRoom,
-//   down: () => mockRoom,
-// };
-
 const mockMonsterArray = ["megaGrumpkin"];
 
 describe("PlayerCast", () => {
@@ -63,9 +52,6 @@ describe("PlayerCast", () => {
       "Mega Grumpkin",
       mockMonsterArray
     );
-
-    console.log(attackResults.attackValue);
-    console.log(mockInventory.getKnownSpellStats("fireBall"));
 
     expect(attackResults.attackValue).toBeLessThan(22);
     expect(attackResults.attackValue).toBeGreaterThan(1);

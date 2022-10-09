@@ -31,17 +31,6 @@ const mockRoom = {
   down: () => mockRoom,
 };
 
-// const fakeLocation = {
-//   describe: () => {},
-//   update: () => {},
-//   left: () => mockRoom,
-//   right: () => mockRoom,
-//   forward: () => mockRoom,
-//   back: () => mockRoom,
-//   up: () => mockRoom,
-//   down: () => mockRoom,
-// };
-
 const mockMonsterArray = ["megaGrumpkin"];
 
 describe("PlayerAttack", () => {
