@@ -9,8 +9,8 @@ import buildLayout from "./src-legacy/tower-layout/buildLayout";
 import generateMonsters from "./monsters/generateMonsters";
 import Fist from "./items/weapons/Fist";
 import PlayerAction from "./player/PlayerAction";
-import PlayerLocation from "./src-legacy/player/PlayerLocation";
-import PlayerInventory from "./src-legacy/player/PlayerInventory";
+import PlayerLocation from "./player/PlayerLocation";
+import PlayerInventory from "./player/PlayerInventory";
 
 const startingRoom = buildLayout();
 const startingItem = new Fist();

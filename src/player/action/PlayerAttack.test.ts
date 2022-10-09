@@ -1,6 +1,6 @@
 import PlayerAttack from "./PlayerAttack";
 import IPlayerInventory from "../types/IPlayerInventory";
-import Weapon from "../../../items/types/Weapons";
+import Weapon from "../../items/types/Weapons";
 
 const mockInventory = {
   addWeapon: () => {},

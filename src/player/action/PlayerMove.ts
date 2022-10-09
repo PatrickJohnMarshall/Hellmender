@@ -1,4 +1,4 @@
-import IPlayerLocation from '../types/IPlayerLocation';
+import IPlayerLocation from "../types/IPlayerLocation";
 
 class PlayerMove {
   #playerLocation;
@@ -11,26 +11,26 @@ class PlayerMove {
 
   move() {
     switch (this.#direction.toLowerCase()) {
-      case 'left':
+      case "left":
         this.#playerLocation.update(this.#playerLocation.left());
         break;
-      case 'right':
+      case "right":
         this.#playerLocation.update(this.#playerLocation.right());
         break;
-      case 'forward':
+      case "forward":
         this.#playerLocation.update(this.#playerLocation.forward());
         break;
-      case 'back':
+      case "back":
         this.#playerLocation.update(this.#playerLocation.back());
         break;
-      case 'up':
+      case "up":
         this.#playerLocation.update(this.#playerLocation.up());
         break;
-      case 'down':
+      case "down":
         this.#playerLocation.update(this.#playerLocation.down());
         break;
       default:
-        throw new Error('Invalid direction');
+        throw new Error("Invalid direction");
     }
   }
 }

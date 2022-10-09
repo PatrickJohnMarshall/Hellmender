@@ -1,4 +1,4 @@
-import Room from '../tower-layout/rooms/types/Room';
+import Room from "src-legacy/tower-layout/rooms/types/Room";
 class PlayerLocation {
   #location: Room;
 
