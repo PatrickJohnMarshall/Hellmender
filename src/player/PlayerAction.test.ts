@@ -1,20 +1,20 @@
-import PlayerAction from './PlayerAction';
-import Weapon from '../src-legacy/items/types/Weapons';
+import PlayerAction from "./PlayerAction";
+import Weapon from "../src-legacy/items/types/Weapons";
 
 const mockMonster = {
-  getID: () => 'grumpkin',
+  getID: () => "grumpkin",
   getHP: () => 20,
   getAC: () => 0,
-  getName: () => 'Grumpkin',
-  getLocationId: () => '',
+  getName: () => "Grumpkin",
+  getLocationId: () => "",
   takeDamage: () => {},
-  describe: () => {},
+  describe: () => "",
 };
 
 const mockRoom = {
-  getID: () => '',
+  getID: () => "",
   addConnections: () => {},
-  description: () => '',
+  description: () => "",
   left: () => mockRoom,
   right: () => mockRoom,
   forward: () => mockRoom,
@@ -24,9 +24,9 @@ const mockRoom = {
 };
 
 const fakeLocation = {
-  describe: () => '',
+  describe: () => "",
   update: () => {},
-  getID: () => '',
+  getID: () => "",
   left: () => mockRoom,
   right: () => mockRoom,
   forward: () => mockRoom,
@@ -48,22 +48,22 @@ const fakeInventory = {
   }),
 };
 
-describe('PlayerAction', () => {
-  test('performs a move', async () => {
+describe("PlayerAction", () => {
+  test("performs a move", async () => {
     const mockForward = jest.fn(() => mockRoom);
     const location = { ...fakeLocation, forward: mockForward };
 
     const playerAction = new PlayerAction(location, fakeInventory);
-    await playerAction.action('move forward', []);
+    await playerAction.action("move forward", []);
     expect(mockForward).toHaveBeenCalled();
   });
 
-  test('performs an attack', async () => {
+  test("performs an attack", async () => {
     const mockTakeDamage = jest.fn();
     const location = { ...fakeLocation };
 
     const playerAction = new PlayerAction(location, fakeInventory);
-    await playerAction.action('attack grumpkin', [
+    await playerAction.action("attack grumpkin", [
       { ...mockMonster, takeDamage: mockTakeDamage },
     ]);
     expect(mockTakeDamage).toHaveBeenCalled();

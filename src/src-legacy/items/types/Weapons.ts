@@ -6,7 +6,7 @@ interface Weapon {
     attackBonus: number;
     damage: { min: number; max: number };
   };
-  describe: () => void;
+  describe: () => string;
 }
 
 export default Weapon;

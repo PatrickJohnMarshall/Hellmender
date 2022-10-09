@@ -13,11 +13,13 @@ import PlayerLocation from "./src-legacy/player/PlayerLocation";
 import PlayerInventory from "./src-legacy/player/PlayerInventory";
 
 const startingRoom = buildLayout();
-const monsters = generateMonsters();
-const fist = new Fist();
+const startingItem = new Fist();
+
 const playerLocation = new PlayerLocation(startingRoom);
-const playerInventory = new PlayerInventory(fist);
+const playerInventory = new PlayerInventory(startingItem);
 const playerAction = new PlayerAction(playerLocation, playerInventory);
+
+const monsters = generateMonsters();
 
 function App() {
   const [terminalLog, setTerminalLog] = useState([
@@ -37,9 +39,13 @@ function App() {
         },
       }}
     >
-      <TerminalController playerAction={playerAction} />
+      <TerminalController
+        playerAction={playerAction}
+        monsters={monsters.getMonstersForRoom(playerLocation.getID())}
+      />
       <ReadoutGrid
         monsters={monsters.getMonstersForRoom(playerLocation.getID())}
+        weapons={playerInventory.getWeapons()}
       />
     </TerminalLogContext.Provider>
   );

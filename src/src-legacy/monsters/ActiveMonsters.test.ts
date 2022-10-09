@@ -1,21 +1,21 @@
-import ActiveMonsters from './ActiveMonsters';
-import TypeMonster from './types/Monster';
+import ActiveMonsters from "./ActiveMonsters";
+import TypeMonster from "./types/Monster";
 
 const mockMonster: TypeMonster = {
-  getID: () => '',
+  getID: () => "",
   getHP: () => 69,
   getAC: () => 420,
-  getName: () => '',
-  getLocationId: () => '',
+  getName: () => "",
+  getLocationId: () => "",
   takeDamage: (damage: number) => {},
-  describe: () => {},
+  describe: () => "",
 };
 
-describe('ActiveMonsters', () => {
-  test('adds a monster', () => {
+describe("ActiveMonsters", () => {
+  test("adds a monster", () => {
     const mockBumpkin = {
       ...mockMonster,
-      getID: () => 'bumpkin',
+      getID: () => "bumpkin",
     };
     const activeMonsters = new ActiveMonsters();
 
@@ -23,15 +23,15 @@ describe('ActiveMonsters', () => {
     expect(
       activeMonsters
         .getMonsters()
-        .findIndex((monster) => monster.getID() === 'bumpkin') !== -1
+        .findIndex((monster) => monster.getID() === "bumpkin") !== -1
     ).toBeTruthy();
   });
 
-  test('gets monster for room', () => {
+  test("gets monster for room", () => {
     const mockMonsterInBedroom = {
       ...mockMonster,
-      getLocationId: () => 'bedroom',
-      getID: () => 'bumpkin',
+      getLocationId: () => "bedroom",
+      getID: () => "bumpkin",
     };
 
     const activeMonsters = new ActiveMonsters();
@@ -39,8 +39,8 @@ describe('ActiveMonsters', () => {
 
     expect(
       activeMonsters
-        .getMonstersForRoom('bedroom')
-        .findIndex((monster) => monster.getID() === 'bumpkin') !== -1
+        .getMonstersForRoom("bedroom")
+        .findIndex((monster) => monster.getID() === "bumpkin") !== -1
     ).toBeTruthy();
   });
 });

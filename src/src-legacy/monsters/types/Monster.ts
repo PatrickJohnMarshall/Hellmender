@@ -5,7 +5,7 @@ interface Monster {
   getName: () => string;
   getLocationId: () => string;
   takeDamage: (damage: number) => void;
-  describe: () => void;
+  describe: () => string;
 }
 
 export default Monster;

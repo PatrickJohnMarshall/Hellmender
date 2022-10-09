@@ -20,7 +20,7 @@ abstract class AbstractWeapons {
     return this.#stats;
   }
 
-  abstract describe(): void;
+  abstract describe(): string;
 }
 
 export default AbstractWeapons;
