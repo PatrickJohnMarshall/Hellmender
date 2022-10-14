@@ -53,6 +53,7 @@ function App() {
       <ReadoutGrid
         monsters={monsters.getMonstersForRoom(playerLocation.getID())}
         weapons={playerInventory.getWeapons()}
+        spells={playerInventory.getSpells()}
       />
     </TerminalLogContext.Provider>
   );
