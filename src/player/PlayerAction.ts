@@ -1,10 +1,10 @@
 import PlayerMove from "./action/PlayerMove";
 import PlayerAttack from "./action/PlayerAttack";
+import PlayerCast from "./action/PlayerCast";
 import Monster from "../monsters/types/Monster";
+import monsterDamage from "../monsters/monsterDamage";
 import IPlayerLocation from "./types/IPlayerLocation";
 import IPlayerInventory from "./types/IPlayerInventory";
-import monsterDamage from "../monsters/monsterDamage";
-import PlayerCast from "./action/PlayerCast";
 
 class PlayerAction {
   #playerLocation;
