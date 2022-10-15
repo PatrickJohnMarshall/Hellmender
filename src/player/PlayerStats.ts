@@ -32,27 +32,28 @@ class PlayerStats {
     this.#ac = initialStats.ac;
   }
 
-  setAttribute(attribute: string, value: number) {
-    switch (attribute) {
-      case "str":
-        this.#str = value;
-        break;
-      case "dex":
-        this.#dex = value;
-        break;
-      case "con":
-        this.#con = value;
-        break;
-      case "int":
-        this.#int = value;
-        break;
-      case "wis":
-        this.#wis = value;
-        break;
-      case "cha":
-        this.#cha = value;
-        break;
-    }
+  setStr(value: number) {
+    this.#str = value;
+  }
+
+  setDex(value: number) {
+    this.#dex = value;
+  }
+
+  setCon(value: number) {
+    this.#con = value;
+  }
+
+  setInt(value: number) {
+    this.#int = value;
+  }
+
+  setWis(value: number) {
+    this.#wis = value;
+  }
+
+  setCha(value: number) {
+    this.#cha = value;
   }
 
   setHP(value: number) {
@@ -90,27 +91,28 @@ class PlayerStats {
     return this.#ac;
   }
 
-  changeAttribute(attribute: string, newValue: number) {
-    switch (attribute) {
-      case "str":
-        this.#str += newValue;
-        break;
-      case "dex":
-        this.#dex += newValue;
-        break;
-      case "con":
-        this.#con += newValue;
-        break;
-      case "int":
-        this.#int += newValue;
-        break;
-      case "wis":
-        this.#wis += newValue;
-        break;
-      case "cha":
-        this.#cha += newValue;
-        break;
-    }
+  changeStr(newValue: number) {
+    this.#str += newValue;
+  }
+
+  changeDex(newValue: number) {
+    this.#dex += newValue;
+  }
+
+  changeCon(newValue: number) {
+    this.#con += newValue;
+  }
+
+  changeInt(newValue: number) {
+    this.#int += newValue;
+  }
+
+  changeWis(newValue: number) {
+    this.#wis += newValue;
+  }
+
+  changeCha(newValue: number) {
+    this.#cha += newValue;
   }
 
   changeHP(value: number) {

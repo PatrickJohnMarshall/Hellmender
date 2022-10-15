@@ -21,7 +21,7 @@ describe("PlayerStats", () => {
   test("can set new attribute value", () => {
     const playerStats = new PlayerStats(mockPlayerStats);
 
-    playerStats.setAttribute("str", 8);
+    playerStats.setStr(8);
 
     expect(playerStats.getAttributes().str).toEqual(8);
   });
@@ -29,7 +29,7 @@ describe("PlayerStats", () => {
   test("can change attribute value", () => {
     const playerStats = new PlayerStats(mockPlayerStats);
 
-    playerStats.changeAttribute("str", -3);
+    playerStats.changeStr(-3);
 
     expect(playerStats.getAttributes().str).toEqual(7);
   });
