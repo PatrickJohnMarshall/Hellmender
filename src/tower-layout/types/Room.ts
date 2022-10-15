@@ -6,7 +6,6 @@ type IRoomConstructor = {
   up?: TypeRoom | undefined;
   down?: TypeRoom | undefined;
 };
-
 interface TypeRoom {
   getID: () => string;
   addConnections: (connections: IRoomConstructor) => void;
