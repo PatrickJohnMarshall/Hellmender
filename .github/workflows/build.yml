@@ -6,30 +6,30 @@ on:
 
 jobs:
   build:
-  runs-on: ubuntu-latest
-  steps:
-    - name: Checkout
-      uses: action/setup-node@v3
+    name: Build Stage
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: action/setup-node@v3
 
-    - name: Setup Node
-      uses: action/setup-node@v3
-      with:
-        node-version: "16"
-        cache: npm
-        cache-dependency-path: ./package-lock.json
+      - name: Setup Node
+        uses: action/setup-node@v3
+        with:
+          node-version: "16"
+          cache: npm
+          cache-dependency-path: ./package-lock.json
 
-    - name: Install Dependencies
-      run: npm i
+      - name: Install Dependencies
+        run: npm i
 
-    - name: Build
-      run: npm run predeploy
+      - name: Build
+        run: npm run predeploy
 
-    - name: Upload artifact
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
           path: ./build
 
-          
   deploy:
     environment:
       name: gh-pages
