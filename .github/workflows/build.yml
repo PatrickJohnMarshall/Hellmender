@@ -1,5 +1,15 @@
-- name: Deploy
-  uses: peaceiris/actions-gh-pages@v3
-  with:
-    github_token: ${{ secrets.GITHUB_TOKEN }}
-    publish_dir: ./public
+jobs:
+  build:
+    steps:
+      - name: Build
+        runs-on: ubuntu-latest
+        with:
+          node-version: "16"
+          cache: npm
+          cache-dependency-path: ./package-lock.json
+          run: npm run predeploy
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
