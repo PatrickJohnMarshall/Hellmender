@@ -1,13 +1,29 @@
+name: Deploy Zork to GH Pages
+
+on:
+  push:
+    branches: ["main"]
+    
 jobs:
   build:
+  runs-on: ubuntu-latest
     steps:
-      - name: Build
-        runs-on: ubuntu-latest
-        with:
+      - name: Checkout
+        uses: action/setup-node@v3
+
+      - name: Setup Node
+        uses: action/setup-node@v3
+        with: 
           node-version: "16"
           cache: npm
           cache-dependency-path: ./package-lock.json
-          run: npm run predeploy
+
+      - name: Install Dependencies
+        run: npm i
+
+      - name: Build
+        run: npm run predeploy
+        
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
