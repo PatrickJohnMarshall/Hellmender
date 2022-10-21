@@ -8,9 +8,7 @@ import InfoBlocks from "./InfoBlocks";
 import PlayerStatsReadout from "./PlayerStatsReadout";
 
 function ReadoutGrid({ monsters, weapons, spells, playerStats }) {
-  const [readout, setReadout] = useState({
-    state: "Weapons",
-  });
+  const [readout, setReadout] = useState<string>("Weapons");
 
   const options = ["Spells", "Weapons", "Apparel", "Potions", "Miscellaneous"];
 
@@ -21,8 +19,8 @@ function ReadoutGrid({ monsters, weapons, spells, playerStats }) {
       </label>
       <select
         className="rpgui-dropdown"
-        value={readout.state}
-        onChange={(selected) => setReadout({ state: selected.target.value })}
+        value={readout}
+        onChange={(selected) => setReadout(selected.target.value)}
       >
         {options.map((value) => (
           <option value={value} key={value}>
@@ -35,7 +33,7 @@ function ReadoutGrid({ monsters, weapons, spells, playerStats }) {
           {
             Weapons: <Weapons weapons={weapons} />,
             Spells: <SpellRepertoire spells={spells} />,
-          }[readout.state]
+          }[readout]
         }
 
         <PlayerStatsReadout playerStats={playerStats} />
