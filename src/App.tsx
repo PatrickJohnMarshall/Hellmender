@@ -16,6 +16,7 @@ import FireBolt from "spells/spells/FireBolt";
 import PlayerAction from "./player/PlayerAction";
 import PlayerLocation from "./player/PlayerLocation";
 import PlayerInventory from "./player/PlayerInventory";
+import PlayerStats from "player/PlayerStats";
 
 const startingRoom = buildLayout();
 const startingItem = new Fist();
@@ -24,6 +25,16 @@ const startingSpell = new FireBolt();
 const playerLocation = new PlayerLocation(startingRoom);
 const playerInventory = new PlayerInventory(startingItem);
 const playerAction = new PlayerAction(playerLocation, playerInventory);
+const playerStats = new PlayerStats({
+  str: 8,
+  dex: 12,
+  con: 12,
+  int: 15,
+  wis: 11,
+  cha: 7,
+  hp: 6,
+  ac: 10,
+});
 
 playerInventory.learnSpell(startingSpell);
 const monsters = generateMonsters();
@@ -51,6 +62,7 @@ function App() {
         monsters={monsters.getMonstersForRoom(playerLocation.getID())}
       />
       <ReadoutGrid
+        playerStats={playerStats}
         monsters={monsters.getMonstersForRoom(playerLocation.getID())}
         weapons={playerInventory.getWeapons()}
         spells={playerInventory.getSpells()}

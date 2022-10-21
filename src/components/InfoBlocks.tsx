@@ -11,7 +11,7 @@ function InfoBlocks({ monsters }) {
       className="rpgui-container framed"
       style={{ height: "375px", width: "375px", marginTop: "35px" }}
     >
-      InfoBlocks:
+      Monsters In Area:
       {monsters.map((monster) => {
         return (
           <button
