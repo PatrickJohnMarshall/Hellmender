@@ -3,7 +3,7 @@ import "../styles/_containers_and_frames.scss";
 import TerminalLogContext from "context/TerminalLog";
 import getImageForItem from "util/getImageForItem";
 
-function Inventory({ weapons }) {
+function Weapons({ weapons }) {
   const terminalLog = useContext(TerminalLogContext);
 
   return (
@@ -11,7 +11,7 @@ function Inventory({ weapons }) {
       className="rpgui-container framed"
       style={{ height: "350px", width: "375px", marginTop: "50px" }}
     >
-      Inventory:
+      Weapons:
       {weapons.map((weapon) => {
         return (
           <button
@@ -32,4 +32,4 @@ function Inventory({ weapons }) {
   );
 }
 
-export default Inventory;
+export default Weapons;
