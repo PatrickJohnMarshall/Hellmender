@@ -7,7 +7,8 @@
   /* position style and default z */
   // position: fixed;
   // z-index: 10;
-  font-family: "Press Start 2P";
+  font-family: "VT323";
+  font-size: calc(2rem + 6 * ((100vw - 80rem) / 680));
   overflow: show;
 }
 

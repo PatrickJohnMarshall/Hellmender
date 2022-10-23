@@ -10,15 +10,9 @@ import TerminalInput from "./linetypes/TerminalInput";
 import TerminalOutput from "./linetypes/TerminalOutput";
 import "styles/_terminal.scss";
 
-export enum ColorMode {
-  Light,
-  Dark,
-}
-
 export interface Props {
   name?: string;
   prompt?: string;
-  colorMode?: ColorMode;
   children?: ReactNode;
   onInput?: ((input: string) => void) | null | undefined;
   startingInputValue?: string;
@@ -27,7 +21,6 @@ export interface Props {
 const Terminal = ({
   name,
   prompt,
-  colorMode,
   onInput,
   children,
   startingInputValue = "",
@@ -96,13 +89,10 @@ const Terminal = ({
   }, [onInput]);
 
   const classes = ["react-terminal-wrapper"];
-  if (colorMode === ColorMode.Light) {
-    classes.push("react-terminal-light");
-  }
   return (
     <div className={classes.join(" ")} data-terminal-name={name}>
       <div className="react-terminal">
-        {children}
+        <div>{children}</div>
         {onInput && (
           <div
             className="react-terminal-line react-terminal-input react-terminal-active-input"
