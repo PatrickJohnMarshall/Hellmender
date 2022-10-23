@@ -19,5 +19,3 @@ function PlayerStatsReadout({ playerStats }) {
 }
 
 export default PlayerStatsReadout;
-
-// height: "350px", width: "375px", marginTop: "50px" original
