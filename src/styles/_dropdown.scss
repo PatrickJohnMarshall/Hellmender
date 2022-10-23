@@ -14,8 +14,10 @@
   /* font */
   text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
   color: white;
+  text-align: center;
 
-  font-family: "Press Start 2P";
+  font-family: "VT323";
+  font-size: calc(2rem + 6 * ((100vw - 80rem) / 680));
 
   /* default size */
   min-height: 40px;

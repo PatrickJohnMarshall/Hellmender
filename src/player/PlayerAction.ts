@@ -38,22 +38,9 @@ class PlayerAction {
   }
 
   _validateCommand(command: string): boolean {
-    if (command.toLowerCase() === "quit") {
-      throw new Error("Player Exit");
-    }
-    if (command.toLowerCase() === "move") {
-      return true;
-    }
-    if (command.toLowerCase() === "attack") {
-      return true;
-    }
-    if (command.toLowerCase() === "look") {
-      return true;
-    }
-    if (command.toLowerCase() === "cast") {
-      return true;
-    }
-    return false;
+    const validCommands = ["quit", "move", "attack", "look", "cast"];
+
+    return !!validCommands.find((c) => c === command);
   }
 
   _doAction({
@@ -89,6 +76,9 @@ class PlayerAction {
           fourthCommand,
           validMonsters
         );
+
+      case "quit":
+        return "quit";
 
       default:
         throw new Error("Invalid Command");

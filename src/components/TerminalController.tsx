@@ -1,20 +1,25 @@
 import React, { useContext } from "react";
-import Terminal, { ColorMode } from "react-terminal-ui";
 import TerminalLogContext from "../context/TerminalLog";
+import Terminal from "./Terminal";
 
-export function TerminalController({ playerAction, monsters }) {
+export function TerminalController({ playerAction, monsters, setGameState }) {
   const terminalLogContext = useContext(TerminalLogContext);
 
   return (
-    <div className="container rpgui-container framed-golden">
+    <div
+      className="container rpgui-container framed-golden"
+      style={{ height: "60vh" }}
+    >
       <Terminal
         prompt=">"
         name="ZORK"
-        colorMode={ColorMode.Dark}
         onInput={(terminalInput) => {
           const actionResult = playerAction.action(terminalInput, [
             ...monsters,
           ]);
+          if (actionResult === "quit") {
+            setGameState("start");
+          }
           const output = `\n>` + terminalInput + `\n\n` + actionResult;
           terminalLogContext.add(output);
         }}

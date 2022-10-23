@@ -1,0 +1,9 @@
+.start-screen {
+  color: white;
+  height: 350px;
+  width: 375px;
+  display: grid;
+  grid-template-rows: 40% 1fr;
+  grid-template-columns: 20% 60% 20%;
+  letter-spacing: 5px;
+}
