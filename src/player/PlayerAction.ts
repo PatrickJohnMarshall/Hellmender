@@ -26,7 +26,7 @@ class PlayerAction {
     const validAnswer = this._validateCommand(commands[0]);
 
     if (!validAnswer) {
-      return "Follow the instructions, dumbass.";
+      return "Invalid command - Please see guide for list of valid commands.";
     }
 
     return this._doAction({

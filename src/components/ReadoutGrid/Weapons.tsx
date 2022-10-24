@@ -8,7 +8,10 @@ function Weapons({ weapons }) {
   const terminalLog = useContext(TerminalLogContext);
 
   return (
-    <div className="rpgui-container framed readout-box">
+    <div
+      className="rpgui-container framed readout-box"
+      style={{ gridColumn: 1 }}
+    >
       Weapons:
       <div>
         {weapons.map((weapon) => {
