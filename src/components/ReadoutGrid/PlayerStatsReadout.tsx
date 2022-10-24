@@ -1,10 +1,16 @@
 import React from "react";
+import "styles/_scrollbars.scss";
 import "styles/_containers_and_frames.scss";
 import "styles/_readout_box.scss";
 
 function PlayerStatsReadout({ playerStats }) {
   return (
-    <div className="rpgui-container framed readout-box">
+    <div
+      className="rpgui-container framed rpgui-content readout-box"
+      style={{
+        gridColumn: 3,
+      }}
+    >
       Stats:
       <div>Strength:{playerStats.getAttributes().str}</div>
       <div>Dexterity:{playerStats.getAttributes().dex}</div>

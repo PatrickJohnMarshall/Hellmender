@@ -92,7 +92,7 @@ const Terminal = ({
   return (
     <div className={classes.join(" ")} data-terminal-name={name}>
       <div className="react-terminal">
-        <div>{children}</div>
+        {children}
         {onInput && (
           <div
             className="react-terminal-line react-terminal-input react-terminal-active-input"

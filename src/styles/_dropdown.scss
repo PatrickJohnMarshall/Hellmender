@@ -7,6 +7,7 @@
 
 .dropdown-label {
   color: white;
+  font-size: 20px;
 }
 
 .rpgui-dropdown-imp,
@@ -17,10 +18,13 @@
   text-align: center;
 
   font-family: "VT323";
-  font-size: calc(2rem + 6 * ((100vw - 80rem) / 680));
+  font-size: calc(14px + (24 - 14) * ((100vw - 300px) / (2560 - 300)));
 
   /* default size */
   min-height: 40px;
+  min-width: 110px;
+  max-height: 40px;
+  max-width: 110px;
   margin-top: 0px;
 
   /* border */

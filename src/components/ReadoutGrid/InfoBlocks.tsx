@@ -8,7 +8,10 @@ function InfoBlocks({ monsters }) {
   const terminalLog = useContext(TerminalLogContext);
 
   return (
-    <div className="rpgui-container framed readout-box">
+    <div
+      className="rpgui-container framed readout-box"
+      style={{ gridColumn: 5 }}
+    >
       Monsters In Area:
       <div>
         {monsters.map((monster) => {
