@@ -11,15 +11,15 @@ function PlayerStatsReadout({ playerStats }) {
         gridColumn: 3,
       }}
     >
-      Stats: <br />
-      Strength:{playerStats.getAttributes().str} <br />
-      Dexterity:{playerStats.getAttributes().dex} <br />
-      Constitution:{playerStats.getAttributes().con} <br />
-      Intelligence:{playerStats.getAttributes().int} <br />
-      Wisdom:{playerStats.getAttributes().wis} <br />
-      Charisma:{playerStats.getAttributes().cha} <br />
-      HP:{playerStats.getHP()} <br />
-      AC:{playerStats.getAC()}
+      Stats:
+      <div>Strength:{playerStats.getAttributes().str}</div>
+      <div>Dexterity:{playerStats.getAttributes().dex}</div>
+      <div>Constitution:{playerStats.getAttributes().con}</div>
+      <div>Intelligence:{playerStats.getAttributes().int}</div>
+      <div>Wisdom:{playerStats.getAttributes().wis}</div>
+      <div>Charisma:{playerStats.getAttributes().cha}</div>
+      <div>HP:{playerStats.getHP()}</div>
+      <div>AC:{playerStats.getAC()}</div>
     </div>
   );
 }
