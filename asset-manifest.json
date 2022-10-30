@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Zork/static/css/main.ffce13b3.css",
-    "main.js": "/Zork/static/js/main.4a4145d8.js",
+    "main.css": "/Zork/static/css/main.ed8fbd5e.css",
+    "main.js": "/Zork/static/js/main.56951623.js",
     "static/js/787.ed8d732a.chunk.js": "/Zork/static/js/787.ed8d732a.chunk.js",
     "static/media/border-image-golden2.png": "/Zork/static/media/border-image-golden2.46c876a09f390e28b086.png",
     "static/media/border-image-grey.png": "/Zork/static/media/border-image-grey.2374b131df7f4287987f.png",
@@ -25,12 +25,12 @@
     "static/media/scrollbar-track.png": "/Zork/static/media/scrollbar-track.c8a57113bb0449f3af00.png",
     "static/media/background-image.png": "/Zork/static/media/background-image.3328a65b91ea173c8b83.png",
     "index.html": "/Zork/index.html",
-    "main.ffce13b3.css.map": "/Zork/static/css/main.ffce13b3.css.map",
-    "main.4a4145d8.js.map": "/Zork/static/js/main.4a4145d8.js.map",
+    "main.ed8fbd5e.css.map": "/Zork/static/css/main.ed8fbd5e.css.map",
+    "main.56951623.js.map": "/Zork/static/js/main.56951623.js.map",
     "787.ed8d732a.chunk.js.map": "/Zork/static/js/787.ed8d732a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ffce13b3.css",
-    "static/js/main.4a4145d8.js"
+    "static/css/main.ed8fbd5e.css",
+    "static/js/main.56951623.js"
   ]
 }
