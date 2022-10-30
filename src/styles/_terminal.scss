@@ -22,7 +22,8 @@
 
 .react-terminal {
   height: 100%;
-  overflow: auto;
+  width: fit-content;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
 }
@@ -58,7 +59,10 @@
 }
 
 .react-terminal-line {
-  white-space: pre;
+  width: -moz-fot-content;
+  width: fit-content;
+  white-space: pre-line;
+  hyphens: auto;
 }
 
 .react-terminal-line:before {

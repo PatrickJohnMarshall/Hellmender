@@ -8,30 +8,31 @@ export function TerminalController({ playerAction, monsters, setGameState }) {
 
   return (
     <div
-      className="container rpgui-container framed-grey"
-      style={{ height: "60vh" }}
+      className="container rpgui-container framed-golden-2 rpgui-content"
+      style={{
+        height: "55vh",
+        maxWidth: "75rem",
+        overflowWrap: "break-word",
+        marginLeft: "auto",
+        marginRight: "auto",
+      }}
     >
-      <div
-        className="container rpgui-container framed-golden-2 rpgui-content"
-        style={{ height: "57vh" }}
+      <Terminal
+        prompt=">"
+        name="ZORK"
+        onInput={(terminalInput) => {
+          const actionResult = playerAction.action(terminalInput, [
+            ...monsters,
+          ]);
+          if (actionResult === "quit") {
+            setGameState("start");
+          }
+          const output = `\n>` + terminalInput + `\n\n` + actionResult;
+          terminalLogContext.add(output);
+        }}
       >
-        <Terminal
-          prompt=">"
-          name="ZORK"
-          onInput={(terminalInput) => {
-            const actionResult = playerAction.action(terminalInput, [
-              ...monsters,
-            ]);
-            if (actionResult === "quit") {
-              setGameState("start");
-            }
-            const output = `\n>` + terminalInput + `\n\n` + actionResult;
-            terminalLogContext.add(output);
-          }}
-        >
-          {terminalLogContext.terminalLog}
-        </Terminal>
-      </div>
+        {terminalLogContext.terminalLog}
+      </Terminal>
     </div>
   );
 }

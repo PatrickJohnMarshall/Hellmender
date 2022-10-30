@@ -56,17 +56,19 @@ function GameEngine({ setGameState }) {
         },
       }}
     >
-      <TerminalController
-        setGameState={setGameState}
-        playerAction={playerAction}
-        monsters={monsters.getMonstersForRoom(playerLocation.getID())}
-      />
-      <ReadoutGrid
-        playerStats={playerStats}
-        monsters={monsters.getMonstersForRoom(playerLocation.getID())}
-        weapons={playerInventory.getWeapons()}
-        spells={playerInventory.getSpells()}
-      />
+      <div className="container rpgui-container framed-grey">
+        <TerminalController
+          setGameState={setGameState}
+          playerAction={playerAction}
+          monsters={monsters.getMonstersForRoom(playerLocation.getID())}
+        />
+        <ReadoutGrid
+          playerStats={playerStats}
+          monsters={monsters.getMonstersForRoom(playerLocation.getID())}
+          weapons={playerInventory.getWeapons()}
+          spells={playerInventory.getSpells()}
+        />
+      </div>
     </TerminalLogContext.Provider>
   );
 }

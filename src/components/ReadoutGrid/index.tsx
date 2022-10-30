@@ -11,10 +11,13 @@ import PlayerStatsReadout from "./PlayerStatsReadout";
 function ReadoutGrid({ monsters, weapons, spells, playerStats }) {
   const [readout, setReadout] = useState<string>("Weapons");
 
-  const options = ["Spells", "Weapons", "Apparel", "Potions", "Miscellaneous"];
+  const options = ["Spells", "Weapons", "Apparel", "Potions", "Misc"];
 
   return (
-    <div className="rpgui-container framed-golden index-grid">
+    <div
+      className="rpgui-container framed-golden index-grid"
+      style={{ maxWidth: "75rem", marginLeft: "auto", marginRight: "auto" }}
+    >
       <div style={{ gridRow: `1`, gridColumn: "2 / 5" }}>
         <label className="dropdown-label" htmlFor="options">
           Select Inventory:
