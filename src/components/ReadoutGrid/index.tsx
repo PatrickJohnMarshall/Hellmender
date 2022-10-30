@@ -11,7 +11,7 @@ import PlayerStatsReadout from "./PlayerStatsReadout";
 function ReadoutGrid({ monsters, weapons, spells, playerStats }) {
   const [readout, setReadout] = useState<string>("Weapons");
 
-  const options = ["Spells", "Weapons", "Apparel", "Potions", "Miscellaneous"];
+  const options = ["Spells", "Weapons", "Apparel", "Potions", "Misc"];
 
   return (
     <div
