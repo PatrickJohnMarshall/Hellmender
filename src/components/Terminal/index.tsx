@@ -91,7 +91,7 @@ const Terminal = ({
   const classes = ["react-terminal-wrapper"];
   return (
     <div className={classes.join(" ")} data-terminal-name={name}>
-      <div className="react-terminal">
+      <div className="react-terminal" style={{ overflowWrap: "break-word" }}>
         {children}
         {onInput && (
           <div

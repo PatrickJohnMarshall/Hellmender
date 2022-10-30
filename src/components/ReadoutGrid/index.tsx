@@ -14,7 +14,10 @@ function ReadoutGrid({ monsters, weapons, spells, playerStats }) {
   const options = ["Spells", "Weapons", "Apparel", "Potions", "Miscellaneous"];
 
   return (
-    <div className="rpgui-container framed-golden index-grid">
+    <div
+      className="rpgui-container framed-golden index-grid"
+      style={{ maxWidth: "75rem", marginLeft: "auto", marginRight: "auto" }}
+    >
       <div style={{ gridRow: `1`, gridColumn: "2 / 5" }}>
         <label className="dropdown-label" htmlFor="options">
           Select Inventory:
