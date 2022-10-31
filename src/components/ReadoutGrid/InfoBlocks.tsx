@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import "styles/_containers_and_frames.scss";
 import "styles/_readout_box.scss";
+import "styles/_icon_grid.scss";
 import TerminalLogContext from "context/TerminalLog";
 import getImageForMonster from "util/getImageForMonster";
 
@@ -12,8 +13,8 @@ function InfoBlocks({ monsters }) {
       className="rpgui-container framed readout-box"
       style={{ gridColumn: 5 }}
     >
-      Monsters In Area:
-      <div>
+      <div>Monsters In Area:</div> <br />
+      <div className="icon-grid">
         {monsters.map((monster) => {
           return (
             <button

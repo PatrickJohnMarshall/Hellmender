@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import "styles/_containers_and_frames.scss";
 import "styles/_readout_box.scss";
+import "styles/_icon_grid.scss";
 import TerminalLogContext from "context/TerminalLog";
 import getImageForSpell from "util/getImageForSpell";
 
@@ -12,8 +13,8 @@ function SpellRepertoire({ spells }) {
       className="rpgui-container framed readout-box"
       style={{ gridColumn: 1 }}
     >
-      Spell Repertoire:
-      <div>
+      <div>Spell Repertoire:</div> <br />
+      <div className="icon-grid">
         {spells.map((spell) => {
           return (
             <button
