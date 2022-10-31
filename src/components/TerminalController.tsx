@@ -10,7 +10,7 @@ export function TerminalController({ playerAction, monsters, setGameState }) {
     <div
       className="container rpgui-container framed-golden-2 rpgui-content"
       style={{
-        height: "55vh",
+        height: "57vh",
         maxWidth: "75rem",
         overflowWrap: "break-word",
         marginLeft: "auto",

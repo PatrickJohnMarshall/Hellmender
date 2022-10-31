@@ -18,6 +18,13 @@
   position: relative;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+
+  border-style: solid;
+  border-image-source: url("img/border-image-grey.png");
+  border-image-repeat: repeat;
+  border-image-slice: 3 3 3 3;
+  border-image-width: 7px;
+  border-width: 7px;
 }
 
 .react-terminal {
