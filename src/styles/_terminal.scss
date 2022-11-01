@@ -113,7 +113,8 @@
 
 .terminal-hidden-input {
   position: fixed;
-  left: -1000px;
+  z-index: -1;
+  opacity: 0;
 }
 
 /* .react-terminal-progress {

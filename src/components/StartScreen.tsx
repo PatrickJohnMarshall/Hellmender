@@ -31,7 +31,7 @@ function StartScreen({
           className="rpgui-button golden"
           style={{ gridColumn: 2, fontSize: "12px" }}
         >
-          <p style={{ paddingTop: "auto" }}>Start Game</p>
+          <p style={{ paddingTop: `5px` }}>Start Game</p>
         </button>
       </div>
     </div>

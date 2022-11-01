@@ -1,13 +1,10 @@
-import React, { useState } from "react";
-import "styles/_readout_grid.scss";
-import "styles/_dropdown.scss";
-import "styles/_containers_and_frames.scss";
-import "styles/_index_grid.scss";
-import "styles/_help_button.scss";
+import { useState } from "react";
 import Weapons from "./Weapons";
 import SpellRepertoire from "./SpellRepertoire";
 import InfoBlocks from "./InfoBlocks";
 import PlayerStatsReadout from "./PlayerStatsReadout";
+import MonsterStats from "./MonsterStats";
+import Monster from "monsters/types/Monster";
 
 function ReadoutGrid({
   monsters,
@@ -17,6 +14,9 @@ function ReadoutGrid({
   setHelpToggle,
 }) {
   const [readout, setReadout] = useState<string>("Weapons");
+  const [monsterStatReadout, setMonsterStatReadout] = useState<Monster | null>(
+    null
+  );
 
   const options = ["Spells", "Weapons", "Apparel", "Potions", "Misc"];
 
@@ -66,7 +66,19 @@ function ReadoutGrid({
         }
 
         <PlayerStatsReadout playerStats={playerStats} />
-        <InfoBlocks monsters={monsters} />
+
+        {monsterStatReadout ? (
+          <MonsterStats
+            monsters={monsters}
+            monsterStatReadout={monsterStatReadout}
+            setMonsterStatReadout={setMonsterStatReadout}
+          />
+        ) : (
+          <InfoBlocks
+            setMonsterStatReadout={setMonsterStatReadout}
+            monsters={monsters}
+          />
+        )}
       </div>
     </div>
   );

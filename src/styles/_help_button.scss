@@ -1,7 +1,26 @@
 .help-button {
   min-height: 40px;
-  min-width: 110px;
+  min-width: 80px !important;
   max-height: 40px;
-  max-width: 110px;
+  max-width: 80px !important;
   margin-top: 0px;
+  padding: 0px !important;
+}
+
+.monster-stat-button {
+  min-height: 15px;
+  min-width: 50px !important;
+  max-height: 45px;
+  max-width: 65px !important;
+  margin-top: 0px;
+  padding: 0px !important;
+}
+
+.monster-describe-button {
+  min-height: 15px;
+  min-width: 50px !important;
+  max-height: 45px;
+  max-width: 120px !important;
+  margin-top: 0px;
+  padding: 0px !important;
 }

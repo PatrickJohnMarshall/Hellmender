@@ -1,15 +1,9 @@
-import React from "react";
-import "styles/_scrollbars.scss";
-import "styles/_containers_and_frames.scss";
-import "styles/_readout_box.scss";
-import "styles/_stat_grid.scss";
-
 function PlayerStatsReadout({ playerStats }) {
   const mobileCheck = window.innerWidth > 700;
 
   return (
     <div
-      className="rpgui-container framed rpgui-content readout-box"
+      className="rpgui-container framed readout-box"
       style={{
         gridColumn: 3,
         overflowWrap: "anywhere",
