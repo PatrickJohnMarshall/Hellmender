@@ -33,7 +33,7 @@ class PlayerStats {
     this.#maxMana = initialStats.mana;
     this.#mana = initialStats.mana;
     this.#maxHP = initialStats.hp;
-    this.#hp = initialStats.con;
+    this.#hp = initialStats.hp;
     this.#ac = initialStats.ac;
   }
 
