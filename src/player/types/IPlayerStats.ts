@@ -1,13 +1,34 @@
 type IPlayerStats = {
-  setAttribute: (attribute: string, attriValue: number) => void;
+  setStr: (hp: number) => void;
+  setDex: (hp: number) => void;
+  setCon: (hp: number) => void;
+  setInt: (hp: number) => void;
+  setWis: (hp: number) => void;
+  setCha: (hp: number) => void;
+  setMaxMana: (mana: number) => void;
+  setMaxHP: (hp: number) => void;
+  setMana: (mana: number) => void;
   setHP: (hp: number) => void;
   setAC: (ac: number) => void;
   getAttributes: () => any;
+  getMaxHP: () => number;
+  getMaxMana: () => number;
+  getMana: () => number;
   getHP: () => number;
   getAC: () => number;
-  changeAttribute: (attribute: string, attriValue: number) => void;
+  changeStr: (changeValue: number) => void;
+  changeDex: (changeValue: number) => void;
+  changeCon: (changeValue: number) => void;
+  changeInt: (changeValue: number) => void;
+  changeWis: (changeValue: number) => void;
+  changeCha: (changeValue: number) => void;
+  changeMaxMana: (changeValue: number) => void;
+  changeMaxHP: (changeValue: number) => void;
+  changeMana: (changeValue: number) => void;
   changeHP: (changeValue: number) => void;
   changeAC: (changeValue: number) => void;
+  _equalizeToMaxMana: () => void;
+  _equalizeToMaxHP: () => void;
 };
 
 export default IPlayerStats;

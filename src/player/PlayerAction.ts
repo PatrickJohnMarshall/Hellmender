@@ -5,17 +5,21 @@ import Monster from "../monsters/types/Monster";
 import monsterDamage from "../monsters/monsterDamage";
 import IPlayerLocation from "./types/IPlayerLocation";
 import IPlayerInventory from "./types/IPlayerInventory";
+import IPlayerStats from "./types/IPlayerStats";
 
 class PlayerAction {
   #playerLocation;
   #playerInventory;
+  #playerStats;
 
   constructor(
     playerLocation: IPlayerLocation,
-    playerInventory: IPlayerInventory
+    playerInventory: IPlayerInventory,
+    playerStats: IPlayerStats
   ) {
     this.#playerLocation = playerLocation;
     this.#playerInventory = playerInventory;
+    this.#playerStats = playerStats;
   }
 
   action(
@@ -125,7 +129,19 @@ class PlayerAction {
       attackResults.damageValue
     );
 
-    if (didHit) {
+    if (didHit === "Already Dead") {
+      return `>The ${targetMonster.getName()} is already dead.`;
+    }
+
+    this.#playerStats.changeMana(-1);
+
+    if (didHit && targetMonster.getHP() <= 0) {
+      return `>You struck the ${targetMonster.getName()} for ${
+        attackResults.damageValue
+      } damage, killing it. |${targetMonster.getName()} HP: ${targetMonster.getHP()}| |Attack: ${
+        attackResults.attackValue
+      }|`;
+    } else if (didHit) {
       return `>You struck the ${targetMonster.getName()} for ${
         attackResults.damageValue
       } damage. |${targetMonster.getName()} HP: ${targetMonster.getHP()}| |Attack: ${

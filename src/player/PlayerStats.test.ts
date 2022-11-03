@@ -7,6 +7,7 @@ const mockPlayerStats = {
   int: 10,
   wis: 10,
   cha: 10,
+  mana: 10,
   hp: 10,
   ac: 10,
 };
@@ -39,6 +40,65 @@ describe("PlayerStats", () => {
     playerStats.changeHP(-5);
 
     expect(playerStats.getHP()).toEqual(5);
+  });
+
+  test("can change max hp value", () => {
+    const playerStats = new PlayerStats(mockPlayerStats);
+    playerStats.changeMaxHP(-1);
+    playerStats.changeHP(-5);
+    playerStats.changeMaxHP(-1);
+
+    expect(playerStats.getHP()).toEqual(4);
+    expect(playerStats.getMaxHP()).toEqual(8);
+  });
+
+  test("can change mana value", () => {
+    const playerStats = new PlayerStats(mockPlayerStats);
+    playerStats.changeMana(-5);
+
+    expect(playerStats.getMana()).toEqual(5);
+  });
+
+  test("can change max mana value", () => {
+    const playerStats = new PlayerStats(mockPlayerStats);
+    playerStats.changeMaxMana(-1);
+    playerStats.changeMana(-5);
+    playerStats.changeMaxMana(-1);
+
+    expect(playerStats.getMana()).toEqual(4);
+    expect(playerStats.getMaxMana()).toEqual(8);
+  });
+
+  test("hp equalizes when max is lowered bellow current hp", () => {
+    const playerStats = new PlayerStats(mockPlayerStats);
+    playerStats.setMaxHP(7);
+
+    expect(playerStats.getHP()).toEqual(7);
+    expect(playerStats.getMaxHP()).toEqual(7);
+  });
+
+  test("hp equalizes set above max hp", () => {
+    const playerStats = new PlayerStats(mockPlayerStats);
+    playerStats.setHP(14);
+
+    expect(playerStats.getHP()).toEqual(10);
+    expect(playerStats.getMaxHP()).toEqual(10);
+  });
+
+  test("mana equalizes when max is lowered bellow current mana", () => {
+    const playerStats = new PlayerStats(mockPlayerStats);
+    playerStats.setMaxMana(3);
+
+    expect(playerStats.getMana()).toEqual(3);
+    expect(playerStats.getMaxMana()).toEqual(3);
+  });
+
+  test("mana equalizes set above max mana", () => {
+    const playerStats = new PlayerStats(mockPlayerStats);
+    playerStats.setMana(14);
+
+    expect(playerStats.getMana()).toEqual(10);
+    expect(playerStats.getMaxMana()).toEqual(10);
   });
 
   test("can change ac value", () => {

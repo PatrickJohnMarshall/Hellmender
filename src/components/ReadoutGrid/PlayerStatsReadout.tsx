@@ -1,3 +1,6 @@
+import HealthBar from "./HealthBar";
+import ManaBar from "./ManaBar";
+
 function PlayerStatsReadout({ playerStats }) {
   const mobileCheck = window.innerWidth > 700;
 
@@ -10,6 +13,12 @@ function PlayerStatsReadout({ playerStats }) {
       }}
     >
       <div className="stat-grid">
+        <div className="health-grid">
+          <HealthBar entity={playerStats} />
+          <ManaBar entity={playerStats} />
+          <div style={{ gridRow: 4 }}>AC: {playerStats.getAC()}</div>
+          <hr style={{ width: `100%`, marginBottom: 0, gridRow: 5 }} />
+        </div>
         Stats:
         <div>
           {mobileCheck ? `Strength:` : "Str:"} {playerStats.getAttributes().str}
@@ -32,8 +41,6 @@ function PlayerStatsReadout({ playerStats }) {
         <div>
           {mobileCheck ? `Charisma:` : "Cha:"} {playerStats.getAttributes().cha}
         </div>
-        <div>HP: {playerStats.getHP()}</div>
-        <div>AC: {playerStats.getAC()}</div>
       </div>
     </div>
   );

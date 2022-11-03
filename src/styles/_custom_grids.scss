@@ -1,0 +1,50 @@
+.readout-grid {
+  display: grid;
+  grid-template-columns: 7fr 0.5fr 7fr 0.5fr 7fr;
+  color: white;
+}
+
+.icon-grid {
+  display: grid;
+  justify-items: center;
+  grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+  grid-auto-rows: auto;
+  row-gap: 1em;
+}
+
+.index-grid {
+  display: grid;
+  height: 40vh;
+  grid-template-columns: 5% 5% 5% 1fr 14% 5%;
+  grid-template-rows: 15% 1fr 5%;
+}
+
+.stat-grid {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 4fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.health-grid {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 2fr 2fr 0.25fr 1fr 1fr;
+}
+
+.monster-frame {
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  padding: 6px;
+}
+
+.monster-stat-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 0.25fr 0.5fr 0.5fr 0.5fr 0.5fr;
+  row-gap: 0.25em;
+}
