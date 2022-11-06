@@ -8,13 +8,10 @@ import "styles/_hr.scss";
 import "styles/_readout_box.scss";
 
 import "styles/_dropdown.scss";
-import "styles/_help_button.scss";
+import "styles/_custom_buttons.scss";
 import "styles/_button.scss";
 
-import "styles/_stat_grid.scss";
-import "styles/_icon_grid.scss";
-import "styles/_index_grid.scss";
-import "styles/_readout_grid.scss";
+import "styles/_custom_grids.scss";
 
 import { TerminalController } from "../TerminalController";
 import TerminalLogContext from "../../context/TerminalLog";
@@ -38,17 +35,22 @@ const startingSpell = new FireBolt();
 
 const playerLocation = new PlayerLocation(startingRoom);
 const playerInventory = new PlayerInventory(startingItem);
-const playerAction = new PlayerAction(playerLocation, playerInventory);
 const playerStats = new PlayerStats({
-  str: 8,
-  dex: 12,
-  con: 12,
-  int: 15,
-  wis: 11,
-  cha: 7,
-  hp: 6,
+  str: 10,
+  dex: 10,
+  con: 10,
+  int: 10,
+  wis: 10,
+  cha: 10,
+  mana: 10,
+  hp: 10,
   ac: 10,
 });
+const playerAction = new PlayerAction(
+  playerLocation,
+  playerInventory,
+  playerStats
+);
 
 playerInventory.learnSpell(startingSpell);
 const monsters = generateMonsters();

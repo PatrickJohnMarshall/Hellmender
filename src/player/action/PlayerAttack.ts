@@ -26,7 +26,7 @@ class PlayerAttack {
         damageValue: this._getDamageValue(),
       };
     }
-    throw new Error("Learn to read. Not a valid target.");
+    throw new Error("Not a valid target.");
   }
 
   _getAttackValue(): number {

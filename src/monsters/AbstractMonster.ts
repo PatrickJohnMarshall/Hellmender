@@ -56,7 +56,12 @@ abstract class AbstractMonster {
   }
 
   takeDamage(damage: number): void {
-    this.#hp -= damage;
+    if (this.#hp !== 0) {
+      this.#hp -= damage;
+    }
+    if (this.#hp < 0) {
+      this.#hp = 0;
+    }
   }
 
   getLocationId(): string {
