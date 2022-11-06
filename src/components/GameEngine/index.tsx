@@ -1,6 +1,20 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import ReadoutGrid from "../ReadoutGrid";
 import "styles/_containers_and_frames.scss";
+import "styles/_scrollbars.scss";
+import "styles/_health_bar.scss";
+import "styles/_hr.scss";
+
+import "styles/_readout_box.scss";
+
+import "styles/_dropdown.scss";
+import "styles/_help_button.scss";
+import "styles/_button.scss";
+
+import "styles/_stat_grid.scss";
+import "styles/_icon_grid.scss";
+import "styles/_index_grid.scss";
+import "styles/_readout_grid.scss";
 
 import { TerminalController } from "../TerminalController";
 import TerminalLogContext from "../../context/TerminalLog";
@@ -60,7 +74,7 @@ function GameEngine({ setGameState }) {
       }}
     >
       <div
-        className="container rpgui-container framed-grey"
+        className="container rpgui-container rpgui-content framed-grey"
         style={{ height: "100vh" }}
       >
         {helpToggle ? (

@@ -43,6 +43,10 @@ abstract class AbstractMonster {
     return this.#hp;
   }
 
+  getMaxHP(): number {
+    return this.#maxHP;
+  }
+
   getAC(): number {
     return this.#ac;
   }

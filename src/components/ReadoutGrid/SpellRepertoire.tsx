@@ -1,7 +1,4 @@
-import React, { useContext } from "react";
-import "styles/_containers_and_frames.scss";
-import "styles/_readout_box.scss";
-import "styles/_icon_grid.scss";
+import { useContext } from "react";
 import TerminalLogContext from "context/TerminalLog";
 import getImageForSpell from "util/getImageForSpell";
 

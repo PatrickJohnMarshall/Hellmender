@@ -1,7 +1,3 @@
-import React from "react";
-import "styles/_containers_and_frames.scss";
-import "styles/_button.scss";
-
 function HelpMenu({ setHelpToggle }) {
   return (
     <div

@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import TerminalLogContext from "../context/TerminalLog";
 import Terminal from "./Terminal";
-import "styles/_readout_box.scss";
 
 export function TerminalController({ playerAction, monsters, setGameState }) {
   const terminalLogContext = useContext(TerminalLogContext);
