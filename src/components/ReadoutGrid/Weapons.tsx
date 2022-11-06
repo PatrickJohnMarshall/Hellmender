@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import "styles/_containers_and_frames.scss";
 import "styles/_readout_box.scss";
+import "styles/_icon_grid.scss";
 import TerminalLogContext from "context/TerminalLog";
 import getImageForItem from "util/getImageForItem";
 
@@ -12,8 +13,8 @@ function Weapons({ weapons }) {
       className="rpgui-container framed readout-box"
       style={{ gridColumn: 1 }}
     >
-      Weapons:
-      <div>
+      <div>Weapons: </div> <br />
+      <div className="icon-grid">
         {weapons.map((weapon) => {
           return (
             <button
