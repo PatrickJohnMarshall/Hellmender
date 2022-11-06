@@ -1,11 +1,15 @@
 import Monster from "../monsters/types/Monster";
 
 function monsterDamage(monster: Monster, attack: number, damage: number) {
+  if (monster.getHP() <= 0) {
+    return "Already Dead";
+  }
+
   if (attack >= monster.getAC()) {
     monster.takeDamage(damage);
-    return true;
+    return "Struck";
   }
-  return false;
+  return "Missed";
 }
 
 export default monsterDamage;

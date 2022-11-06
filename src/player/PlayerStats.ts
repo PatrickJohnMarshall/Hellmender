@@ -6,6 +6,7 @@ type InitialStats = {
   wis: number;
   cha: number;
   hp: number;
+  mana: number;
   ac: number;
 };
 
@@ -16,6 +17,8 @@ class PlayerStats {
   #int: number;
   #wis: number;
   #cha: number;
+  #maxMana: number;
+  #mana: number;
   #maxHP: number;
   #hp: number;
   #ac: number;
@@ -27,6 +30,8 @@ class PlayerStats {
     this.#int = initialStats.int;
     this.#wis = initialStats.wis;
     this.#cha = initialStats.cha;
+    this.#maxMana = initialStats.mana;
+    this.#mana = initialStats.mana;
     this.#maxHP = initialStats.hp;
     this.#hp = initialStats.hp;
     this.#ac = initialStats.ac;
@@ -56,8 +61,24 @@ class PlayerStats {
     this.#cha = value;
   }
 
+  setMaxHP(value: number) {
+    this.#maxHP = value;
+    this._equalizeToMaxHP();
+  }
+
+  setMaxMana(value: number) {
+    this.#maxMana = value;
+    this._equalizeToMaxMana();
+  }
+
+  setMana(value: number) {
+    this.#mana = value;
+    this._equalizeToMaxMana();
+  }
+
   setHP(value: number) {
     this.#hp = value;
+    this._equalizeToMaxHP();
   }
 
   setAC(value: number) {
@@ -81,6 +102,18 @@ class PlayerStats {
       cha: this.#cha,
     };
     return attributes;
+  }
+
+  getMaxHP(): number {
+    return this.#maxHP;
+  }
+
+  getMaxMana(): number {
+    return this.#maxMana;
+  }
+
+  getMana(): number {
+    return this.#mana;
   }
 
   getHP(): number {
@@ -115,12 +148,40 @@ class PlayerStats {
     this.#cha += newValue;
   }
 
+  changeMaxHP(value: number) {
+    this.#maxHP += value;
+    this._equalizeToMaxHP();
+  }
+
+  changeMaxMana(value: number) {
+    this.#maxMana += value;
+    this._equalizeToMaxMana();
+  }
+
+  changeMana(value: number) {
+    this.#mana += value;
+    this._equalizeToMaxMana();
+  }
+
   changeHP(value: number) {
     this.#hp += value;
+    this._equalizeToMaxHP();
   }
 
   changeAC(value: number) {
     this.#ac += value;
+  }
+
+  _equalizeToMaxMana() {
+    if (this.#mana > this.#maxMana) {
+      this.#mana = this.#maxMana;
+    }
+  }
+
+  _equalizeToMaxHP() {
+    if (this.#hp > this.#maxHP) {
+      this.#hp = this.#maxHP;
+    }
   }
 }
 
