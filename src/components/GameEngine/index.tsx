@@ -16,6 +16,7 @@ import PlayerAction from "../../player/PlayerAction";
 import PlayerLocation from "../../player/PlayerLocation";
 import PlayerInventory from "../../player/PlayerInventory";
 import PlayerStats from "player/PlayerStats";
+import HelpMenu from "components/ReadoutGrid/HelpMenu";
 
 const startingRoom = buildLayout();
 const startingItem = new Fist();
@@ -43,6 +44,8 @@ function GameEngine({ setGameState }) {
     <TerminalOutput>{`${playerLocation.describe()}`}</TerminalOutput>,
   ]);
 
+  const [helpToggle, setHelpToggle] = useState<boolean>(false);
+
   return (
     <TerminalLogContext.Provider
       value={{
@@ -56,17 +59,25 @@ function GameEngine({ setGameState }) {
         },
       }}
     >
-      <div className="container rpgui-container framed-grey">
-        <TerminalController
-          setGameState={setGameState}
-          playerAction={playerAction}
-          monsters={monsters.getMonstersForRoom(playerLocation.getID())}
-        />
+      <div
+        className="container rpgui-container framed-grey"
+        style={{ height: "100vh" }}
+      >
+        {helpToggle ? (
+          <HelpMenu setHelpToggle={setHelpToggle} />
+        ) : (
+          <TerminalController
+            setGameState={setGameState}
+            playerAction={playerAction}
+            monsters={monsters.getMonstersForRoom(playerLocation.getID())}
+          />
+        )}
         <ReadoutGrid
           playerStats={playerStats}
           monsters={monsters.getMonstersForRoom(playerLocation.getID())}
           weapons={playerInventory.getWeapons()}
           spells={playerInventory.getSpells()}
+          setHelpToggle={setHelpToggle}
         />
       </div>
     </TerminalLogContext.Provider>

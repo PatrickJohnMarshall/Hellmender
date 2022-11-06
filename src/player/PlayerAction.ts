@@ -22,7 +22,7 @@ class PlayerAction {
     answer: string,
     validMonsters: Monster[]
   ): string | { id: string; attackValue: number; damageValue: number } {
-    const commands = answer.split(" ");
+    const commands = answer.toLowerCase().split(" ");
     const validAnswer = this._validateCommand(commands[0]);
 
     if (!validAnswer) {
