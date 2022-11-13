@@ -1,6 +1,9 @@
 import getImageForMonster from "util/getImageForMonster";
+import InterfaceAudio from "audio/InterfaceAudio";
 
 function InfoBlocks({ monsters, setMonsterStatReadout }) {
+  const interfaceAudio = new InterfaceAudio();
+
   return (
     <div
       className="rpgui-container framed readout-box"
@@ -18,7 +21,10 @@ function InfoBlocks({ monsters, setMonsterStatReadout }) {
                 height: `50px`,
                 width: "50px",
               }}
-              onClick={() => setMonsterStatReadout(monster)}
+              onClick={() => {
+                setMonsterStatReadout(monster);
+                interfaceAudio.playButton();
+              }}
             />
           );
         })}

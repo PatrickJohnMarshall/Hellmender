@@ -5,6 +5,7 @@ import InfoBlocks from "./InfoBlocks";
 import PlayerStatsReadout from "./PlayerStatsReadout";
 import MonsterStats from "./MonsterStats";
 import Monster from "monsters/types/Monster";
+import InterfaceAudio from "audio/InterfaceAudio";
 
 function ReadoutGrid({
   monsters,
@@ -17,8 +18,18 @@ function ReadoutGrid({
   const [monsterStatReadout, setMonsterStatReadout] = useState<Monster | null>(
     null
   );
+  const interfaceAudio = new InterfaceAudio();
 
   const options = ["Spells", "Weapons", "Apparel", "Potions", "Misc"];
+
+  function optionSelect(option) {
+    const renderOptions = {
+      Weapons: <Weapons weapons={weapons} />,
+      Spells: <SpellRepertoire spells={spells} />,
+    };
+
+    return renderOptions[option];
+  }
 
   return (
     <div
@@ -28,7 +39,10 @@ function ReadoutGrid({
       <div style={{ gridRow: "1", gridColumn: "4 / 6", justifySelf: "end" }}>
         <button
           className="rpgui-button help-button"
-          onClick={() => setHelpToggle(true)}
+          onClick={() => {
+            setHelpToggle(true);
+            interfaceAudio.playButton();
+          }}
         >
           Help
         </button>
@@ -41,7 +55,11 @@ function ReadoutGrid({
         <select
           className="rpgui-dropdown"
           value={readout}
-          onChange={(selected) => setReadout(selected.target.value)}
+          onClick={() => interfaceAudio.playButton()}
+          onChange={(selected) => {
+            setReadout(selected.target.value);
+            interfaceAudio.playButton();
+          }}
         >
           {options.map((value) => (
             <option value={value} key={value}>
@@ -58,12 +76,7 @@ function ReadoutGrid({
           overflowY: "auto",
         }}
       >
-        {
-          {
-            Weapons: <Weapons weapons={weapons} />,
-            Spells: <SpellRepertoire spells={spells} />,
-          }[readout]
-        }
+        {optionSelect(readout)}
 
         <PlayerStatsReadout playerStats={playerStats} />
 

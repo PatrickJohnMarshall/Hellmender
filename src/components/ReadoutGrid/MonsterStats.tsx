@@ -1,11 +1,13 @@
 import { useContext } from "react";
 import TerminalLogContext from "context/TerminalLog";
 import HealthBar from "./HealthBar";
+import InterfaceAudio from "audio/InterfaceAudio";
 import "styles/_input.scss";
 
 function MonsterStats({ monsters, monsterStatReadout, setMonsterStatReadout }) {
   const terminalLog = useContext(TerminalLogContext);
   const monster = monsterStatReadout;
+  const interfaceAudio = new InterfaceAudio();
 
   return (
     <div
@@ -16,7 +18,10 @@ function MonsterStats({ monsters, monsterStatReadout, setMonsterStatReadout }) {
         <div className="rpgui-content monster-stat-grid">
           <button
             className="rpgui-button monster-stat-button"
-            onClick={() => setMonsterStatReadout(null)}
+            onClick={() => {
+              setMonsterStatReadout(null);
+              interfaceAudio.playButton();
+            }}
           >
             Back
           </button>
@@ -33,6 +38,7 @@ function MonsterStats({ monsters, monsterStatReadout, setMonsterStatReadout }) {
             className="rpgui-button monster-describe-button"
             onClick={() => {
               terminalLog.add("\n" + monster.describe());
+              interfaceAudio.playButton();
             }}
           >
             Describe
