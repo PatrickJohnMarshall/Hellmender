@@ -38,6 +38,10 @@ export default class TextOutput {
       return "quit";
     }
 
+    if (this.#event === "INVALID") {
+      return "Invalid command - Please see guide for list of valid commands.";
+    }
+
     if (this.#event === "ATTACK_ALREADY_DEAD") {
       return `You hit ${this.#eventData.monsterName}, but it is already dead.`;
     }

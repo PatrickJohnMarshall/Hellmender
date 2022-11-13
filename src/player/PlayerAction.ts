@@ -51,7 +51,6 @@ class PlayerAction {
     const validAnswer = this._validateCommand(commands[0]);
 
     if (!validAnswer) {
-      // return "Invalid command - Please see guide for list of valid commands.";
       return { event: "INVALID", eventData: null };
     }
 
@@ -239,24 +238,6 @@ class PlayerAction {
       },
     };
   }
-
-  // return `You hit the ${targetMonster.getName()}, but it is already dead.`;
-
-  // return `You struck the ${targetMonster.getName()} for ${
-  //   attackResults.damageValue
-  // } damage, killing it. |${targetMonster.getName()} HP: ${targetMonster.getHP()}| |Attack: ${
-  //   attackResults.attackValue
-  // }|`;
-
-  // return `You struck the ${targetMonster.getName()} for ${
-  //   attackResults.damageValue
-  // } damage. |${targetMonster.getName()} HP: ${targetMonster.getHP()}| |Attack: ${
-  //   attackResults.attackValue
-  // }|`;
-
-  // return `You missed the ${targetMonster.getName()}. |Attack: ${
-  //   attackResults.attackValue
-  // }|`;
 }
 
 export default PlayerAction;
