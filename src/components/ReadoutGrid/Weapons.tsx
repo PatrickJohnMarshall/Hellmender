@@ -1,9 +1,11 @@
 import { useContext } from "react";
 import TerminalLogContext from "context/TerminalLog";
 import getImageForItem from "util/getImageForItem";
+import InterfaceAudio from "audio/InterfaceAudio";
 
 function Weapons({ weapons }) {
   const terminalLog = useContext(TerminalLogContext);
+  const interfaceAudio = new InterfaceAudio();
 
   return (
     <div
@@ -24,6 +26,7 @@ function Weapons({ weapons }) {
               }}
               onClick={() => {
                 terminalLog.add("\n" + weapon.describe());
+                interfaceAudio.playButton();
               }}
             />
           );

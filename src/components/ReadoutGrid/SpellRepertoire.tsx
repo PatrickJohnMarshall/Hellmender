@@ -1,9 +1,11 @@
 import { useContext } from "react";
 import TerminalLogContext from "context/TerminalLog";
 import getImageForSpell from "util/getImageForSpell";
+import InterfaceAudio from "audio/InterfaceAudio";
 
 function SpellRepertoire({ spells }) {
   const terminalLog = useContext(TerminalLogContext);
+  const interfaceAudio = new InterfaceAudio();
 
   return (
     <div
@@ -23,6 +25,7 @@ function SpellRepertoire({ spells }) {
               }}
               onClick={() => {
                 terminalLog.add("\n" + spell.describe());
+                interfaceAudio.playButton();
               }}
             />
           );

@@ -6,7 +6,31 @@ import monsterDamage from "../monsters/monsterDamage";
 import IPlayerLocation from "./types/IPlayerLocation";
 import IPlayerInventory from "./types/IPlayerInventory";
 import IPlayerStats from "./types/IPlayerStats";
+import {
+  EventType,
+  AttackHit,
+  AttackKill,
+  AttackMiss,
+  AttackAlreadyDead,
+  SpellHit,
+  SpellKill,
+  SpellMiss,
+  SpellAlreadyDead,
+} from "./types/ActionEventTypes";
 
+type ActionReturn = {
+  event: EventType;
+  eventData:
+    | AttackHit
+    | AttackKill
+    | AttackMiss
+    | AttackAlreadyDead
+    | SpellHit
+    | SpellKill
+    | SpellMiss
+    | SpellAlreadyDead
+    | null;
+};
 class PlayerAction {
   #playerLocation;
   #playerInventory;
@@ -22,15 +46,12 @@ class PlayerAction {
     this.#playerStats = playerStats;
   }
 
-  action(
-    answer: string,
-    validMonsters: Monster[]
-  ): string | { id: string; attackValue: number; damageValue: number } {
+  action(answer: string, validMonsters: Monster[]): ActionReturn {
     const commands = answer.toLowerCase().split(" ");
     const validAnswer = this._validateCommand(commands[0]);
 
     if (!validAnswer) {
-      return "Invalid command - Please see guide for list of valid commands.";
+      return { event: "INVALID", eventData: null };
     }
 
     return this._doAction({
@@ -57,7 +78,7 @@ class PlayerAction {
     secondaryCommand: string;
     fourthCommand: string | undefined;
     validMonsters: Monster[];
-  }): string | { id: string; attackValue: number; damageValue: number } {
+  }): ActionReturn {
     switch (primaryCommand) {
       case "look":
         return this.#playerLocation.describe();
@@ -82,14 +103,14 @@ class PlayerAction {
         );
 
       case "quit":
-        return "quit";
+        return { event: "QUIT", eventData: null };
 
       default:
         throw new Error("Invalid Command");
     }
   }
 
-  _doWeaponAttack(secondaryCommand, validMonsters) {
+  _doWeaponAttack(secondaryCommand, validMonsters): ActionReturn {
     // secondaryCommand is monsterName
     const validMonsterIDs = validMonsters.map((monster) => monster.getID());
 
@@ -100,25 +121,6 @@ class PlayerAction {
       validMonsterIDs
     );
 
-    return this._doAttack(attackResults, validMonsters);
-  }
-
-  _doSpellAttack(secondaryCommand, spellTarget, validMonsters) {
-    // secondaryCommand is monsterName
-    const validMonsterIDs = validMonsters.map((monster) => monster.getID());
-
-    const playerCast = new PlayerCast(this.#playerInventory);
-
-    const attackResults = playerCast.attack(
-      secondaryCommand,
-      spellTarget,
-      validMonsterIDs
-    );
-
-    return this._doAttack(attackResults, validMonsters);
-  }
-
-  _doAttack(attackResults, validMonsters) {
     const targetMonster = validMonsters.find(
       (monster) => monster.getID() === attackResults.id
     );
@@ -130,27 +132,111 @@ class PlayerAction {
     );
 
     if (didHit === "Already Dead") {
-      return `>The ${targetMonster.getName()} is already dead.`;
+      return {
+        event: "ATTACK_ALREADY_DEAD",
+        eventData: { monsterName: targetMonster.getName() },
+      };
     }
+
+    if (didHit === "Struck" && targetMonster.getHP() <= 0) {
+      return {
+        event: "ATTACK_KILL",
+        eventData: {
+          attackValue: attackResults.attackValue,
+          damageValue: attackResults.damageValue,
+          monsterName: targetMonster.getName(),
+        },
+      };
+    }
+
+    if (didHit === "Struck") {
+      return {
+        event: "ATTACK_HIT",
+        eventData: {
+          attackValue: attackResults.attackValue,
+          damageValue: attackResults.damageValue,
+          monsterName: targetMonster.getName(),
+          monsterHP: targetMonster.getHP(),
+        },
+      };
+    }
+
+    return {
+      event: "ATTACK_MISS",
+      eventData: {
+        attackValue: attackResults.attackValue,
+        monsterName: targetMonster.getName(),
+      },
+    };
+  }
+
+  _doSpellAttack(secondaryCommand, spellTarget, validMonsters): ActionReturn {
+    // secondaryCommand is spell name
+    const validMonsterIDs = validMonsters.map((monster) => monster.getID());
+
+    const playerCast = new PlayerCast(this.#playerInventory);
 
     this.#playerStats.changeMana(-1);
 
-    if (didHit && targetMonster.getHP() <= 0) {
-      return `>You struck the ${targetMonster.getName()} for ${
-        attackResults.damageValue
-      } damage, killing it. |${targetMonster.getName()} HP: ${targetMonster.getHP()}| |Attack: ${
-        attackResults.attackValue
-      }|`;
-    } else if (didHit) {
-      return `>You struck the ${targetMonster.getName()} for ${
-        attackResults.damageValue
-      } damage. |${targetMonster.getName()} HP: ${targetMonster.getHP()}| |Attack: ${
-        attackResults.attackValue
-      }|`;
-    } else
-      return `>You missed the ${targetMonster.getName()}. |Attack: ${
-        attackResults.attackValue
-      }|`;
+    const attackResults = playerCast.attack(
+      secondaryCommand,
+      spellTarget,
+      validMonsterIDs
+    );
+
+    const targetMonster = validMonsters.find(
+      (monster) => monster.getID() === attackResults.id
+    );
+
+    const didHit = monsterDamage(
+      targetMonster,
+      attackResults.attackValue,
+      attackResults.damageValue
+    );
+
+    if (didHit === "Already Dead") {
+      return {
+        event: "SPELL_ALREADY_DEAD",
+        eventData: {
+          monsterName: targetMonster.getName(),
+          spellName: secondaryCommand,
+        },
+      };
+    }
+
+    if (didHit === "Struck" && targetMonster.getHP() <= 0) {
+      return {
+        event: "SPELL_KILL",
+        eventData: {
+          spellName: secondaryCommand,
+          attackValue: attackResults.attackValue,
+          damageValue: attackResults.damageValue,
+          monsterName: targetMonster.getName(),
+        },
+      };
+    }
+
+    if (didHit === "Struck") {
+      return {
+        event: "SPELL_HIT",
+        eventData: {
+          spellName: secondaryCommand,
+          attackValue: attackResults.attackValue,
+          damageValue: attackResults.damageValue,
+          monsterName: targetMonster.getName(),
+          monsterHP: targetMonster.getHP(),
+        },
+      };
+    }
+
+    return {
+      event: "SPELL_MISS",
+      eventData: {
+        spellName: secondaryCommand,
+        attackValue: attackResults.attackValue,
+        monsterName: targetMonster.getName(),
+      },
+    };
   }
 }
 

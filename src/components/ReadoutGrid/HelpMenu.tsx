@@ -1,4 +1,7 @@
+import InterfaceAudio from "audio/InterfaceAudio";
+
 function HelpMenu({ setHelpToggle }) {
+  const interfaceAudio = new InterfaceAudio();
   return (
     <div
       className="rpgui-container framed-golden-2"
@@ -23,7 +26,10 @@ function HelpMenu({ setHelpToggle }) {
       >
         <button
           className="rpgui-button help-button"
-          onClick={() => setHelpToggle(false)}
+          onClick={() => {
+            setHelpToggle(false);
+            interfaceAudio.playButton();
+          }}
         >
           Back
         </button>
