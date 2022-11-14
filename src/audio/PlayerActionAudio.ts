@@ -54,24 +54,30 @@ export default class PlayerActionAudio {
       this._playEffect("meleeHit");
     }
 
-    // if (this.#event === "ATTACK_MISS") {
-    //   this._playEffect("meleeMiss");
-    // }
+    if (this.#event === "ATTACK_MISS") {
+      this._playEffect("meleeMiss");
+    }
 
     if (this.#event === "SPELL_ALREADY_DEAD") {
-      this._playEffect("meleeHit"); //'spellHit' later
+      if (this.#eventData.spellName === "firebolt") {
+        this._playEffect("fireboltHit");
+      }
     }
 
     if (this.#event === "SPELL_KILL") {
-      this._playEffect("meleeHit"); //'spellHit' later
+      if (this.#eventData.spellName === "firebolt") {
+        this._playEffect("fireboltHit");
+      }
     }
 
     if (this.#event === "SPELL_HIT") {
-      this._playEffect("meleeHit"); //'spellHit' later
+      if (this.#eventData.spellName === "firebolt") {
+        this._playEffect("fireboltHit");
+      }
     }
 
-    // if (this.#event === "SPELL_MISS") {
-    //   this._playEffect("spellMiss");
-    // }
+    if (this.#event === "SPELL_MISS") {
+      this._playEffect("spellMiss");
+    }
   }
 }
