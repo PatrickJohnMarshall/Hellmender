@@ -1,9 +1,12 @@
 {
   "files": {
     "main.css": "/Zork/static/css/main.bc0a0ea2.css",
-    "main.js": "/Zork/static/js/main.e3a07439.js",
+    "main.js": "/Zork/static/js/main.1d4afcee.js",
     "static/js/787.ed8d732a.chunk.js": "/Zork/static/js/787.ed8d732a.chunk.js",
     "static/media/impacttest.wav": "/Zork/static/media/impacttest.173a48ae2c3fc25cce5a.wav",
+    "static/media/spellmisstest.wav": "/Zork/static/media/spellmisstest.618c6897166bfff9dc5c.wav",
+    "static/media/misstest.wav": "/Zork/static/media/misstest.04bae772b1803bf2e9b5.wav",
+    "static/media/firebolttest.wav": "/Zork/static/media/firebolttest.3294d7e94089e440313b.wav",
     "static/media/border-image-golden2.png": "/Zork/static/media/border-image-golden2.46c876a09f390e28b086.png",
     "static/media/test.wav": "/Zork/static/media/test.7c678e7152951940ccee.wav",
     "static/media/border-image-grey.png": "/Zork/static/media/border-image-grey.2374b131df7f4287987f.png",
@@ -32,11 +35,11 @@
     "static/media/background-image.png": "/Zork/static/media/background-image.3328a65b91ea173c8b83.png",
     "index.html": "/Zork/index.html",
     "main.bc0a0ea2.css.map": "/Zork/static/css/main.bc0a0ea2.css.map",
-    "main.e3a07439.js.map": "/Zork/static/js/main.e3a07439.js.map",
+    "main.1d4afcee.js.map": "/Zork/static/js/main.1d4afcee.js.map",
     "787.ed8d732a.chunk.js.map": "/Zork/static/js/787.ed8d732a.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.bc0a0ea2.css",
-    "static/js/main.e3a07439.js"
+    "static/js/main.1d4afcee.js"
   ]
 }
