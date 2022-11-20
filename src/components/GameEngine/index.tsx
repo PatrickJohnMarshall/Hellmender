@@ -35,6 +35,7 @@ const startingSpell = new FireBolt();
 
 const playerLocation = new PlayerLocation(startingRoom);
 const playerInventory = new PlayerInventory(startingItem);
+
 const playerStats = new PlayerStats({
   str: 10,
   dex: 10,
@@ -46,6 +47,7 @@ const playerStats = new PlayerStats({
   hp: 10,
   ac: 10,
 });
+
 const playerAction = new PlayerAction(
   playerLocation,
   playerInventory,

@@ -16,6 +16,7 @@ import {
   SpellKill,
   SpellMiss,
   SpellAlreadyDead,
+  Description,
 } from "./types/ActionEventTypes";
 
 type ActionReturn = {
@@ -29,6 +30,7 @@ type ActionReturn = {
     | SpellKill
     | SpellMiss
     | SpellAlreadyDead
+    | Description
     | null;
 };
 class PlayerAction {
@@ -81,7 +83,10 @@ class PlayerAction {
   }): ActionReturn {
     switch (primaryCommand) {
       case "look":
-        return this.#playerLocation.describe();
+        return {
+          event: "LOOK",
+          eventData: { description: this.#playerLocation.describe() },
+        };
 
       case "move":
         // secondaryCommand is a direction
@@ -89,8 +94,13 @@ class PlayerAction {
           this.#playerLocation,
           secondaryCommand
         );
+
         playerMove.move();
-        return this.#playerLocation.describe();
+
+        return {
+          event: "MOVE",
+          eventData: { description: this.#playerLocation.describe() },
+        };
 
       case "attack":
         return this._doWeaponAttack(secondaryCommand, validMonsters);

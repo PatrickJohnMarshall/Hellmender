@@ -8,6 +8,7 @@ import {
   SpellKill,
   SpellMiss,
   SpellAlreadyDead,
+  Description,
 } from "../player/types/ActionEventTypes";
 
 type ActionReturn = {
@@ -21,6 +22,7 @@ type ActionReturn = {
     | SpellKill
     | SpellMiss
     | SpellAlreadyDead
+    | Description
     | null;
 };
 
@@ -40,6 +42,14 @@ export default class TextOutput {
 
     if (this.#event === "INVALID") {
       return "Invalid command - Please see guide for list of valid commands.";
+    }
+
+    if (this.#event === "LOOK") {
+      return this.#eventData.description;
+    }
+
+    if (this.#event === "MOVE") {
+      return this.#eventData.description;
     }
 
     if (this.#event === "ATTACK_ALREADY_DEAD") {

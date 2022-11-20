@@ -7,8 +7,14 @@ export type EventType =
   | "SPELL_KILL"
   | "ATTACK_ALREADY_DEAD"
   | "SPELL_ALREADY_DEAD"
+  | "LOOK"
+  | "MOVE"
   | "QUIT"
   | "INVALID";
+
+export type Description = {
+  description: string;
+};
 
 export type AttackHit = {
   attackValue: number;
