@@ -1,69 +1,56 @@
 import PlayerInventory from "./PlayerInventory";
-
-const mockSpell = {
-  getID: () => "fireBall",
-  getSpellStats: () => ({
-    attackBonus: 0,
-    damage: { min: 6, max: 36 },
-  }),
-  describe: () => "",
-};
-
-const defaultWeapon = {
-  getID: () => "doomFist",
-  getAttackStats: () => ({
-    attackBonus: 2,
-    damage: { min: 1, max: 12 },
-  }),
-  describe: () => "",
-};
-
-const mockWeapon = {
-  getID: () => "vorpalFist",
-  getAttackStats: () => ({
-    attackBonus: 0,
-    damage: { min: 1, max: 5 },
-  }),
-  describe: () => "",
-};
+import Fist from "items/weapons/Fist";
+import ShortSword from "items/weapons/ShortSword";
+import FireBolt from "spells/spells/FireBolt";
 
 describe("PlayerInventory", () => {
   test("adds a weapon", () => {
-    const playerInventory = new PlayerInventory(defaultWeapon);
+    const fist = new Fist();
 
-    playerInventory.addWeapon(mockWeapon);
+    const playerInventory = new PlayerInventory(fist);
+
+    playerInventory.addWeapon(fist);
 
     const weaponResult = playerInventory.getWeapons();
     expect(weaponResult.length).toBe(2);
   });
 
   test("equips a weapon", () => {
-    const playerInventory = new PlayerInventory(defaultWeapon);
+    const fist = new Fist();
+    const shortSword = new ShortSword();
 
-    playerInventory.addWeapon(mockWeapon);
+    const playerInventory = new PlayerInventory(fist);
 
-    playerInventory.equipWeapon("vorpalFist");
+    playerInventory.addWeapon(shortSword);
+
+    playerInventory.equipWeapon(shortSword.getID());
     const equippedResult = playerInventory.getEquippedWeaponStats();
 
     expect(equippedResult.attackBonus).toBe(
-      mockWeapon.getAttackStats().attackBonus
+      shortSword.getAttackStats().attackBonus
     );
   });
 
   test("learn a spell", () => {
-    const playerInventory = new PlayerInventory(defaultWeapon);
+    const fist = new Fist();
+    const playerInventory = new PlayerInventory(fist);
 
-    playerInventory.learnSpell(mockSpell);
+    const firebolt = new FireBolt();
+
+    playerInventory.learnSpell(firebolt);
 
     expect(playerInventory.getSpells().length).toBe(1);
   });
 
   test("give stats of known spell", () => {
-    const playerInventory = new PlayerInventory(defaultWeapon);
+    const fist = new Fist();
+    const playerInventory = new PlayerInventory(fist);
 
-    playerInventory.learnSpell(mockSpell);
-    const spellStats = playerInventory.getKnownSpellStats("fireBall");
+    const firebolt = new FireBolt();
 
-    expect(spellStats.attackBonus).toBe(mockSpell.getSpellStats().attackBonus);
+    playerInventory.learnSpell(firebolt);
+    const spellStats = playerInventory.getKnownSpellStats(firebolt.getID());
+
+    expect(spellStats.attackBonus).toBe(firebolt.getSpellStats().attackBonus);
   });
 });
