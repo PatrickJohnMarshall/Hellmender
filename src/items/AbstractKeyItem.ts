@@ -1,16 +1,9 @@
-type Stats = {
-  attackBonus: number;
-  damage: { min: number; max: number };
-};
-
-abstract class AbstractWeapons {
+abstract class AbstractKeyItems {
   #id: string;
-  #stats: Stats;
   #location: string | undefined;
 
-  constructor({ id, stats }: { id: string; stats: Stats }) {
+  constructor({ id }: { id: string }) {
     this.#id = id;
-    this.#stats = stats;
   }
 
   getID(): string {
@@ -25,13 +18,9 @@ abstract class AbstractWeapons {
     return this.#location;
   }
 
-  getAttackStats(): Stats {
-    return this.#stats;
-  }
-
   abstract describe(): string;
 
   abstract inLocationDescription(): string;
 }
 
-export default AbstractWeapons;
+export default AbstractKeyItems;

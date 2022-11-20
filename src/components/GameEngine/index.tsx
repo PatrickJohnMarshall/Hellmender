@@ -35,6 +35,7 @@ const startingSpell = new FireBolt();
 
 const playerLocation = new PlayerLocation(startingRoom);
 const playerInventory = new PlayerInventory(startingItem);
+playerInventory.learnSpell(startingSpell);
 
 const playerStats = new PlayerStats({
   str: 10,
@@ -54,7 +55,6 @@ const playerAction = new PlayerAction(
   playerStats
 );
 
-playerInventory.learnSpell(startingSpell);
 const monsters = generateMonsters();
 
 function GameEngine({ setGameState }) {

@@ -12,6 +12,10 @@ class Fist extends AbstractWeapons {
   describe(): string {
     return formatLog(["Its your hands."]);
   }
+
+  inLocationDescription(): string {
+    return formatLog(["Something went HORRIBLY wrong here."]);
+  }
 }
 
 export default Fist;

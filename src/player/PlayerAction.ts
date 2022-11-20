@@ -1,8 +1,12 @@
 import PlayerMove from "./action/PlayerMove";
 import PlayerAttack from "./action/PlayerAttack";
 import PlayerCast from "./action/PlayerCast";
+
+import KeyItems from "items/types/KeyItems";
+
 import Monster from "../monsters/types/Monster";
 import monsterDamage from "../monsters/monsterDamage";
+
 import IPlayerLocation from "./types/IPlayerLocation";
 import IPlayerInventory from "./types/IPlayerInventory";
 import IPlayerStats from "./types/IPlayerStats";
@@ -48,7 +52,15 @@ class PlayerAction {
     this.#playerStats = playerStats;
   }
 
-  action(answer: string, validMonsters: Monster[]): ActionReturn {
+  action({
+    answer,
+    validMonsters,
+    validKeyItems,
+  }: {
+    answer: string;
+    validMonsters: Monster[];
+    validKeyItems: KeyItems[];
+  }): ActionReturn {
     const commands = answer.toLowerCase().split(" ");
     const validAnswer = this._validateCommand(commands[0]);
 
@@ -61,6 +73,7 @@ class PlayerAction {
       secondaryCommand: commands[1],
       fourthCommand: commands[3],
       validMonsters,
+      validKeyItems,
     });
   }
 
@@ -75,17 +88,27 @@ class PlayerAction {
     secondaryCommand,
     fourthCommand,
     validMonsters,
+    validKeyItems,
   }: {
     primaryCommand: string;
     secondaryCommand: string;
     fourthCommand: string | undefined;
     validMonsters: Monster[];
+    validKeyItems: KeyItems[];
   }): ActionReturn {
     switch (primaryCommand) {
       case "look":
+        const roomItemDescriptions = validKeyItems.reduce(
+          (finalDesc, keyItem) =>
+            finalDesc + "\n" + keyItem.inLocationDescription(),
+          ""
+        );
+
         return {
           event: "LOOK",
-          eventData: { description: this.#playerLocation.describe() },
+          eventData: {
+            description: this.#playerLocation.describe() + roomItemDescriptions,
+          },
         };
 
       case "move":
