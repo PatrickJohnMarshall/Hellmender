@@ -20,7 +20,6 @@ import { TerminalOutput } from "../Terminal";
 import buildLayout from "../../tower-layout/buildLayout";
 import generateMonsters from "../../monsters/generateMonsters";
 
-import Fist from "../../items/weapons/Fist";
 import FireBolt from "spells/spells/FireBolt";
 
 import PlayerAction from "../../player/PlayerAction";
@@ -28,13 +27,15 @@ import PlayerLocation from "../../player/PlayerLocation";
 import PlayerInventory from "../../player/PlayerInventory";
 import PlayerStats from "player/PlayerStats";
 import HelpMenu from "components/ReadoutGrid/HelpMenu";
+import generateItems from "items/generateItems";
 
 const startingRoom = buildLayout();
-const startingItem = new Fist();
 const startingSpell = new FireBolt();
+const items = generateItems();
+const monsters = generateMonsters();
 
 const playerLocation = new PlayerLocation(startingRoom);
-const playerInventory = new PlayerInventory(startingItem);
+const playerInventory = new PlayerInventory(items.defaultWeapon);
 playerInventory.learnSpell(startingSpell);
 
 const playerStats = new PlayerStats({
@@ -54,8 +55,6 @@ const playerAction = new PlayerAction(
   playerInventory,
   playerStats
 );
-
-const monsters = generateMonsters();
 
 function GameEngine({ setGameState }) {
   const [terminalLog, setTerminalLog] = useState([

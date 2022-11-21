@@ -96,14 +96,13 @@ class PlayerAction {
     validMonsters: Monster[];
     validKeyItems: KeyItems[];
   }): ActionReturn {
+    const roomItemDescriptions = validKeyItems.reduce(
+      (finalDesc, keyItem) =>
+        finalDesc + "\n" + keyItem.inLocationDescription(),
+      ""
+    );
     switch (primaryCommand) {
       case "look":
-        const roomItemDescriptions = validKeyItems.reduce(
-          (finalDesc, keyItem) =>
-            finalDesc + "\n" + keyItem.inLocationDescription(),
-          ""
-        );
-
         return {
           event: "LOOK",
           eventData: {
@@ -122,7 +121,9 @@ class PlayerAction {
 
         return {
           event: "MOVE",
-          eventData: { description: this.#playerLocation.describe() },
+          eventData: {
+            description: this.#playerLocation.describe() + roomItemDescriptions,
+          },
         };
 
       case "attack":
