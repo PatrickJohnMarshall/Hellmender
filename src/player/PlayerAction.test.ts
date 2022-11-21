@@ -7,9 +7,8 @@ import Spell from "spells/types/Spell";
 import PlayerLocation from "player/PlayerLocation";
 import PlayerInventory from "player/PlayerInventory";
 import buildLayout from "tower-layout/buildLayout";
-import Fist from "items/weapons/Fist";
 import { Description } from "./types/ActionEventTypes";
-import Wand from "items/keyItems/Wand";
+import generateItems from "items/generateItems";
 
 const mockInitialStats = {
   str: 10,
@@ -132,11 +131,11 @@ describe("PlayerAction", () => {
 
   test("players see item description in room", () => {
     const startingRoom = buildLayout();
-    const startingItem = new Fist();
-    const wand = new Wand();
+    const items = generateItems();
 
     const playerLocation = new PlayerLocation(startingRoom);
-    const playerInventory = new PlayerInventory(startingItem);
+
+    const playerInventory = new PlayerInventory(items.defaultWeapon);
 
     const playerStats = new PlayerStats({
       str: 10,
@@ -159,12 +158,11 @@ describe("PlayerAction", () => {
     const actionResult = playerAction.action({
       answer: "look",
       validMonsters: [],
-      validKeyItems: [wand],
+      validKeyItems: items.activeItems.getKeyItems(),
     }) as unknown as {
       event: Event;
       eventData: Description;
     };
-    console.log(actionResult.eventData.description);
 
     expect(
       actionResult.eventData.description.includes("This is a wand")
