@@ -56,9 +56,18 @@ const playerAction = new PlayerAction(
   playerStats
 );
 
+const itemDesc = items.activeItems
+  .getKeyItemsForRoom(playerLocation.getID())
+  .reduce(
+    (finalDesc, keyItem) => finalDesc + "\n" + keyItem.inLocationDescription(),
+    ""
+  );
+
 function GameEngine({ setGameState }) {
   const [terminalLog, setTerminalLog] = useState([
-    <TerminalOutput>{`${playerLocation.describe()}`}</TerminalOutput>,
+    <TerminalOutput>{`${
+      playerLocation.describe() + itemDesc
+    }`}</TerminalOutput>,
   ]);
 
   const [helpToggle, setHelpToggle] = useState<boolean>(false);
@@ -86,6 +95,7 @@ function GameEngine({ setGameState }) {
           <TerminalController
             setGameState={setGameState}
             playerAction={playerAction}
+            items={items.activeItems}
             monsters={monsters.getMonstersForRoom(playerLocation.getID())}
           />
         )}

@@ -11,7 +11,9 @@ class Wand extends AbstractKeyItems {
   }
 
   inLocationDescription(): string {
-    return formatLog(["This is a wand."]);
+    return formatLog([
+      "Upon the nightstand is a wand. It jammed firmly in a loaf of stale bread.",
+    ]);
   }
 }
 

@@ -12,7 +12,8 @@ export type EventType =
   | "QUIT"
   | "INVALID";
 
-export type Description = {
+export type Location = {
+  location: string;
   description: string;
 };
 

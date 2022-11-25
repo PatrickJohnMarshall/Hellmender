@@ -2,7 +2,7 @@ import PlayerMove from "./action/PlayerMove";
 import PlayerAttack from "./action/PlayerAttack";
 import PlayerCast from "./action/PlayerCast";
 
-import KeyItems from "items/types/KeyItems";
+// import KeyItems from "items/types/KeyItems";
 
 import Monster from "../monsters/types/Monster";
 import monsterDamage from "../monsters/monsterDamage";
@@ -20,7 +20,7 @@ import {
   SpellKill,
   SpellMiss,
   SpellAlreadyDead,
-  Description,
+  Location,
 } from "./types/ActionEventTypes";
 
 type ActionReturn = {
@@ -34,7 +34,7 @@ type ActionReturn = {
     | SpellKill
     | SpellMiss
     | SpellAlreadyDead
-    | Description
+    | Location
     | null;
 };
 class PlayerAction {
@@ -55,11 +55,11 @@ class PlayerAction {
   action({
     answer,
     validMonsters,
-    validKeyItems,
-  }: {
+  }: // validKeyItems,
+  {
     answer: string;
     validMonsters: Monster[];
-    validKeyItems: KeyItems[];
+    // validKeyItems: KeyItems[];
   }): ActionReturn {
     const commands = answer.toLowerCase().split(" ");
     const validAnswer = this._validateCommand(commands[0]);
@@ -73,7 +73,7 @@ class PlayerAction {
       secondaryCommand: commands[1],
       fourthCommand: commands[3],
       validMonsters,
-      validKeyItems,
+      // validKeyItems,
     });
   }
 
@@ -88,25 +88,26 @@ class PlayerAction {
     secondaryCommand,
     fourthCommand,
     validMonsters,
-    validKeyItems,
-  }: {
+  }: // validKeyItems,
+  {
     primaryCommand: string;
     secondaryCommand: string;
     fourthCommand: string | undefined;
     validMonsters: Monster[];
-    validKeyItems: KeyItems[];
+    // validKeyItems: KeyItems[];
   }): ActionReturn {
-    const roomItemDescriptions = validKeyItems.reduce(
-      (finalDesc, keyItem) =>
-        finalDesc + "\n" + keyItem.inLocationDescription(),
-      ""
-    );
+    // const roomItemDescriptions = validKeyItems.reduce(
+    //   (finalDesc, keyItem) =>
+    //     finalDesc + "\n" + keyItem.inLocationDescription(),
+    //   ""
+    // );
     switch (primaryCommand) {
       case "look":
         return {
           event: "LOOK",
           eventData: {
-            description: this.#playerLocation.describe() + roomItemDescriptions,
+            location: this.#playerLocation.getID(),
+            description: this.#playerLocation.describe(),
           },
         };
 
@@ -122,7 +123,8 @@ class PlayerAction {
         return {
           event: "MOVE",
           eventData: {
-            description: this.#playerLocation.describe() + roomItemDescriptions,
+            location: this.#playerLocation.getID(),
+            description: this.#playerLocation.describe(),
           },
         };
 
