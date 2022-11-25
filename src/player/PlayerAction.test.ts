@@ -4,12 +4,6 @@ import IPlayerInventory from "./types/IPlayerInventory";
 import Weapon from "../items/types/Weapon";
 import Spell from "spells/types/Spell";
 
-// import PlayerLocation from "player/PlayerLocation";
-// import PlayerInventory from "player/PlayerInventory";
-// import buildLayout from "tower-layout/buildLayout";
-// import { Description } from "./types/ActionEventTypes";
-// import generateItems from "items/generateItems";
-
 const mockInitialStats = {
   str: 10,
   dex: 10,

@@ -2,8 +2,6 @@ import PlayerMove from "./action/PlayerMove";
 import PlayerAttack from "./action/PlayerAttack";
 import PlayerCast from "./action/PlayerCast";
 
-// import KeyItems from "items/types/KeyItems";
-
 import Monster from "../monsters/types/Monster";
 import monsterDamage from "../monsters/monsterDamage";
 
@@ -88,19 +86,12 @@ class PlayerAction {
     secondaryCommand,
     fourthCommand,
     validMonsters,
-  }: // validKeyItems,
-  {
+  }: {
     primaryCommand: string;
     secondaryCommand: string;
     fourthCommand: string | undefined;
     validMonsters: Monster[];
-    // validKeyItems: KeyItems[];
   }): ActionReturn {
-    // const roomItemDescriptions = validKeyItems.reduce(
-    //   (finalDesc, keyItem) =>
-    //     finalDesc + "\n" + keyItem.inLocationDescription(),
-    //   ""
-    // );
     switch (primaryCommand) {
       case "look":
         return {

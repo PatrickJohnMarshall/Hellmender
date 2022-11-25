@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import TerminalLogContext from "../context/TerminalLog";
 import Terminal from "./Terminal";
 import TextOutput from "text-output/TextOutput";
+import getRoomItemDescriptions from "util/getRoomItemDescriptions";
 import PlayerActionAudio from "audio/PlayerActionAudio";
 
 export function TerminalController({
@@ -35,18 +36,6 @@ export function TerminalController({
           const playerActionAudio = new PlayerActionAudio(actionResult);
           playerActionAudio.play();
 
-          function roomItemDescriptions() {
-            return actionResult.event === "MOVE" || "LOOK"
-              ? items
-                  .getKeyItemsForRoom(actionResult.eventData.location)
-                  .reduce(
-                    (finalDesc, keyItem) =>
-                      finalDesc + "\n" + keyItem.inLocationDescription(),
-                    ""
-                  )
-              : "";
-          }
-
           const textOutput = new TextOutput(actionResult);
 
           if (textOutput.getText() === "quit") {
@@ -58,7 +47,7 @@ export function TerminalController({
             terminalInput +
             `\n\n` +
             textOutput.getText() +
-            roomItemDescriptions();
+            getRoomItemDescriptions(actionResult.eventData.location, items);
 
           terminalLogContext.add(output);
         }}

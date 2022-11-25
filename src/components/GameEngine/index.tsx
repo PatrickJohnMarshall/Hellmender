@@ -28,6 +28,7 @@ import PlayerInventory from "../../player/PlayerInventory";
 import PlayerStats from "player/PlayerStats";
 import HelpMenu from "components/ReadoutGrid/HelpMenu";
 import generateItems from "items/generateItems";
+import getRoomItemDescriptions from "util/getRoomItemDescriptions";
 
 const startingRoom = buildLayout();
 const startingSpell = new FireBolt();
@@ -56,17 +57,11 @@ const playerAction = new PlayerAction(
   playerStats
 );
 
-const itemDesc = items.activeItems
-  .getKeyItemsForRoom(playerLocation.getID())
-  .reduce(
-    (finalDesc, keyItem) => finalDesc + "\n" + keyItem.inLocationDescription(),
-    ""
-  );
-
 function GameEngine({ setGameState }) {
   const [terminalLog, setTerminalLog] = useState([
     <TerminalOutput>{`${
-      playerLocation.describe() + itemDesc
+      playerLocation.describe() +
+      getRoomItemDescriptions(playerLocation.getID(), items.activeItems)
     }`}</TerminalOutput>,
   ]);
 
