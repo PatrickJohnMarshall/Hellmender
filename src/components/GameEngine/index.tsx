@@ -28,6 +28,7 @@ import PlayerInventory from "../../player/PlayerInventory";
 import PlayerStats from "player/PlayerStats";
 import HelpMenu from "components/ReadoutGrid/HelpMenu";
 import generateItems from "items/generateItems";
+import getRoomItemDescriptions from "util/getRoomItemDescriptions";
 
 const startingRoom = buildLayout();
 const startingSpell = new FireBolt();
@@ -58,7 +59,10 @@ const playerAction = new PlayerAction(
 
 function GameEngine({ setGameState }) {
   const [terminalLog, setTerminalLog] = useState([
-    <TerminalOutput>{`${playerLocation.describe()}`}</TerminalOutput>,
+    <TerminalOutput>{`${
+      playerLocation.describe() +
+      getRoomItemDescriptions(playerLocation.getID(), items.activeItems)
+    }`}</TerminalOutput>,
   ]);
 
   const [helpToggle, setHelpToggle] = useState<boolean>(false);
@@ -86,6 +90,7 @@ function GameEngine({ setGameState }) {
           <TerminalController
             setGameState={setGameState}
             playerAction={playerAction}
+            items={items.activeItems}
             monsters={monsters.getMonstersForRoom(playerLocation.getID())}
           />
         )}

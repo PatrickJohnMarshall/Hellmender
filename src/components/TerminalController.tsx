@@ -2,9 +2,15 @@ import React, { useContext } from "react";
 import TerminalLogContext from "../context/TerminalLog";
 import Terminal from "./Terminal";
 import TextOutput from "text-output/TextOutput";
+import getRoomItemDescriptions from "util/getRoomItemDescriptions";
 import PlayerActionAudio from "audio/PlayerActionAudio";
 
-export function TerminalController({ playerAction, monsters, setGameState }) {
+export function TerminalController({
+  playerAction,
+  monsters,
+  items,
+  setGameState,
+}) {
   const terminalLogContext = useContext(TerminalLogContext);
 
   return (
@@ -22,9 +28,10 @@ export function TerminalController({ playerAction, monsters, setGameState }) {
         prompt=">"
         name="ZORK"
         onInput={(terminalInput) => {
-          const actionResult = playerAction.action(terminalInput, [
-            ...monsters,
-          ]);
+          const actionResult = playerAction.action({
+            answer: terminalInput,
+            validMonsters: [...monsters],
+          });
 
           const playerActionAudio = new PlayerActionAudio(actionResult);
           playerActionAudio.play();
@@ -35,7 +42,12 @@ export function TerminalController({ playerAction, monsters, setGameState }) {
             setGameState("start");
           }
 
-          const output = `\n>` + terminalInput + `\n\n` + textOutput.getText();
+          const output =
+            `\n>` +
+            terminalInput +
+            `\n\n` +
+            textOutput.getText() +
+            getRoomItemDescriptions(actionResult.eventData.location, items);
 
           terminalLogContext.add(output);
         }}

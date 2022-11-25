@@ -8,7 +8,7 @@ import {
   SpellKill,
   SpellMiss,
   SpellAlreadyDead,
-  Description,
+  Location,
 } from "../player/types/ActionEventTypes";
 
 type ActionReturn = {
@@ -22,7 +22,7 @@ type ActionReturn = {
     | SpellKill
     | SpellMiss
     | SpellAlreadyDead
-    | Description
+    | Location
     | null;
 };
 
