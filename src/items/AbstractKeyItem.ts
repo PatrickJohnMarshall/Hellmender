@@ -18,6 +18,10 @@ abstract class AbstractKeyItems {
     return this.#location;
   }
 
+  removeLocationID() {
+    this.#location = undefined;
+  }
+
   abstract describe(): string;
 
   abstract inLocationDescription(): string;

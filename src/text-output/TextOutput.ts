@@ -8,7 +8,8 @@ import {
   SpellKill,
   SpellMiss,
   SpellAlreadyDead,
-  Location,
+  LocationDescription,
+  AddedToInventory,
 } from "../player/types/ActionEventTypes";
 
 type ActionReturn = {
@@ -22,7 +23,8 @@ type ActionReturn = {
     | SpellKill
     | SpellMiss
     | SpellAlreadyDead
-    | Location
+    | LocationDescription
+    | AddedToInventory
     | null;
 };
 
@@ -50,6 +52,10 @@ export default class TextOutput {
 
     if (this.#event === "MOVE") {
       return this.#eventData.description;
+    }
+
+    if (this.#event === "TAKE") {
+      return `You take the ${this.#eventData.itemName}.`;
     }
 
     if (this.#event === "ATTACK_ALREADY_DEAD") {

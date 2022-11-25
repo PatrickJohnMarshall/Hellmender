@@ -14,7 +14,7 @@ class ShortSword extends AbstractWeapons {
   }
 
   inLocationDescription(): string {
-    return formatLog(["A dull shortsword rests... somewhere."]);
+    return formatLog(["A dull shortsword rests here for testing purposes."]);
   }
 }
 

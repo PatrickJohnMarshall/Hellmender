@@ -9,12 +9,17 @@ export type EventType =
   | "SPELL_ALREADY_DEAD"
   | "LOOK"
   | "MOVE"
+  | "TAKE"
   | "QUIT"
   | "INVALID";
 
-export type Location = {
+export type LocationDescription = {
   location: string;
   description: string;
+};
+
+export type AddedToInventory = {
+  itemName: string;
 };
 
 export type AttackHit = {
