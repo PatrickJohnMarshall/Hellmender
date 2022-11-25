@@ -8,7 +8,8 @@ import PlayerActionAudio from "audio/PlayerActionAudio";
 export function TerminalController({
   playerAction,
   monsters,
-  items,
+  allItems,
+  itemsInRoom,
   setGameState,
 }) {
   const terminalLogContext = useContext(TerminalLogContext);
@@ -31,6 +32,8 @@ export function TerminalController({
           const actionResult = playerAction.action({
             answer: terminalInput,
             validMonsters: [...monsters],
+            keyItems: itemsInRoom.keyItems,
+            weapons: itemsInRoom.weapons,
           });
 
           const playerActionAudio = new PlayerActionAudio(actionResult);
@@ -47,7 +50,7 @@ export function TerminalController({
             terminalInput +
             `\n\n` +
             textOutput.getText() +
-            getRoomItemDescriptions(actionResult.eventData.location, items);
+            getRoomItemDescriptions(actionResult.eventData.location, allItems);
 
           terminalLogContext.add(output);
         }}

@@ -90,7 +90,15 @@ function GameEngine({ setGameState }) {
           <TerminalController
             setGameState={setGameState}
             playerAction={playerAction}
-            items={items.activeItems}
+            allItems={items.activeItems}
+            itemsInRoom={{
+              keyItems: items.activeItems.getKeyItemsForRoom(
+                playerLocation.getID()
+              ),
+              weapons: items.activeItems.getWeaponsForRoom(
+                playerLocation.getID()
+              ),
+            }}
             monsters={monsters.getMonstersForRoom(playerLocation.getID())}
           />
         )}

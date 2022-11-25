@@ -1,5 +1,10 @@
-const imageMap = { fist: `https://i.imgur.com/hkA2Su1.png` };
+// import {sword} from `../styles/img/icons/sword.png`
 
-export default function getImageForMonster(itemID: string) {
+const imageMap = {
+  fist: `https://i.imgur.com/hkA2Su1.png`,
+  shortsword: `https://i.imgur.com/K9Hs3nm.jpg`,
+};
+
+export default function getImageForItem(itemID: string) {
   return imageMap[itemID];
 }
