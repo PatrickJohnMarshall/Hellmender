@@ -1,5 +1,5 @@
 export default function getRoomItemDescriptions(location, items) {
-  if (location === undefined) {
+  if (location === undefined || location === null) {
     return "";
   }
 

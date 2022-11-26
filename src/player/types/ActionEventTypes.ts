@@ -10,6 +10,7 @@ export type EventType =
   | "LOOK"
   | "MOVE"
   | "TAKE"
+  | "NOTHING_TO_TAKE"
   | "QUIT"
   | "INVALID";
 
@@ -20,6 +21,10 @@ export type LocationDescription = {
 
 export type AddedToInventory = {
   itemName: string;
+};
+
+export type MiscStatus = {
+  status: string;
 };
 
 export type AttackHit = {

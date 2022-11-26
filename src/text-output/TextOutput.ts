@@ -58,6 +58,10 @@ export default class TextOutput {
       return `You take the ${this.#eventData.itemName}.`;
     }
 
+    if (this.#event === "NOTHING_TO_TAKE") {
+      return `Theres nothing like that to take.`;
+    }
+
     if (this.#event === "ATTACK_ALREADY_DEAD") {
       return `You hit ${this.#eventData.monsterName}, but it is already dead.`;
     }

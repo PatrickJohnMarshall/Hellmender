@@ -23,6 +23,7 @@ import {
   SpellAlreadyDead,
   LocationDescription,
   AddedToInventory,
+  MiscStatus,
 } from "./types/ActionEventTypes";
 
 type ActionReturn = {
@@ -38,6 +39,7 @@ type ActionReturn = {
     | SpellAlreadyDead
     | LocationDescription
     | AddedToInventory
+    | MiscStatus
     | null;
 };
 class PlayerAction {
@@ -70,7 +72,7 @@ class PlayerAction {
     const validAnswer = this._validateCommand(commands[0]);
 
     if (!validAnswer) {
-      return { event: "INVALID", eventData: null };
+      return { event: "INVALID", eventData: { status: "invalid" } };
     }
 
     return this._doAction({
@@ -149,7 +151,7 @@ class PlayerAction {
         );
 
       case "quit":
-        return { event: "QUIT", eventData: null };
+        return { event: "QUIT", eventData: { status: "quit" } };
 
       default:
         throw new Error("Invalid Command");
@@ -183,6 +185,11 @@ class PlayerAction {
         eventData: { itemName: weaponToAdd.getID() },
       };
     }
+
+    return {
+      event: "NOTHING_TO_TAKE",
+      eventData: { status: "nothing to take" },
+    };
   }
 
   _doWeaponAttack(secondaryCommand, validMonsters): ActionReturn {
