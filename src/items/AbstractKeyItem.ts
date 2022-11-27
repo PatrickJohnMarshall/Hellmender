@@ -1,6 +1,6 @@
 abstract class AbstractKeyItems {
   #id: string;
-  #location: string | undefined;
+  #location: string | null;
 
   constructor({ id }: { id: string }) {
     this.#id = id;
@@ -19,7 +19,7 @@ abstract class AbstractKeyItems {
   }
 
   removeLocationID() {
-    this.#location = undefined;
+    this.#location = null;
   }
 
   abstract describe(): string;

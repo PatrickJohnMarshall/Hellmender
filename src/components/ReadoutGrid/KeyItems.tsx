@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import TerminalLogContext from "context/TerminalLog";
-import getImageForSpell from "util/getImageForSpell";
+import getImageForItem from "util/getImageForItem";
 import InterfaceAudio from "audio/InterfaceAudio";
 
-function SpellRepertoire({ spells }) {
+function KeyItems({ keyItems }) {
   const terminalLog = useContext(TerminalLogContext);
   const interfaceAudio = new InterfaceAudio();
 
@@ -12,19 +12,23 @@ function SpellRepertoire({ spells }) {
       className="rpgui-container framed readout-box"
       style={{ gridColumn: 1 }}
     >
-      <div>Spells:</div> <br />
+      <div>Key Items: </div> <br />
       <div className="icon-grid">
-        {spells.map((spell) => {
+        {keyItems.map((keyItem) => {
           return (
             <button
               style={{
-                backgroundImage: `url(${getImageForSpell(spell.getID())})`,
-                backgroundSize: "50px 50px",
+                background: `url(https://i.imgur.com/YRXu3iB.png)
+              `,
+                backgroundRepeat: "no-repeat",
+                backgroundSize: `800px`,
+                backgroundPosition: `${getImageForItem(keyItem.getID())}`,
+                display: "inline-block",
                 height: `50px`,
                 width: "50px",
               }}
               onClick={() => {
-                terminalLog.add("\n" + spell.describe());
+                terminalLog.add("\n" + keyItem.describe());
                 interfaceAudio.playButton();
               }}
             />
@@ -35,4 +39,4 @@ function SpellRepertoire({ spells }) {
   );
 }
 
-export default SpellRepertoire;
+export default KeyItems;

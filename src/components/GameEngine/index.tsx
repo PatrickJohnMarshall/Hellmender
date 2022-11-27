@@ -106,6 +106,7 @@ function GameEngine({ setGameState }) {
           playerStats={playerStats}
           monsters={monsters.getMonstersForRoom(playerLocation.getID())}
           weapons={playerInventory.getWeapons()}
+          keyItems={playerInventory.getKeyItems()}
           spells={playerInventory.getSpells()}
           setHelpToggle={setHelpToggle}
         />
