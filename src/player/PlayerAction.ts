@@ -5,6 +5,9 @@ import PlayerCast from "./action/PlayerCast";
 import Monster from "../monsters/types/Monster";
 import monsterDamage from "../monsters/monsterDamage";
 
+import KeyItems from "items/types/KeyItems";
+import Weapon from "items/types/Weapon";
+
 import IPlayerLocation from "./types/IPlayerLocation";
 import IPlayerInventory from "./types/IPlayerInventory";
 import IPlayerStats from "./types/IPlayerStats";
@@ -18,7 +21,8 @@ import {
   SpellKill,
   SpellMiss,
   SpellAlreadyDead,
-  Location,
+  LocationDescription,
+  AddedToInventory,
 } from "./types/ActionEventTypes";
 
 type ActionReturn = {
@@ -32,7 +36,8 @@ type ActionReturn = {
     | SpellKill
     | SpellMiss
     | SpellAlreadyDead
-    | Location
+    | LocationDescription
+    | AddedToInventory
     | null;
 };
 class PlayerAction {
@@ -53,11 +58,13 @@ class PlayerAction {
   action({
     answer,
     validMonsters,
-  }: // validKeyItems,
-  {
+    keyItems,
+    weapons,
+  }: {
     answer: string;
     validMonsters: Monster[];
-    // validKeyItems: KeyItems[];
+    keyItems: KeyItems[];
+    weapons: Weapon[];
   }): ActionReturn {
     const commands = answer.toLowerCase().split(" ");
     const validAnswer = this._validateCommand(commands[0]);
@@ -71,12 +78,13 @@ class PlayerAction {
       secondaryCommand: commands[1],
       fourthCommand: commands[3],
       validMonsters,
-      // validKeyItems,
+      keyItems,
+      weapons,
     });
   }
 
   _validateCommand(command: string): boolean {
-    const validCommands = ["quit", "move", "attack", "look", "cast"];
+    const validCommands = ["quit", "move", "attack", "look", "cast", "take"];
 
     return !!validCommands.find((c) => c === command);
   }
@@ -86,11 +94,15 @@ class PlayerAction {
     secondaryCommand,
     fourthCommand,
     validMonsters,
+    keyItems,
+    weapons,
   }: {
     primaryCommand: string;
     secondaryCommand: string;
     fourthCommand: string | undefined;
     validMonsters: Monster[];
+    keyItems: KeyItems[];
+    weapons: Weapon[];
   }): ActionReturn {
     switch (primaryCommand) {
       case "look":
@@ -119,6 +131,13 @@ class PlayerAction {
           },
         };
 
+      case "take":
+        return this._AddItemToInventory({
+          itemID: secondaryCommand,
+          keyItems: keyItems,
+          weapons: weapons,
+        });
+
       case "attack":
         return this._doWeaponAttack(secondaryCommand, validMonsters);
 
@@ -134,6 +153,35 @@ class PlayerAction {
 
       default:
         throw new Error("Invalid Command");
+    }
+  }
+
+  _AddItemToInventory({
+    itemID,
+    keyItems,
+    weapons,
+  }: {
+    itemID: string;
+    keyItems: KeyItems[];
+    weapons: Weapon[];
+  }): ActionReturn {
+    const keyItemToAdd = keyItems.find((item) => item.getID() === itemID);
+    const weaponToAdd = weapons.find((item) => item.getID() === itemID);
+
+    if (keyItemToAdd) {
+      this.#playerInventory.addKeyItem(keyItemToAdd);
+      return {
+        event: "TAKE",
+        eventData: { itemName: keyItemToAdd.getID() },
+      };
+    }
+
+    if (weaponToAdd) {
+      this.#playerInventory.addWeapon(weaponToAdd);
+      return {
+        event: "TAKE",
+        eventData: { itemName: weaponToAdd.getID() },
+      };
     }
   }
 

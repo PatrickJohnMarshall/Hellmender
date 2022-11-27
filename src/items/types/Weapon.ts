@@ -7,7 +7,9 @@ interface Weapon {
     damage: { min: number; max: number };
   };
   describe: () => string;
+  setLocationID: (location: string) => void;
   getLocationID: () => string;
+  removeLocationID: () => void;
 }
 
 export default Weapon;

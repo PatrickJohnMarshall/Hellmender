@@ -1,9 +1,12 @@
 import Weapon from "../items/types/Weapon";
+import KeyItems from "items/types/KeyItems";
 import Spell from "spells/types/Spell";
 
 class PlayerInventory {
-  #spells: Spell[] = [];
   #weapons: Weapon[] = [];
+  #keyItems: KeyItems[] = [];
+  #spells: Spell[] = [];
+
   #equipedWeapon: Weapon;
 
   constructor(defaultWeapon: Weapon) {
@@ -14,10 +17,20 @@ class PlayerInventory {
 
   addWeapon(weapon: Weapon) {
     this.#weapons.push(weapon);
+    weapon.removeLocationID();
+  }
+
+  addKeyItem(keyItem: KeyItems) {
+    this.#keyItems.push(keyItem);
+    keyItem.removeLocationID();
   }
 
   getWeapons(): Weapon[] {
     return this.#weapons;
+  }
+
+  getKeyItems(): KeyItems[] {
+    return this.#keyItems;
   }
 
   equipWeapon(weaponID: string) {

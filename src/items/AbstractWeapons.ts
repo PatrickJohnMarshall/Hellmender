@@ -25,6 +25,10 @@ abstract class AbstractWeapons {
     return this.#location;
   }
 
+  removeLocationID() {
+    this.#location = undefined;
+  }
+
   getAttackStats(): Stats {
     return this.#stats;
   }
