@@ -18,9 +18,12 @@ function Weapons({ weapons }) {
           return (
             <button
               style={{
-                backgroundImage: `url(${getImageForItem(weapon.getID())}
-              )`,
-                backgroundSize: "50px 50px",
+                background: `url(https://i.imgur.com/YRXu3iB.png)
+              `,
+                backgroundRepeat: "no-repeat",
+                backgroundSize: `800px`,
+                backgroundPosition: `${getImageForItem(weapon.getID())}`,
+                display: "inline-block",
                 height: `50px`,
                 width: "50px",
               }}

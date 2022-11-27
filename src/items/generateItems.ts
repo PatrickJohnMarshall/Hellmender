@@ -14,7 +14,8 @@ export default function generateItems() {
   shortsword.setLocationID("bedroom");
 
   activeItems.addWeapons(fist);
-  activeItems.addKeyItems(wand);
   activeItems.addWeapons(shortsword);
+
+  activeItems.addKeyItems(wand);
   return { activeItems: activeItems, defaultWeapon: fist };
 }

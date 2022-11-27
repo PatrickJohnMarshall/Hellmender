@@ -6,7 +6,7 @@ type Stats = {
 abstract class AbstractWeapons {
   #id: string;
   #stats: Stats;
-  #location: string | undefined;
+  #location: string | null;
 
   constructor({ id, stats }: { id: string; stats: Stats }) {
     this.#id = id;
@@ -26,7 +26,7 @@ abstract class AbstractWeapons {
   }
 
   removeLocationID() {
-    this.#location = undefined;
+    this.#location = null;
   }
 
   getAttackStats(): Stats {
