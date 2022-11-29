@@ -11,6 +11,8 @@ export type EventType =
   | "MOVE"
   | "TAKE"
   | "NOTHING_TO_TAKE"
+  | "EQUIP"
+  | "NOTHING_TO_EQUIP"
   | "QUIT"
   | "INVALID";
 
@@ -30,18 +32,21 @@ export type MiscStatus = {
 export type AttackHit = {
   attackValue: number;
   damageValue: number;
+  weaponName: string;
   monsterName: string;
   monsterHP: number;
 };
 
 export type AttackMiss = {
   attackValue: number;
+  weaponName: string;
   monsterName: string;
 };
 
 export type AttackKill = {
   attackValue: number;
   damageValue: number;
+  weaponName: string;
   monsterName: string;
 };
 

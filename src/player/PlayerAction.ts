@@ -86,7 +86,15 @@ class PlayerAction {
   }
 
   _validateCommand(command: string): boolean {
-    const validCommands = ["quit", "move", "attack", "look", "cast", "take"];
+    const validCommands = [
+      "quit",
+      "move",
+      "attack",
+      "look",
+      "cast",
+      "take",
+      "equip",
+    ];
 
     return !!validCommands.find((c) => c === command);
   }
@@ -139,6 +147,28 @@ class PlayerAction {
           keyItems: keyItems,
           weapons: weapons,
         });
+
+      case "equip":
+        this.#playerInventory.equipWeapon(secondaryCommand);
+        const weaponToAdd = this.#playerInventory
+          .getWeapons()
+          .find((item) => item.getID() === secondaryCommand);
+
+        if (!weaponToAdd) {
+          return {
+            event: "NOTHING_TO_EQUIP",
+            eventData: {
+              status: "nothing to equip",
+            },
+          };
+        }
+
+        return {
+          event: "EQUIP",
+          eventData: {
+            itemName: weaponToAdd.getID(),
+          },
+        };
 
       case "attack":
         return this._doWeaponAttack(secondaryCommand, validMonsters);
@@ -226,6 +256,7 @@ class PlayerAction {
         eventData: {
           attackValue: attackResults.attackValue,
           damageValue: attackResults.damageValue,
+          weaponName: this.#playerInventory.getEquippedWeaponID(),
           monsterName: targetMonster.getName(),
         },
       };
@@ -237,6 +268,7 @@ class PlayerAction {
         eventData: {
           attackValue: attackResults.attackValue,
           damageValue: attackResults.damageValue,
+          weaponName: this.#playerInventory.getEquippedWeaponID(),
           monsterName: targetMonster.getName(),
           monsterHP: targetMonster.getHP(),
         },
@@ -247,6 +279,7 @@ class PlayerAction {
       event: "ATTACK_MISS",
       eventData: {
         attackValue: attackResults.attackValue,
+        weaponName: this.#playerInventory.getEquippedWeaponID(),
         monsterName: targetMonster.getName(),
       },
     };

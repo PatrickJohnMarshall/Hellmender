@@ -62,28 +62,40 @@ export default class TextOutput {
       return `Theres nothing like that to take.`;
     }
 
+    if (this.#event === "EQUIP") {
+      return `You equip the ${this.#eventData.itemName}.`;
+    }
+
+    if (this.#event === "NOTHING_TO_EQUIP") {
+      return `There is nothing like that for you to wield.`;
+    }
+
     if (this.#event === "ATTACK_ALREADY_DEAD") {
       return `You hit ${this.#eventData.monsterName}, but it is already dead.`;
     }
 
     if (this.#event === "ATTACK_KILL") {
-      return `You struck ${this.#eventData.monsterName} for ${
-        this.#eventData.damageValue
-      } damage, killing it. |Attack: ${this.#eventData.attackValue}|`;
+      return `You struck ${this.#eventData.monsterName} with the ${
+        this.#eventData.weaponName
+      } for ${this.#eventData.damageValue} damage, killing it. |Attack: ${
+        this.#eventData.attackValue
+      }|`;
     }
 
     if (this.#event === "ATTACK_HIT") {
-      return `You struck ${this.#eventData.monsterName} for ${
-        this.#eventData.damageValue
-      } damage. |${this.#eventData.monsterName} HP: ${
-        this.#eventData.monsterHP
-      }| |Attack: ${this.#eventData.attackValue}|`;
+      return `You struck ${this.#eventData.monsterName} with the ${
+        this.#eventData.weaponName
+      } for ${this.#eventData.damageValue} damage. |${
+        this.#eventData.monsterName
+      } HP: ${this.#eventData.monsterHP}| |Attack: ${
+        this.#eventData.attackValue
+      }|`;
     }
 
     if (this.#event === "ATTACK_MISS") {
-      return `You missed ${this.#eventData.monsterName}. |Attack: ${
-        this.#eventData.attackValue
-      }|`;
+      return `You missed ${this.#eventData.monsterName} with the ${
+        this.#eventData.weaponName
+      }. |Attack: ${this.#eventData.attackValue}|`;
     }
 
     if (this.#event === "SPELL_ALREADY_DEAD") {

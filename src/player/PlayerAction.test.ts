@@ -26,6 +26,7 @@ const mockInventory = {
   addWeapon: () => {},
   getWeapons: () => [] as Weapon[],
   equipWeapon: () => {},
+  getEquippedWeaponID: () => "fist",
   getEquippedWeaponStats: () => ({
     attackBonus: 4,
     damage: { min: 1, max: 8 },
@@ -168,5 +169,54 @@ describe("PlayerAction", () => {
     };
 
     expect(actionResult.eventData.itemName).toEqual("shortsword");
+  });
+
+  test("player can equip item from inventory", () => {
+    const startingRoom = buildLayout();
+    const items = generateItems();
+
+    const playerLocation = new PlayerLocation(startingRoom);
+    const playerInventory = new PlayerInventory(items.defaultWeapon);
+
+    const playerStats = new PlayerStats({
+      str: 10,
+      dex: 10,
+      con: 10,
+      int: 10,
+      wis: 10,
+      cha: 10,
+      mana: 10,
+      hp: 10,
+      ac: 10,
+    });
+
+    const playerAction = new PlayerAction(
+      playerLocation,
+      playerInventory,
+      playerStats
+    );
+
+    playerAction.action({
+      answer: "take shortsword",
+      validMonsters: [],
+      keyItems: items.activeItems.getKeyItems(),
+      weapons: items.activeItems.getWeapons(),
+    }) as unknown as {
+      event: Event;
+      eventData: AddedToInventory;
+    };
+
+    const actionResult = playerAction.action({
+      answer: "equip shortsword",
+      validMonsters: [],
+      keyItems: items.activeItems.getKeyItems(),
+      weapons: items.activeItems.getWeapons(),
+    }) as unknown as {
+      event: Event;
+      eventData: AddedToInventory;
+    };
+
+    expect(actionResult.eventData.itemName).toEqual("shortsword");
+    expect(playerInventory.getEquippedWeaponID()).toEqual("shortsword");
   });
 });

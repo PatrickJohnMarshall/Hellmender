@@ -44,6 +44,10 @@ class PlayerInventory {
     return this.#equipedWeapon.getAttackStats();
   }
 
+  getEquippedWeaponID() {
+    return this.#equipedWeapon.getID();
+  }
+
   learnSpell(spell: Spell) {
     this.#spells.push(spell);
   }
