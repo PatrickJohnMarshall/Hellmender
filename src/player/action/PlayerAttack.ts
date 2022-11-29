@@ -7,26 +7,14 @@ class PlayerAttack {
     this.#playerInventory = playerInventory;
   }
 
-  attack(
-    monsterName: string,
-    validMonsterIDs: string[]
-  ): {
-    id: string;
+  attack(): {
     attackValue: number;
     damageValue: number;
   } {
-    const target = validMonsterIDs.find(
-      (id) => id.toLowerCase() === monsterName.toLowerCase().replace(" ", "")
-    );
-
-    if (target) {
-      return {
-        id: target,
-        attackValue: this._getAttackValue(),
-        damageValue: this._getDamageValue(),
-      };
-    }
-    throw new Error("Not a valid target.");
+    return {
+      attackValue: this._getAttackValue(),
+      damageValue: this._getDamageValue(),
+    };
   }
 
   _getAttackValue(): number {

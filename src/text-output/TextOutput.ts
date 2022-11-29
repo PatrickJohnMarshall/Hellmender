@@ -43,7 +43,29 @@ export default class TextOutput {
     }
 
     if (this.#event === "INVALID") {
-      return "Invalid command - Please see guide for list of valid commands.";
+      if (this.#eventData.status === "INVALID_COMMAND") {
+        return "You cannot seem to get this creature to do that.";
+      }
+
+      if (this.#eventData.status === "INVALID_ATTACK_TARGET") {
+        return "You see beyond this mortal - The mortal's eyes do not see anything like that to attack.";
+      }
+
+      if (this.#eventData.status === "INVALID_SPELL_TARGET") {
+        return "Hmm... this wizard's eyes seem incable of seeing as you do. It sees nothing like that to cast on.";
+      }
+
+      if (this.#eventData.status === "NOTHING_TO_TAKE") {
+        return `There is nothing of the sort to grasp.`;
+      }
+
+      if (this.#eventData.status === "NOTHING_TO_EQUIP") {
+        return `You possess nothing of the sort to wield.`;
+      }
+
+      if (this.#eventData.status === "INVALID_MOVEMENT") {
+        return "Mortals can only move in certain directions, we appologize for any inconvenience.";
+      }
     }
 
     if (this.#event === "LOOK") {
@@ -58,16 +80,8 @@ export default class TextOutput {
       return `You take the ${this.#eventData.itemName}.`;
     }
 
-    if (this.#event === "NOTHING_TO_TAKE") {
-      return `Theres nothing like that to take.`;
-    }
-
     if (this.#event === "EQUIP") {
       return `You equip the ${this.#eventData.itemName}.`;
-    }
-
-    if (this.#event === "NOTHING_TO_EQUIP") {
-      return `There is nothing like that for you to wield.`;
     }
 
     if (this.#event === "ATTACK_ALREADY_DEAD") {
