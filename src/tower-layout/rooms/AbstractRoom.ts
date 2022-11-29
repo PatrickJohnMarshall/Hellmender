@@ -37,46 +37,46 @@ abstract class AbstractRoom {
     return this.#id;
   }
 
-  left(): TypeRoom {
+  left(): TypeRoom | string {
     if (this.#left) {
       return this.#left;
     }
-    throw new Error("NO_CONNECTION");
+    return "NO_CONNECTION";
   }
 
-  right(): TypeRoom {
+  right(): TypeRoom | string {
     if (this.#right) {
       return this.#right;
     }
-    throw new Error("NO_CONNECTION");
+    return "NO_CONNECTION";
   }
 
-  forward(): TypeRoom {
+  forward(): TypeRoom | string {
     if (this.#forward) {
       return this.#forward;
     }
-    throw new Error("NO_CONNECTION");
+    return "NO_CONNECTION";
   }
 
-  back(): TypeRoom {
+  back(): TypeRoom | string {
     if (this.#back) {
       return this.#back;
     }
-    throw new Error("NO_CONNECTION");
+    return "NO_CONNECTION";
   }
 
-  up(): TypeRoom {
+  up(): TypeRoom | string {
     if (this.#up) {
       return this.#up;
     }
-    throw new Error("NO_CONNECTION");
+    return "NO_CONNECTION";
   }
 
-  down(): TypeRoom {
+  down(): TypeRoom | string {
     if (this.#down) {
       return this.#down;
     }
-    throw new Error("NO_CONNECTION");
+    return "NO_CONNECTION";
   }
 }
 
