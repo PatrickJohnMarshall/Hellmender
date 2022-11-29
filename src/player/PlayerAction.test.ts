@@ -26,7 +26,7 @@ const mockInventory = {
   addWeapon: () => {},
   getWeapons: () => [] as Weapon[],
   equipWeapon: () => {},
-  getEquippedWeaponID: () => {},
+  getEquippedWeaponID: () => "fist",
   getEquippedWeaponStats: () => ({
     attackBonus: 4,
     damage: { min: 1, max: 8 },

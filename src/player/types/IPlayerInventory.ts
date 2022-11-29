@@ -5,6 +5,7 @@ type IPlayerInventory = {
   addWeapon: (weapon: Weapon) => void;
   getWeapons: () => Weapon[];
   equipWeapon: (weaponID: string) => void;
+  getEquippedWeaponID: () => string;
   getEquippedWeaponStats: () => {
     attackBonus: number;
     damage: { min: number; max: number };
