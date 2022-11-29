@@ -10,6 +10,47 @@ class PlayerMove {
   }
 
   move() {
+    if (
+      this.#direction === "left" &&
+      this.#playerLocation.left() === "NO_CONNECTION"
+    ) {
+      return "NO_CONNECTION";
+    }
+    if (
+      this.#direction === "right" &&
+      this.#playerLocation.right() === "NO_CONNECTION"
+    ) {
+      return "NO_CONNECTION";
+    }
+    if (
+      this.#direction === "forward" &&
+      this.#playerLocation.forward() === "NO_CONNECTION"
+    ) {
+      return "NO_CONNECTION";
+    }
+    if (
+      this.#direction === "back" &&
+      this.#playerLocation.back() === "NO_CONNECTION"
+    ) {
+      return "NO_CONNECTION";
+    }
+    if (
+      this.#direction === "up" &&
+      this.#playerLocation.up() === "NO_CONNECTION"
+    ) {
+      return "NO_CONNECTION";
+    }
+    if (
+      this.#direction === "down" &&
+      this.#playerLocation.down() === "NO_CONNECTION"
+    ) {
+      return "NO_CONNECTION";
+    }
+
+    this._doMove();
+  }
+
+  _doMove() {
     switch (this.#direction.toLowerCase()) {
       case "left":
         this.#playerLocation.update(this.#playerLocation.left());

@@ -66,6 +66,10 @@ export default class TextOutput {
       if (this.#eventData.status === "INVALID_MOVEMENT") {
         return "Mortals can only move in certain directions, we appologize for any inconvenience.";
       }
+
+      if (this.#eventData.status === "NO_CONNECTION") {
+        return "There is nowhere to head to in that direction.";
+      }
     }
 
     if (this.#event === "LOOK") {

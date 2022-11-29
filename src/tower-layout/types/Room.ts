@@ -10,12 +10,12 @@ interface TypeRoom {
   getID: () => string;
   addConnections: (connections: IRoomConstructor) => void;
   description: () => string;
-  left: () => TypeRoom;
-  right: () => TypeRoom;
-  forward: () => TypeRoom;
-  back: () => TypeRoom;
-  up: () => TypeRoom;
-  down: () => TypeRoom;
+  left: () => TypeRoom | string;
+  right: () => TypeRoom | string;
+  forward: () => TypeRoom | string;
+  back: () => TypeRoom | string;
+  up: () => TypeRoom | string;
+  down: () => TypeRoom | string;
 }
 
 export default TypeRoom;

@@ -137,9 +137,14 @@ class PlayerAction {
         const playerMove = new PlayerMove(
           this.#playerLocation,
           secondaryCommand
-        );
+        ).move();
 
-        playerMove.move();
+        if (playerMove === "NO_CONNECTION") {
+          return {
+            event: "INVALID",
+            eventData: { status: "NO_CONNECTION" },
+          };
+        }
 
         return {
           event: "MOVE",
