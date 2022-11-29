@@ -72,7 +72,7 @@ class PlayerAction {
     const validAnswer = this._validateCommand(commands[0]);
 
     if (!validAnswer) {
-      return { event: "INVALID", eventData: { status: "invalid" } };
+      return { event: "INVALID", eventData: { status: "INVALID_COMMAND" } };
     }
 
     return this._doAction({
@@ -126,6 +126,14 @@ class PlayerAction {
 
       case "move":
         // secondaryCommand is a direction
+
+        if (!secondaryCommand.match(/^(left|right|forward|back|up|down)$/)) {
+          return {
+            event: "INVALID",
+            eventData: { status: "INVALID_MOVEMENT" },
+          };
+        }
+
         const playerMove = new PlayerMove(
           this.#playerLocation,
           secondaryCommand
@@ -156,9 +164,9 @@ class PlayerAction {
 
         if (!weaponToAdd) {
           return {
-            event: "NOTHING_TO_EQUIP",
+            event: "INVALID",
             eventData: {
-              status: "nothing to equip",
+              status: "NOTHING_TO_EQUIP",
             },
           };
         }
@@ -217,25 +225,27 @@ class PlayerAction {
     }
 
     return {
-      event: "NOTHING_TO_TAKE",
-      eventData: { status: "nothing to take" },
+      event: "INVALID",
+      eventData: { status: "NOTHING_TO_TAKE" },
     };
   }
 
   _doWeaponAttack(secondaryCommand, validMonsters): ActionReturn {
-    // secondaryCommand is monsterName
-    const validMonsterIDs = validMonsters.map((monster) => monster.getID());
+    const targetMonster = validMonsters.find(
+      (monster) =>
+        monster.getID() === secondaryCommand.toLowerCase().replace(" ", "")
+    );
+
+    if (!targetMonster) {
+      return {
+        event: "INVALID",
+        eventData: { status: "INVALID_ATTACK_TARGET" },
+      };
+    }
 
     const playerAttack = new PlayerAttack(this.#playerInventory);
 
-    const attackResults = playerAttack.attack(
-      secondaryCommand,
-      validMonsterIDs
-    );
-
-    const targetMonster = validMonsters.find(
-      (monster) => monster.getID() === attackResults.id
-    );
+    const attackResults = playerAttack.attack();
 
     const didHit = monsterDamage(
       targetMonster,
@@ -286,22 +296,23 @@ class PlayerAction {
   }
 
   _doSpellAttack(secondaryCommand, spellTarget, validMonsters): ActionReturn {
-    // secondaryCommand is spell name
-    const validMonsterIDs = validMonsters.map((monster) => monster.getID());
+    const targetMonster = validMonsters.find(
+      (monster) =>
+        monster.getID() === secondaryCommand.toLowerCase().replace(" ", "")
+    );
+
+    if (!targetMonster) {
+      return {
+        event: "INVALID",
+        eventData: { status: "INVALID_SPELL_TARGET" },
+      };
+    }
 
     const playerCast = new PlayerCast(this.#playerInventory);
 
     this.#playerStats.changeMana(-1);
 
-    const attackResults = playerCast.attack(
-      secondaryCommand,
-      spellTarget,
-      validMonsterIDs
-    );
-
-    const targetMonster = validMonsters.find(
-      (monster) => monster.getID() === attackResults.id
-    );
+    const attackResults = playerCast.attack(secondaryCommand);
 
     const didHit = monsterDamage(
       targetMonster,

@@ -7,27 +7,14 @@ class PlayerCast {
     this.#playerInventory = playerInventory;
   }
 
-  attack(
-    spellID: string,
-    monsterName: string,
-    validMonsterIDs: string[]
-  ): {
-    id: string;
+  attack(spellID: string): {
     attackValue: number;
     damageValue: number;
   } {
-    const target = validMonsterIDs.find(
-      (id) => id.toLowerCase() === monsterName.toLowerCase().replace(" ", "")
-    );
-
-    if (target) {
-      return {
-        id: target,
-        attackValue: this._getAttackValue(spellID),
-        damageValue: this._getDamageValue(spellID),
-      };
-    }
-    throw new Error("Learn to read. Not a valid target.");
+    return {
+      attackValue: this._getAttackValue(spellID),
+      damageValue: this._getDamageValue(spellID),
+    };
   }
 
   _getAttackValue(spellID: string): number {

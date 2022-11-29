@@ -10,9 +10,7 @@ export type EventType =
   | "LOOK"
   | "MOVE"
   | "TAKE"
-  | "NOTHING_TO_TAKE"
   | "EQUIP"
-  | "NOTHING_TO_EQUIP"
   | "QUIT"
   | "INVALID";
 

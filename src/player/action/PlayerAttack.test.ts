@@ -7,6 +7,7 @@ const mockInventory = {
   addWeapon: () => {},
   getWeapons: () => [] as Weapon[],
   equipWeapon: () => {},
+  getEquippedWeaponID: () => "",
   getEquippedWeaponStats: () => ({
     attackBonus: 4,
     damage: { min: 1, max: 8 },
@@ -31,22 +32,17 @@ const mockRoom = {
   down: () => mockRoom,
 };
 
-const mockMonsterArray = ["megaGrumpkin"];
-
 describe("PlayerAttack", () => {
   test("targets valid monster", () => {
     const playerAttack = new PlayerAttack(mockInventory);
-    const result = playerAttack.attack("Mega Grumpkin", mockMonsterArray);
+    const result = playerAttack.attack();
 
     expect(result).toEqual(expect.objectContaining({ id: "megaGrumpkin" }));
   });
 
   test("returns attack results", () => {
     const playerAttack = new PlayerAttack(mockInventory);
-    const attackResults = playerAttack.attack(
-      "Mega Grumpkin",
-      mockMonsterArray
-    );
+    const attackResults = playerAttack.attack();
 
     expect(attackResults.attackValue).toBeLessThan(25);
     expect(attackResults.attackValue).toBeGreaterThan(4);
