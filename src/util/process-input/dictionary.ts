@@ -23,6 +23,21 @@ const directionDictionary = [
   "below",
 ];
 
+const directionSynonyms = {
+  north: "forward",
+  west: "left",
+  east: "right",
+};
+
+const directionAntonyms = {
+  forward: "south",
+  left: "right",
+  right: "left",
+  south: "forward",
+  up: "down",
+  down: "up",
+};
+
 const nounDictionary = ["grumpkin", "firebolt", "shortsword"];
 
 const prepositionDictionary = [
@@ -66,4 +81,6 @@ export {
   directionDictionary,
   nounDictionary,
   prepositionDictionary,
+  directionSynonyms,
+  directionAntonyms,
 };

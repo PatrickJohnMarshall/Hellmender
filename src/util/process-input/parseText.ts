@@ -3,6 +3,8 @@ import {
   directionDictionary,
   nounDictionary,
   prepositionDictionary,
+  directionSynonyms,
+  directionAntonyms,
 } from "./dictionary";
 
 export default function parseText(input: string): {
@@ -12,6 +14,7 @@ export default function parseText(input: string): {
   command?: string[] | null;
   prepositions?: string[] | null;
   subject?: string[] | null;
+  findAntonym?: (string) => string[];
 } {
   function filterArticles(word) {
     if (word === "the" || word === "an" || word === "a") {
@@ -59,6 +62,21 @@ export default function parseText(input: string): {
     return wordArray;
   }
 
+  function findSynonym(inputArray) {
+    if (directionSynonyms.hasOwnProperty(inputArray[0])) {
+      return [directionSynonyms[inputArray[0]]];
+    }
+
+    return inputArray;
+  }
+
+  function findAntonym(wordStr) {
+    if (directionAntonyms.hasOwnProperty(wordStr)) {
+      return [directionAntonyms[wordStr]];
+    }
+    return [wordStr];
+  }
+
   function compileOutput() {
     if (command[0] === "quit") {
       return {
@@ -67,9 +85,18 @@ export default function parseText(input: string): {
     }
 
     if (command[0] === "move") {
+      console.log(findSynonym(direction));
+      if (direction[0] === "back") {
+        return {
+          command: checkIfDefined(command),
+          direction: checkIfDefined(findSynonym(direction)),
+          findAntonym: findAntonym,
+        };
+      }
+
       return {
         command: checkIfDefined(command),
-        direction: checkIfDefined(direction),
+        direction: checkIfDefined(findSynonym(direction)),
       };
     }
 
