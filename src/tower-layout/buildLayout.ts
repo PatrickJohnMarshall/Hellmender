@@ -22,8 +22,8 @@ export default function buildLayout() {
     right: bathroom,
     down: libraryLanding,
   });
-  kitchen.addConnections({ back: study });
-  bathroom.addConnections({ back: study, down: toiletArena });
+  kitchen.addConnections({ right: study });
+  bathroom.addConnections({ left: study, down: toiletArena });
   toiletArena.addConnections({ up: bathroom });
   libraryLanding.addConnections({ up: study });
 
