@@ -12,7 +12,7 @@ class Wand extends AbstractKeyItems {
 
   inLocationDescription(): string {
     return formatLog([
-      "Upon the nightstand is a wand. It is jammed firmly in a loaf of stale bread.",
+      "Upon the nightstand is a wand. It jammed firmly in a loaf of stale bread.",
     ]);
   }
 }

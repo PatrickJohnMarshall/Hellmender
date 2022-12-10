@@ -85,7 +85,7 @@ describe("PlayerAction", () => {
       mockPlayerStats
     );
     await playerAction.action({
-      input: "move forward",
+      answer: "move forward",
       validMonsters: [],
       keyItems: [],
       weapons: [],
@@ -104,7 +104,7 @@ describe("PlayerAction", () => {
       mockPlayerStats
     );
     await playerAction.action({
-      input: "attack grumpkin",
+      answer: "attack grumpkin",
       validMonsters: [{ ...mockMonster, takeDamage: mockTakeDamage }],
       keyItems: [],
       weapons: [],
@@ -123,7 +123,7 @@ describe("PlayerAction", () => {
       mockPlayerStats
     );
     await playerAction.action({
-      input: "cast fireBall on grumpkin",
+      answer: "cast fireBall on grumpkin",
       validMonsters: [{ ...mockMonster, takeDamage: mockTakeDamage }],
       keyItems: [],
       weapons: [],
@@ -159,7 +159,7 @@ describe("PlayerAction", () => {
     );
 
     const actionResult = playerAction.action({
-      input: "take shortsword",
+      answer: "take shortsword",
       validMonsters: [],
       keyItems: items.activeItems.getKeyItems(),
       weapons: items.activeItems.getWeapons(),
@@ -197,7 +197,7 @@ describe("PlayerAction", () => {
     );
 
     playerAction.action({
-      input: "take shortsword",
+      answer: "take shortsword",
       validMonsters: [],
       keyItems: items.activeItems.getKeyItems(),
       weapons: items.activeItems.getWeapons(),
@@ -207,7 +207,7 @@ describe("PlayerAction", () => {
     };
 
     const actionResult = playerAction.action({
-      input: "equip shortsword",
+      answer: "equip shortsword",
       validMonsters: [],
       keyItems: items.activeItems.getKeyItems(),
       weapons: items.activeItems.getWeapons(),

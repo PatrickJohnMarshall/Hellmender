@@ -55,54 +55,16 @@ export default class TextOutput {
         return "Hmm... this wizard's eyes seem incable of seeing as you do. It sees nothing like that to cast on.";
       }
 
-      if (this.#eventData.status === "INCOMPLETE_SPELL_NOSPELL") {
-        return "What would you wish to cast?";
-      }
-
-      if (this.#eventData.status === "INCOMPLETE_SPELL_NOPREP_NOSUB") {
-        return `Is there anywhere in particular you wish to aim this ${
-          this.#eventData.spellID
-        }?`;
-      }
-
-      if (this.#eventData.status === "INCOMPLETE_SPELL_NOSUB") {
-        return `Cast ${this.#eventData.spellID} on what?`;
-      }
-
-      if (this.#eventData.status === "INCOMPLETE_SPELL_INFORMATION") {
-        return "Which spell would you like the creature to conjure?";
-      }
-
       if (this.#eventData.status === "NOTHING_TO_TAKE") {
         return `There is nothing of the sort to grasp.`;
-      }
-
-      if (this.#eventData.status === "NOTHING_REQUESTED_TAKE") {
-        return "What did you wish to take?";
-      }
-
-      if (this.#eventData.status === "INVALID_TAKE_REQUEST") {
-        return "The creature's brain struggles to comprehend the item you request.";
       }
 
       if (this.#eventData.status === "NOTHING_TO_EQUIP") {
         return `You possess nothing of the sort to wield.`;
       }
 
-      if (this.#eventData.status === "NOTHING_REQUESTED_EQUIP") {
-        return "What did you wish to equip?";
-      }
-
-      if (this.#eventData.status === "INVALID_EQUIP_REQUEST") {
-        return "You possess nothing of the sort to wield.";
-      }
-
       if (this.#eventData.status === "INVALID_MOVEMENT") {
         return "Mortals can only move in certain directions, we appologize for any inconvenience.";
-      }
-
-      if (this.#eventData.status === "INVALID_MOVEMENT_NOBACK") {
-        return "There is no going back now, though we wish there were.";
       }
 
       if (this.#eventData.status === "NO_CONNECTION") {

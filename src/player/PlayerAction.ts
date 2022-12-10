@@ -1,5 +1,3 @@
-import parseText from "util/process-input/parseText";
-
 import PlayerMove from "./action/PlayerMove";
 import PlayerAttack from "./action/PlayerAttack";
 import PlayerCast from "./action/PlayerCast";
@@ -49,8 +47,6 @@ class PlayerAction {
   #playerInventory;
   #playerStats;
 
-  #previousMoveCommand;
-
   constructor(
     playerLocation: IPlayerLocation,
     playerInventory: IPlayerInventory,
@@ -62,24 +58,27 @@ class PlayerAction {
   }
 
   action({
-    input,
+    answer,
     validMonsters,
     keyItems,
     weapons,
   }: {
-    input: string;
+    answer: string;
     validMonsters: Monster[];
     keyItems: KeyItems[];
     weapons: Weapon[];
   }): ActionReturn {
-    const parsedInput = parseText(input);
+    const commands = answer.toLowerCase().split(" ");
+    const validAnswer = this._validateCommand(commands[0]);
 
-    if (parsedInput.command[0] === "INVALID") {
+    if (!validAnswer) {
       return { event: "INVALID", eventData: { status: "INVALID_COMMAND" } };
     }
 
     return this._doAction({
-      inputs: parsedInput,
+      primaryCommand: commands[0],
+      secondaryCommand: commands[1],
+      fourthCommand: commands[3],
       validMonsters,
       keyItems,
       weapons,
@@ -101,25 +100,21 @@ class PlayerAction {
   }
 
   _doAction({
-    inputs,
+    primaryCommand,
+    secondaryCommand,
+    fourthCommand,
     validMonsters,
     keyItems,
     weapons,
   }: {
-    inputs: {
-      words?: string[] | null;
-      direction?: string[] | null;
-      nouns?: string[] | null;
-      command?: string[] | null;
-      prepositions?: string[] | null;
-      subject?: string[] | null;
-      findAntonym?: (string) => string[];
-    };
+    primaryCommand: string;
+    secondaryCommand: string;
+    fourthCommand: string | undefined;
     validMonsters: Monster[];
     keyItems: KeyItems[];
     weapons: Weapon[];
   }): ActionReturn {
-    switch (inputs.command[0]) {
+    switch (primaryCommand) {
       case "look":
         return {
           event: "LOOK",
@@ -132,37 +127,7 @@ class PlayerAction {
       case "move":
         // secondaryCommand is a direction
 
-        if (inputs.direction[0] === "back") {
-          if (!this.#previousMoveCommand) {
-            return {
-              event: "INVALID",
-              eventData: { status: "INVALID_MOVEMENT_NOBACK" },
-            };
-          }
-
-          const backDirection = inputs.findAntonym(
-            this.#previousMoveCommand
-          )[0];
-
-          const playerMove = new PlayerMove(
-            this.#playerLocation,
-            backDirection
-          );
-
-          playerMove.move();
-
-          this.#previousMoveCommand = backDirection;
-
-          return {
-            event: "MOVE",
-            eventData: {
-              location: this.#playerLocation.getID(),
-              description: this.#playerLocation.describe(),
-            },
-          };
-        }
-
-        if (!inputs.direction) {
+        if (!secondaryCommand.match(/^(left|right|forward|back|up|down)$/)) {
           return {
             event: "INVALID",
             eventData: { status: "INVALID_MOVEMENT" },
@@ -171,7 +136,7 @@ class PlayerAction {
 
         const playerMove = new PlayerMove(
           this.#playerLocation,
-          inputs.direction[0]
+          secondaryCommand
         ).move();
 
         if (playerMove === "NO_CONNECTION") {
@@ -180,8 +145,6 @@ class PlayerAction {
             eventData: { status: "NO_CONNECTION" },
           };
         }
-
-        this.#previousMoveCommand = inputs.direction[0];
 
         return {
           event: "MOVE",
@@ -192,44 +155,17 @@ class PlayerAction {
         };
 
       case "take":
-        if (inputs.words.length === 1) {
-          return {
-            event: "INVALID",
-            eventData: { status: "NOTHING_REQUESTED_TAKE" },
-          };
-        }
-
-        if (!inputs.nouns) {
-          return {
-            event: "INVALID",
-            eventData: { status: "INVALID_TAKE_REQUEST" },
-          };
-        }
-
         return this._AddItemToInventory({
-          itemID: inputs.nouns[0],
+          itemID: secondaryCommand,
           keyItems: keyItems,
           weapons: weapons,
         });
 
       case "equip":
-        if (inputs.words.length === 1) {
-          return {
-            event: "INVALID",
-            eventData: { status: "NOTHING_REQUESTED_EQUIP" },
-          };
-        }
-
-        if (!inputs.nouns) {
-          return {
-            event: "INVALID",
-            eventData: { status: "INVALID_EQUIP_REQUEST" },
-          };
-        }
-
+        this.#playerInventory.equipWeapon(secondaryCommand);
         const weaponToAdd = this.#playerInventory
           .getWeapons()
-          .find((item) => item.getID() === inputs.nouns[0]);
+          .find((item) => item.getID() === secondaryCommand);
 
         if (!weaponToAdd) {
           return {
@@ -240,8 +176,6 @@ class PlayerAction {
           };
         }
 
-        this.#playerInventory.equipWeapon(inputs.nouns[0]);
-
         return {
           event: "EQUIP",
           eventData: {
@@ -250,75 +184,12 @@ class PlayerAction {
         };
 
       case "attack":
-        if (!inputs.nouns) {
-          return {
-            event: "INVALID",
-            eventData: { status: "INVALID_ATTACK_TARGET" },
-          };
-        }
-
-        const monsterCheck = validMonsters.find(
-          (monster) => monster.getID() === inputs.nouns[0]
-        );
-
-        if (!monsterCheck) {
-          return {
-            event: "INVALID",
-            eventData: { status: "INVALID_ATTACK_TARGET" },
-          };
-        }
-
-        return this._doWeaponAttack(inputs.nouns[0], validMonsters);
+        return this._doWeaponAttack(secondaryCommand, validMonsters);
 
       case "cast":
-        if (!inputs.nouns) {
-          return {
-            event: "INVALID",
-            eventData: { status: "INCOMPLETE_SPELL_NOSPELL" },
-          };
-        }
-
-        if (!this.#playerInventory.getKnownSpellStats(inputs.nouns[0])) {
-          return {
-            event: "INVALID",
-            eventData: { status: "INCOMPLETE_SPELL_INFORMATION" },
-          };
-        }
-
-        if (!inputs.subject) {
-          if (!inputs.prepositions) {
-            return {
-              event: "INVALID",
-              eventData: {
-                status: "INCOMPLETE_SPELL_NOPREP_NOSUB",
-                spellID: inputs.nouns[0],
-              },
-            };
-          }
-          return {
-            event: "INVALID",
-            eventData: {
-              status: "INCOMPLETE_SPELL_NOSUB",
-              spellID: inputs.nouns[0],
-            },
-          };
-        }
-
-        const monsterCheckSpell = validMonsters.find(
-          (monster) => monster.getID() === inputs.nouns[1]
-        );
-
-        if (!monsterCheckSpell) {
-          console.log("here");
-          return {
-            event: "INVALID",
-            eventData: { status: "INVALID_SPELL_TARGET" },
-          };
-        }
-
         return this._doSpellAttack(
-          inputs.nouns[0],
-          inputs.subject[0],
+          secondaryCommand,
+          fourthCommand,
           validMonsters
         );
 
@@ -369,6 +240,13 @@ class PlayerAction {
       (monster) =>
         monster.getID() === secondaryCommand.toLowerCase().replace(" ", "")
     );
+
+    if (!targetMonster) {
+      return {
+        event: "INVALID",
+        eventData: { status: "INVALID_ATTACK_TARGET" },
+      };
+    }
 
     const playerAttack = new PlayerAttack(this.#playerInventory);
 
@@ -422,16 +300,24 @@ class PlayerAction {
     };
   }
 
-  _doSpellAttack(spellID, spellTarget, validMonsters): ActionReturn {
+  _doSpellAttack(secondaryCommand, spellTarget, validMonsters): ActionReturn {
     const targetMonster = validMonsters.find(
-      (monster) => monster.getID() === spellTarget
+      (monster) =>
+        monster.getID() === secondaryCommand.toLowerCase().replace(" ", "")
     );
+
+    if (!targetMonster) {
+      return {
+        event: "INVALID",
+        eventData: { status: "INVALID_SPELL_TARGET" },
+      };
+    }
 
     const playerCast = new PlayerCast(this.#playerInventory);
 
     this.#playerStats.changeMana(-1);
 
-    const attackResults = playerCast.attack(spellID);
+    const attackResults = playerCast.attack(secondaryCommand);
 
     const didHit = monsterDamage(
       targetMonster,
@@ -444,7 +330,7 @@ class PlayerAction {
         event: "SPELL_ALREADY_DEAD",
         eventData: {
           monsterName: targetMonster.getName(),
-          spellName: spellID,
+          spellName: secondaryCommand,
         },
       };
     }
@@ -453,7 +339,7 @@ class PlayerAction {
       return {
         event: "SPELL_KILL",
         eventData: {
-          spellName: spellID,
+          spellName: secondaryCommand,
           attackValue: attackResults.attackValue,
           damageValue: attackResults.damageValue,
           monsterName: targetMonster.getName(),
@@ -465,7 +351,7 @@ class PlayerAction {
       return {
         event: "SPELL_HIT",
         eventData: {
-          spellName: spellID,
+          spellName: secondaryCommand,
           attackValue: attackResults.attackValue,
           damageValue: attackResults.damageValue,
           monsterName: targetMonster.getName(),
@@ -477,7 +363,7 @@ class PlayerAction {
     return {
       event: "SPELL_MISS",
       eventData: {
-        spellName: spellID,
+        spellName: secondaryCommand,
         attackValue: attackResults.attackValue,
         monsterName: targetMonster.getName(),
       },
