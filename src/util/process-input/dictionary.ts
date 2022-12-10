@@ -1,24 +1,41 @@
 const verbDictionary = [
   "quit",
+
   "move",
+  "go",
+  "walk",
+  "head",
+  "travel",
+  "run",
+
   "attack",
+
   "look",
+
   "cast",
+
   "take",
+
   "equip",
 ];
 
 const directionDictionary = [
   "forward",
   "north",
+
   "back",
+
   "south",
+
   "left",
   "west",
+
   "right",
   "east",
+
   "up",
   "above",
+
   "down",
   "below",
 ];
@@ -27,6 +44,16 @@ const directionSynonyms = {
   north: "forward",
   west: "left",
   east: "right",
+  below: "down",
+  above: "up",
+};
+
+const commandSynonyms = {
+  go: "move",
+  walk: "move",
+  head: "move",
+  travel: "move",
+  run: "move",
 };
 
 const directionAntonyms = {
@@ -82,5 +109,6 @@ export {
   nounDictionary,
   prepositionDictionary,
   directionSynonyms,
+  commandSynonyms,
   directionAntonyms,
 };

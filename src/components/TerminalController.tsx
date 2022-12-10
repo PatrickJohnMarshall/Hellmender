@@ -30,7 +30,7 @@ export function TerminalController({
         name="ZORK"
         onInput={(terminalInput) => {
           const actionResult = playerAction.action({
-            answer: terminalInput,
+            input: terminalInput,
             validMonsters: [...monsters],
             keyItems: itemsInRoom.keyItems,
             weapons: itemsInRoom.weapons,

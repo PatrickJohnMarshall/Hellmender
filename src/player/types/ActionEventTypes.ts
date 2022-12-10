@@ -25,6 +25,8 @@ export type AddedToInventory = {
 
 export type MiscStatus = {
   status: string;
+  spellID?: string;
+  weaponID?: string;
 };
 
 export type AttackHit = {
