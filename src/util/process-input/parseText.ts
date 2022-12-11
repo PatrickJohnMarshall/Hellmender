@@ -140,6 +140,7 @@ export default function parseText(input: string): {
       return {
         command: checkIfDefined(command),
         nouns: checkIfDefined(nouns),
+        words: checkIfDefined(words),
       };
     }
 
@@ -147,6 +148,7 @@ export default function parseText(input: string): {
       return {
         command: checkIfDefined(command),
         nouns: checkIfDefined(nouns),
+        words: checkIfDefined(words),
       };
     }
   }

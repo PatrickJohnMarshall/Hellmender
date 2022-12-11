@@ -82,7 +82,11 @@ function GameEngine({ setGameState }) {
     >
       <div
         className="container rpgui-container rpgui-content framed-grey"
-        style={{ height: "100vh" }}
+        style={{
+          height: "100vh",
+          background: "black",
+          backgroundColor: "#300105",
+        }}
       >
         {helpToggle ? (
           <HelpMenu setHelpToggle={setHelpToggle} />
