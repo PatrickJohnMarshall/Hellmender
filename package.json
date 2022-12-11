@@ -1,7 +1,7 @@
 {
-  "name": "zork",
+  "name": "hellmender",
   "version": "0.1.0",
-  "homepage": "https://PatrickJohnMarshall.github.io/Zork",
+  "homepage": "https://PatrickJohnMarshall.github.io/Hellmender",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
