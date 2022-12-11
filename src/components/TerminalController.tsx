@@ -27,7 +27,7 @@ export function TerminalController({
     >
       <Terminal
         prompt=">"
-        name="ZORK"
+        name="HELLMENDER"
         onInput={(terminalInput) => {
           const actionResult = playerAction.action({
             input: terminalInput,

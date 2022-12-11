@@ -27,7 +27,7 @@ function StartScreen({
             justifySelf: "center",
           }}
         >
-          Zork
+          Hellmender
         </h1>
         <button
           onClick={() => {
