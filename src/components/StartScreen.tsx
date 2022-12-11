@@ -17,6 +17,7 @@ function StartScreen({
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        backgroundColor: "#300105",
       }}
     >
       <div className="rpgui-container framed start-screen">
