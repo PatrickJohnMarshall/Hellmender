@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Hellmender/static/css/main.4f4c0557.css",
-    "main.js": "/Hellmender/static/js/main.357ee53f.js",
+    "main.css": "/Hellmender/static/css/main.63df24a0.css",
+    "main.js": "/Hellmender/static/js/main.9d7ce9c0.js",
     "static/js/787.2838265d.chunk.js": "/Hellmender/static/js/787.2838265d.chunk.js",
     "static/media/impacttest.wav": "/Hellmender/static/media/impacttest.173a48ae2c3fc25cce5a.wav",
     "static/media/spellmisstest.wav": "/Hellmender/static/media/spellmisstest.618c6897166bfff9dc5c.wav",
@@ -19,8 +19,6 @@
     "static/media/button.png": "/Hellmender/static/media/button.ab5161157e731ae035d5.png",
     "static/media/button-down.png": "/Hellmender/static/media/button-down.161363a72d6b1c0d0b77.png",
     "static/media/background-image-golden.png": "/Hellmender/static/media/background-image-golden.b37452e0c2440eba7ef8.png",
-    "static/media/button-golden-left.png": "/Hellmender/static/media/button-golden-left.818e3ec7408b0ef2c0d3.png",
-    "static/media/button-golden-right.png": "/Hellmender/static/media/button-golden-right.23bc080f2e5f7ffb7dba.png",
     "static/media/border-image.png": "/Hellmender/static/media/border-image.29ef5ac8930efc081267.png",
     "static/media/background-image-golden2.png": "/Hellmender/static/media/background-image-golden2.736b9deb5be5391a1e5b.png",
     "static/media/background-image-grey.png": "/Hellmender/static/media/background-image-grey.ca4a89bfa33ce7ea9edb.png",
@@ -34,12 +32,12 @@
     "static/media/hr.png": "/Hellmender/static/media/hr.ee00b33cf1362cc7fb65.png",
     "static/media/background-image.png": "/Hellmender/static/media/background-image.3328a65b91ea173c8b83.png",
     "index.html": "/Hellmender/index.html",
-    "main.4f4c0557.css.map": "/Hellmender/static/css/main.4f4c0557.css.map",
-    "main.357ee53f.js.map": "/Hellmender/static/js/main.357ee53f.js.map",
+    "main.63df24a0.css.map": "/Hellmender/static/css/main.63df24a0.css.map",
+    "main.9d7ce9c0.js.map": "/Hellmender/static/js/main.9d7ce9c0.js.map",
     "787.2838265d.chunk.js.map": "/Hellmender/static/js/787.2838265d.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.4f4c0557.css",
-    "static/js/main.357ee53f.js"
+    "static/css/main.63df24a0.css",
+    "static/js/main.9d7ce9c0.js"
   ]
 }
