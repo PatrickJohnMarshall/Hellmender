@@ -1,0 +1,31 @@
+.intro-shell {
+  height: 705px;
+  width: 855px;
+  display: "flex";
+  justify-content: "center";
+  align-items: "center";
+}
+
+.intro {
+  color: white;
+  height: 100%;
+  width: 100%;
+  display: grid;
+  background: #252a33 !important;
+  align-items: center;
+  grid-template-rows: 85% 1fr;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  letter-spacing: 5px;
+}
+
+.intro-input {
+  color: white;
+  height: 100%;
+  width: 100%;
+  display: grid;
+  background: #252a33 !important;
+  align-items: center;
+  grid-template-rows: 85% 1fr;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  letter-spacing: 5px;
+}

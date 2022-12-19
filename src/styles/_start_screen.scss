@@ -1,9 +1,10 @@
 .start-screen {
-  color: white;
+  color: rgb(189, 14, 14);
   height: 350px;
   width: 375px;
   display: grid;
-  grid-template-rows: 40% 1fr;
+  background: #252a33 !important;
+  grid-template-rows: 35% 1fr 1fr;
   grid-template-columns: 20% 60% 20%;
   letter-spacing: 5px;
 }
