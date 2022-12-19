@@ -6,39 +6,50 @@ import InterfaceAudio from "audio/InterfaceAudio";
 function StartScreen({
   setGameState,
 }: {
-  setGameState: (state: "start" | "game") => void;
+  setGameState: (state: "start" | "game" | "intro") => void;
 }) {
   const interfaceAudio = new InterfaceAudio();
 
   return (
     <div
+      className="container rpgui-container rpgui-content framed-grey"
       style={{
         height: "100vh",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#300105",
       }}
     >
-      <div className="rpgui-container framed start-screen">
+      <div className="rpgui-container framed-grey start-screen">
         <h1
           style={{
             gridColumn: 2,
-            display: "flex",
             justifySelf: "center",
           }}
         >
-          Hellmender
+          HELLMENDER
         </h1>
+
         <button
+          className="rpgui-button golden"
+          style={{ gridColumn: 2, fontSize: "18px" }}
+          onClick={() => {
+            setGameState("intro");
+            interfaceAudio.playButton();
+          }}
+        >
+          <p style={{ marginTop: `15px` }}>New Game</p>
+        </button>
+
+        <button
+          className="rpgui-button golden"
+          style={{ gridColumn: 2, fontSize: "18px" }}
           onClick={() => {
             setGameState("game");
             interfaceAudio.playButton();
           }}
-          className="rpgui-button golden"
-          style={{ gridColumn: 2, fontSize: "12px" }}
         >
-          <p style={{ paddingTop: `5px` }}>Start Game</p>
+          <p style={{ marginTop: `15px` }}>Continue</p>
         </button>
       </div>
     </div>
