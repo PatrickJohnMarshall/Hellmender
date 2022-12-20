@@ -38,9 +38,8 @@ function Intro1({ introState, setIntroState }) {
             </p>
             <p style={{ gridRow: 3 }}>Orderly.</p>
             <p style={{ gridRow: 4 }}>
-              Your Boss (everyones boss, really) Aramos the Everlord owns the
-              planet, Irenne. Keeps it in line. Not with overt rule like some
-              uncouth mortal king, no.
+              Your Boss Aramos the Everlord owns the planet, Irenne. Keeps it in
+              line. Not with overt rule like some uncouth mortal king, no.
             </p>
             <p style={{ gridRow: 5 }}>
               Through deals and contracts, blood oaths and lineage pacts. Some
