@@ -36,8 +36,6 @@ describe("parseText", () => {
 
     const response2 = parseText("move to the north");
 
-    console.log(response2);
-
     expect(response.subject).toContain("grumpkin");
     expect(response2.subject).toBe(null);
   });
