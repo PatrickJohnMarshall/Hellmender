@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Hellmender/static/css/main.63df24a0.css",
-    "main.js": "/Hellmender/static/js/main.9d7ce9c0.js",
+    "main.css": "/Hellmender/static/css/main.66cbf22e.css",
+    "main.js": "/Hellmender/static/js/main.f14bffb6.js",
     "static/js/787.2838265d.chunk.js": "/Hellmender/static/js/787.2838265d.chunk.js",
     "static/media/impacttest.wav": "/Hellmender/static/media/impacttest.173a48ae2c3fc25cce5a.wav",
     "static/media/spellmisstest.wav": "/Hellmender/static/media/spellmisstest.618c6897166bfff9dc5c.wav",
@@ -32,12 +32,12 @@
     "static/media/hr.png": "/Hellmender/static/media/hr.ee00b33cf1362cc7fb65.png",
     "static/media/background-image.png": "/Hellmender/static/media/background-image.3328a65b91ea173c8b83.png",
     "index.html": "/Hellmender/index.html",
-    "main.63df24a0.css.map": "/Hellmender/static/css/main.63df24a0.css.map",
-    "main.9d7ce9c0.js.map": "/Hellmender/static/js/main.9d7ce9c0.js.map",
+    "main.66cbf22e.css.map": "/Hellmender/static/css/main.66cbf22e.css.map",
+    "main.f14bffb6.js.map": "/Hellmender/static/js/main.f14bffb6.js.map",
     "787.2838265d.chunk.js.map": "/Hellmender/static/js/787.2838265d.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.63df24a0.css",
-    "static/js/main.9d7ce9c0.js"
+    "static/css/main.66cbf22e.css",
+    "static/js/main.f14bffb6.js"
   ]
 }
