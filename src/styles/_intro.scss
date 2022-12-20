@@ -7,25 +7,16 @@
 }
 
 .intro {
-  color: white;
   height: 100%;
   width: 100%;
   display: grid;
-  background: #252a33 !important;
   align-items: center;
   grid-template-rows: 85% 1fr;
   grid-template-columns: 20% 20% 20% 20% 20%;
   letter-spacing: 5px;
 }
 
-.intro-input {
+.intro-text-shell {
   color: white;
-  height: 100%;
-  width: 100%;
-  display: grid;
   background: #252a33 !important;
-  align-items: center;
-  grid-template-rows: 85% 1fr;
-  grid-template-columns: 20% 20% 20% 20% 20%;
-  letter-spacing: 5px;
 }

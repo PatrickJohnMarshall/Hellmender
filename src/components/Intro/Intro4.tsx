@@ -20,7 +20,7 @@ function Intro4({ setGameState, introState, setIntroState }) {
       <div className="rpgui-container framed-golden-2 intro-shell">
         <div className="rpgui-container framed-grey intro">
           <div
-            className="rpgui-container framed-grey"
+            className="rpgui-container framed-grey intro-text-shell"
             style={{
               gridColumn: "1 / -1",
               gridRow: 1,

@@ -20,7 +20,7 @@ function Intro2({ introState, setIntroState }) {
       <div className="rpgui-container framed-golden-2 intro-shell">
         <div className="rpgui-container framed-grey intro">
           <div
-            className="rpgui-container framed-grey"
+            className="rpgui-container framed-grey intro-text-shell"
             style={{
               gridColumn: "1 / -1",
               gridRow: 1,
@@ -55,11 +55,20 @@ function Intro2({ introState, setIntroState }) {
                 <input
                   type="text"
                   defaultValue="are you?"
-                  style={{ width: "15em", color: "red" }}
+                  style={{
+                    width: "7em",
+                    color: "red",
+                    textAlign: "center",
+                    padding: 0,
+                  }}
                   disabled
                 ></input>
               </label>
-              <input type="submit" style={{ width: "5em" }} disabled></input>
+              <input
+                type="submit"
+                style={{ width: "5em", padding: 0 }}
+                disabled
+              ></input>
             </form>
           </div>
 
@@ -78,7 +87,7 @@ function Intro2({ introState, setIntroState }) {
           </div>
 
           <button
-            className="rpgui-button golden help-button"
+            className="rpgui-button golden help-button "
             style={{
               gridColumn: 2,
               gridRow: 3,

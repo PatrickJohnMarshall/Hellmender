@@ -309,7 +309,6 @@ class PlayerAction {
         );
 
         if (!monsterCheckSpell) {
-          console.log("here");
           return {
             event: "INVALID",
             eventData: { status: "INVALID_SPELL_TARGET" },

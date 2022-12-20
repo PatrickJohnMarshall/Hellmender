@@ -20,7 +20,7 @@ function Intro1({ introState, setIntroState }) {
       <div className="rpgui-container framed-golden-2 intro-shell">
         <div className="rpgui-container framed-grey intro">
           <div
-            className="rpgui-container framed-grey"
+            className="rpgui-container framed-grey intro-text-shell"
             style={{
               gridColumn: "1 / -1",
               gridRow: 1,
@@ -32,18 +32,18 @@ function Intro1({ introState, setIntroState }) {
             }}
           >
             <p style={{ gridRow: 2 }}>
-              You are a proud member of an ancient order. THE Ancient Order.
-              When mortal kind was first getting its footing on the world, yours
-              were making plans, organizing things, keeping things...
+              You are a proud member of an ancient order. When mortal kind was
+              first getting its footing on the world, yours were making plans,
+              organizing systems, keeping things...
             </p>
             <p style={{ gridRow: 3 }}>Orderly.</p>
             <p style={{ gridRow: 4 }}>
-              Your Boss, EVERYONES Boss, Aramos the Everlord, owns the planet,
-              Irenne. Keeps it in line. Not with overt rule like some uncouth
-              mortal king, no.
+              Your Boss (everyones boss, really) Aramos the Everlord owns the
+              planet, Irenne. Keeps it in line. Not with overt rule like some
+              uncouth mortal king, no.
             </p>
             <p style={{ gridRow: 5 }}>
-              Through deals and contracts, blood oaths and lineage pacts, some
+              Through deals and contracts, blood oaths and lineage pacts. Some
               way, some how, EVERYONE on Irrene owes us.
             </p>
             <p style={{ gridRow: 6 }}>
