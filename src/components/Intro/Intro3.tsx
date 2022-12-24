@@ -3,34 +3,43 @@ import "../../styles/_button.scss";
 import "../../styles/_intro.scss";
 import "../../styles/_custom_buttons.scss";
 import InterfaceAudio from "audio/InterfaceAudio";
+import styled from "styled-components";
+
+const IntroScreen = styled.div`
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const IntroShell = styled.div`
+  height: 705px;
+  width: 855px;
+  display: "flex";
+  justify-content: "center";
+  align-items: "center";
+`;
+
+const IntroShellText = styled.div`
+  height: 100%;
+  background: #252a33 !important;
+  font-size: 18px;
+  color: white;
+  grid-column: 1 / -1;
+  grid-row: 1;
+  display: grid;
+  grid-template-rows: 4% 1fr 1fr 1fr 1fr 4%;
+  align-items: center;
+`;
 
 function Intro3({ introState, setIntroState }) {
   const interfaceAudio = new InterfaceAudio();
 
   return (
-    <div
-      className="container rpgui-container rpgui-content framed-grey"
-      style={{
-        height: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <div className="rpgui-container framed-golden-2 intro-shell">
+    <IntroScreen className="container rpgui-container rpgui-content framed-grey">
+      <IntroShell className="rpgui-container framed-golden-2 ">
         <div className="rpgui-container framed-grey intro">
-          <div
-            className="rpgui-container framed-grey intro-text-shell"
-            style={{
-              gridColumn: "1 / -1",
-              gridRow: 1,
-              height: "100%",
-              fontSize: "18px",
-              display: "grid",
-              gridTemplateRows: `4% 1fr 1fr 1fr 1fr 4%`,
-              alignItems: "center",
-            }}
-          >
+          <IntroShellText className="rpgui-container framed-grey ">
             <p style={{ gridRow: 2 }}>
               EMPLOYEE: [Placeholder] #997766787660770034
               <br />
@@ -44,16 +53,17 @@ function Intro3({ introState, setIntroState }) {
               glorious splendor. Prestige, renown, your name in everyone's head.
             </p>
             <p style={{ gridRow: 4 }}>
-              So, no. You don't get to rend the souls of the damned or strike
-              fear in the heart of kings. But at least you have a cool pen. And
-              your boss isn't half bad, especially for Hell! That's gotta count
-              for something, right?
+              But no, you don't get to rend the souls of the damned or strike
+              fear in the heart of kings. You instead have a cool pen, a desk,
+              and a mound of paperwork to shuffle through at all times. Your
+              boss isn't half bad either, especially for Hell! That's gotta
+              count for something, right?
             </p>
             <p style={{ gridRow: 5 }}>
               And speak of the devil, he just sent you a message! Your job-slate
               is alive in crimson-splendor, runes abuzz for your attention.
             </p>
-          </div>
+          </IntroShellText>
 
           <div
             className="rpgui-container framed-golden-2"
@@ -96,8 +106,8 @@ function Intro3({ introState, setIntroState }) {
             Next
           </button>
         </div>
-      </div>
-    </div>
+      </IntroShell>
+    </IntroScreen>
   );
 }
 

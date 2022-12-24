@@ -3,20 +3,20 @@ import "../../styles/_button.scss";
 import "../../styles/_intro.scss";
 import "../../styles/_custom_buttons.scss";
 import InterfaceAudio from "audio/InterfaceAudio";
+import styled from "styled-components";
+
+const IntroShell = styled.div`
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 function Intro4({ setGameState, introState, setIntroState }) {
   const interfaceAudio = new InterfaceAudio();
 
   return (
-    <div
-      className="container rpgui-container rpgui-content framed-grey"
-      style={{
-        height: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <IntroShell className="container rpgui-container rpgui-content framed-grey">
       <div className="rpgui-container framed-golden-2 intro-shell">
         <div className="rpgui-container framed-grey intro">
           <div
@@ -63,8 +63,8 @@ function Intro4({ setGameState, introState, setIntroState }) {
             </div>
 
             <p style={{ gridRow: 3 }}>
-              ... Not the most formal message you've seen from your boss, but
-              that's your boss alright. Got his signature and everything.
+              Not the most formal message you've seen from your boss, but that's
+              your boss alright. Got his signature and everything.
             </p>
             <p style={{ gridRow: 4 }}>
               You take a swig of your soul-brew
@@ -106,7 +106,7 @@ function Intro4({ setGameState, introState, setIntroState }) {
               justifySelf: "flex-end",
             }}
             onClick={() => {
-              setIntroState(2);
+              setIntroState(3);
               interfaceAudio.playButton();
             }}
           >
@@ -125,7 +125,7 @@ function Intro4({ setGameState, introState, setIntroState }) {
           </button>
         </div>
       </div>
-    </div>
+    </IntroShell>
   );
 }
 

@@ -33,17 +33,17 @@ function Intro2({ introState, setIntroState }) {
           >
             <p style={{ gridRow: 2 }}>
               The Architechterate runs like a well-worded machine. No oath
-              forgotten, no contract broken without retaliation.
+              forgotten nor contract broken without retaliation.
             </p>
             <p style={{ gridRow: 3 }}>
-              Legions wait in shadow for the slightest mistake, a forgotten
-              clause unmet or the measliest wrong twitch outside the oath-bidden
+              Legions wait in shadow for the slightest mistake; a forgotten
+              clause unmet or the measliest twitch outside the oath-bidden
               bounds.
             </p>
             <p style={{ gridRow: 4 }}>
               From the Didacts themselves to their Reaverlords, Sangoliffs,
               Contractistrates and the like, there is someone waiting to right a
-              wrong or push back even the Heavens if the contract demands it.
+              wrong or to push back the Heavens if the contract demands it.
             </p>
             <p style={{ gridRow: 5 }}>
               Ashlorath of Wrath, Volskasha the Shrewd, Ralik Gorefiend, all
