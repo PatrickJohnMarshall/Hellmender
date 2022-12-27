@@ -1,10 +1,10 @@
-import "../../styles/_containers_and_frames.scss";
-import "../../styles/_button.scss";
-import "../../styles/_intro.scss";
 import { useState } from "react";
 import InterfaceAudio from "audio/InterfaceAudio";
 import makeTextComponent from "util/makeTextComponent";
 
+import "../../styles/_containers_and_frames.scss";
+import "../../styles/_button.scss";
+import "../../styles/_intro.scss";
 import {
   IntroScreen,
   IntroShell,
@@ -38,22 +38,16 @@ function Intro({
   const IntroText = introNum[introState]();
 
   return (
-    <IntroScreen className="container rpgui-container rpgui-content framed-grey">
-      <IntroShell className="rpgui-container framed-golden-2 ">
-        <IntroBox className="rpgui-container framed-grey ">
-          <IntroShellText
-            textLength={IntroText.length}
-            className="rpgui-container framed-grey "
-          >
+    <IntroScreen>
+      <IntroShell>
+        <IntroBox>
+          <IntroShellText textLength={IntroText.length}>
             {makeTextComponent(IntroText)}
           </IntroShellText>
 
-          <PageBox className="rpgui-container framed-golden-2">
-            {`${introState}/4`}
-          </PageBox>
+          <PageBox>{`${introState}/4`}</PageBox>
 
           <BackButton
-            className="rpgui-button golden help-button"
             onClick={() => {
               introState === 1
                 ? setGameState("start")
@@ -66,7 +60,6 @@ function Intro({
           </BackButton>
 
           <ForwardButton
-            className="rpgui-button golden help-button"
             onClick={() => {
               introState === 4
                 ? setGameState("game")

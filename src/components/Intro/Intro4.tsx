@@ -8,21 +8,19 @@ function Intro4() {
       </p>
       <p>
         Can't give details here. Just click the box below, and we'll hash out
-        the details when you get here. Gotta beHush hush and all that.
+        the details when you get here. Gotta be hush-hush and all that.
       </p>
       <p>Move fast. Lotta hungry eyes around here.</p>
       <p>
         - Kisses,
         <br />
-        <span style={{ margin: "1.3em" }}>Sub-Regional Overseer Alveron</span>
+        <span style={{ margin: "1em" }}>Sub-Regional Overseer Alveron</span>
       </p>
-      <FakeAcceptButton className="rpgui-container framed-grey">
-        ACCEPT
-      </FakeAcceptButton>
+      <FakeAcceptButton>ACCEPT</FakeAcceptButton>
     </div>,
 
     [
-      `Not the most formal message you've seen from your boss, but that's
+      `Not the most formal message you've seen from him, but that's
   your boss alright. Got his signature and everything.`,
     ],
 
