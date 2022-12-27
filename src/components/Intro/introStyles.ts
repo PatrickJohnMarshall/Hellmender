@@ -1,18 +1,24 @@
 import styled, { keyframes } from "styled-components";
 
-const IntroScreen = styled.div`
+const IntroScreen = styled.div.attrs(() => ({
+  className: "rpgui-content rpgui-container framed-grey",
+}))`
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-const IntroShell = styled.div`
+const IntroShell = styled.div.attrs(() => ({
+  className: "rpgui-container framed-golden-2",
+}))`
   height: 705px;
   width: 855px;
 `;
 
-const IntroBox = styled.div`
+const IntroBox = styled.div.attrs(() => ({
+  className: "rpgui-container framed-grey",
+}))`
   height: 100%;
   width: 100%;
   padding: 0 !important;
@@ -24,7 +30,9 @@ const IntroBox = styled.div`
   letter-spacing: 2px;
 `;
 
-const IntroShellText = styled.div`
+const IntroShellText = styled.div.attrs(() => ({
+  className: "rpgui-container framed-grey",
+}))`
   height: 100%;
   background: #252a33 !important;
   padding: 26px !important;
@@ -36,7 +44,9 @@ const IntroShellText = styled.div`
   align-items: center;
 `;
 
-const PageBox = styled.div`
+const PageBox = styled.div.attrs(() => ({
+  className: "rpgui-container framed-golden-2",
+}))`
   grid-column: 3;
   grid-row: 2;
   height: 75px;
@@ -45,14 +55,18 @@ const PageBox = styled.div`
   text-align: center;
 `;
 
-const BackButton = styled.button`
+const BackButton = styled.button.attrs(() => ({
+  className: "rpgui-button golden help-button",
+}))`
   grid-column: 2;
   grid-row: 2;
   font-size: 18px;
   justify-self: flex-end;
 `;
 
-const ForwardButton = styled.button`
+const ForwardButton = styled.button.attrs(() => ({
+  className: "rpgui-button golden help-button",
+}))`
   grid-column: 4;
   grid-row: 2;
   font-size: 18px;
@@ -83,7 +97,9 @@ const TextDiv = styled.div`
   font-size: 18px;
 `;
 
-const FakeAcceptButton = styled.div`
+const FakeAcceptButton = styled.div.attrs(() => ({
+  className: "rpgui-container framed-grey",
+}))`
   && {
     background: black;
     background-color: black;
