@@ -65,7 +65,7 @@ const directionAntonyms = {
   down: "up",
 };
 
-const nounDictionary = ["grumpkin", "firebolt", "shortsword"];
+const nounDictionary = ["grumpkin", "firebolt", "shortsword", "wand"];
 
 const prepositionDictionary = [
   "at",
