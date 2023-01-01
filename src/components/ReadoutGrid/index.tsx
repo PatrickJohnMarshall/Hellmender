@@ -1,12 +1,9 @@
-import { useState } from "react";
 import InventoryBlock from "./InventoryBlock";
 import InfoBlocks from "./InfoBlocks";
 import PlayerStatsReadout from "./PlayerStatsReadout";
-import MonsterStats from "./MonsterStats";
-import Monster from "monsters/types/Monster";
 import InterfaceAudio from "audio/InterfaceAudio";
 
-import { ReadoutShell, ReadoutBox, HelpButton } from "./readoutStyles";
+import { ReadoutShell, ReadoutBox, HelpButton } from "./styles/Readout_styles";
 
 function ReadoutGrid({
   monsters,
@@ -16,9 +13,6 @@ function ReadoutGrid({
   playerStats,
   setHelpToggle,
 }) {
-  const [monsterStatReadout, setMonsterStatReadout] = useState<Monster | null>(
-    null
-  );
   const interfaceAudio = new InterfaceAudio();
 
   return (
@@ -43,18 +37,7 @@ function ReadoutGrid({
 
         <PlayerStatsReadout playerStats={playerStats} />
 
-        {monsterStatReadout ? (
-          <MonsterStats
-            monsters={monsters}
-            monsterStatReadout={monsterStatReadout}
-            setMonsterStatReadout={setMonsterStatReadout}
-          />
-        ) : (
-          <InfoBlocks
-            setMonsterStatReadout={setMonsterStatReadout}
-            monsters={monsters}
-          />
-        )}
+        <InfoBlocks monsters={monsters} />
       </ReadoutBox>
     </ReadoutShell>
   );

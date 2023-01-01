@@ -8,7 +8,7 @@ export default function generateMonsters() {
 
   const grumpkin = new Grumpkin({
     id: "grumpkin",
-    hp: 15,
+    hp: 7,
     ac: 13,
     name: "Grumpkin",
     location: startingRoom,
