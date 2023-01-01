@@ -1,35 +1,51 @@
-import getImageForMonster from "util/getImageForMonster";
+import { useContext } from "react";
+import TerminalLogContext from "context/TerminalLog";
 import InterfaceAudio from "audio/InterfaceAudio";
+import StatBar from "./StatBar";
+import {
+  InfoBlockShell,
+  MonsterPartShell,
+  MonsterIconGrid,
+  MonsterIconShell,
+  MonsterIcon,
+  MonsterName,
+  MonsterHPShell,
+} from "./styles/InfoBlocks_styles";
 
-function InfoBlocks({ monsters, setMonsterStatReadout }) {
+function InfoBlocks({ monsters }) {
   const interfaceAudio = new InterfaceAudio();
+  const terminalLog = useContext(TerminalLogContext);
 
   return (
-    <div
-      className="rpgui-container framed readout-box"
-      style={{ gridColumn: 5 }}
-    >
-      <div style={{ gridRow: 1 }}>Monsters In Area:</div> <br />
-      <div className="icon-grid" style={{ gridRow: 2 }}>
+    <InfoBlockShell>
+      <div style={{ gridRow: 1 }}>Entities In Room:</div> <br />
+      <MonsterIconGrid>
         {monsters.map((monster) => {
           return (
-            <button
-              id={monster}
-              style={{
-                backgroundImage: `url(${getImageForMonster(monster.getID())})`,
-                backgroundSize: "50px 50px",
-                height: `50px`,
-                width: "50px",
-              }}
-              onClick={() => {
-                setMonsterStatReadout(monster);
-                interfaceAudio.playButton();
-              }}
-            />
+            <MonsterIconShell>
+              <MonsterPartShell>
+                <MonsterIcon icon={monster} />
+              </MonsterPartShell>
+              <MonsterPartShell>
+                <label>Describe:</label>
+                <MonsterName
+                  onClick={() => {
+                    terminalLog.add("\n" + monster.describe());
+                    interfaceAudio.playButton();
+                  }}
+                >
+                  {monster.getName()}
+                </MonsterName>
+              </MonsterPartShell>
+
+              <MonsterHPShell>
+                <StatBar entity={monster} statType={`health`} />
+              </MonsterHPShell>
+            </MonsterIconShell>
           );
         })}
-      </div>
-    </div>
+      </MonsterIconGrid>
+    </InfoBlockShell>
   );
 }
 

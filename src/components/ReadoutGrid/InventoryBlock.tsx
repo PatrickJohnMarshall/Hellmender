@@ -11,7 +11,7 @@ import {
   IconGrid,
   ItemIcon,
   BlankIcon,
-} from "./readoutStyles";
+} from "./styles/InventoryBlock_styles";
 
 function InventoryBlock({ spells, weapons, apparel, potions, keyItems }) {
   const interfaceAudio = new InterfaceAudio();

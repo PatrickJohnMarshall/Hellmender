@@ -1,30 +1,13 @@
 import InterfaceAudio from "audio/InterfaceAudio";
+import { HelpBox, HelpShell } from "./styles/HelpMenu_styles";
+import { GeneralButton } from "./styles/Readout_styles";
 
 function HelpMenu({ setHelpToggle }) {
   const interfaceAudio = new InterfaceAudio();
   return (
-    <div
-      className="rpgui-container framed-golden-2"
-      style={{
-        height: `57vh`,
-        maxWidth: "75rem",
-        overflowWrap: "break-word",
-        marginLeft: "auto",
-        marginRight: "auto",
-      }}
-    >
-      <div
-        className="rpgui-container framed-grey rpgui-content"
-        style={{
-          height: "100%",
-          width: "100%",
-          overflowY: "auto",
-          fontSize: `18px`,
-          background: `#252a33`,
-          color: "white",
-        }}
-      >
-        <button
+    <HelpShell>
+      <HelpBox>
+        <GeneralButton
           className="rpgui-button help-button"
           onClick={() => {
             setHelpToggle(false);
@@ -32,7 +15,7 @@ function HelpMenu({ setHelpToggle }) {
           }}
         >
           Back
-        </button>
+        </GeneralButton>
         <h2>Instructions</h2>
 
         <hr />
@@ -67,8 +50,8 @@ function HelpMenu({ setHelpToggle }) {
           the names, descriptions, and stats for their representative
           item/monster.
         </p>
-      </div>
-    </div>
+      </HelpBox>
+    </HelpShell>
   );
 }
 

@@ -1,15 +1,8 @@
 import { useState } from "react";
 import ReadoutGrid from "../ReadoutGrid";
-import "styles/_containers_and_frames.scss";
+
 import "styles/_scrollbars.scss";
-import "styles/_health_bar.scss";
 import "styles/_hr.scss";
-
-import "styles/_readout_box.scss";
-
-import "styles/_dropdown.scss";
-import "styles/_custom_buttons.scss";
-import "styles/_button.scss";
 
 import "styles/_custom_grids.scss";
 

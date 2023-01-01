@@ -2,50 +2,6 @@ import styled from "styled-components";
 import getImageForItem from "util/getImageForItem";
 import getImageForSpell from "util/getImageForSpell";
 
-const ReadoutShell = styled.div.attrs(() => ({
-  className: "rpgui-content rpgui-container framed-golden",
-}))`
-  max-width: 75rem;
-  margin-left: auto;
-  margin-right: auto;
-
-  display: grid;
-  height: 40vh;
-  grid-template-columns: 5% 7fr 0.5fr 7fr 0.5fr 7fr 5%;
-  grid-template-rows: 5% 3em 1fr 5%;
-`;
-
-const HelpButton = styled.button.attrs(() => ({
-  className: "rpgui-button",
-}))`
-  && {
-    grid-row: 2;
-    grid-column: 6;
-    justify-self: end;
-    align-self: center;
-
-    min-height: 40px;
-    min-width: 80px;
-    max-height: 40px;
-    max-width: 80px;
-    margin-top: 0px;
-    padding: 0px;
-  }
-`;
-
-const ReadoutBox = styled.div`
-  display: grid;
-  grid-template-columns: 7fr 0.5fr 7fr 0.5fr 7fr;
-  color: white;
-
-  z-index: 2;
-
-  grid-row: 3;
-  grid-column: 2 / 7;
-  overflow-y: auto;
-`;
-
-/////Inventory Block/////
 const InventorySelectorGrid = styled.div.attrs(() => ({
   className: "rpgui-container framed-grey",
 }))`
@@ -140,11 +96,7 @@ const BlankIcon = styled.div`
 `;
 
 export {
-  ReadoutShell,
-  ReadoutBox,
-  HelpButton,
   InventoryButton,
-  /////Inventory Block/////
   InventorySelectorGrid,
   InventoryBox,
   IconGrid,
