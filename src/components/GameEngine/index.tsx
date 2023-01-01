@@ -3,8 +3,7 @@ import ReadoutGrid from "../ReadoutGrid";
 
 import "styles/_scrollbars.scss";
 import "styles/_hr.scss";
-
-import "styles/_custom_grids.scss";
+import "styles/_input.scss";
 
 import { TerminalController } from "../TerminalController";
 import TerminalLogContext from "../../context/TerminalLog";
