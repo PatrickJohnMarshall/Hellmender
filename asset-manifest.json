@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Hellmender/static/css/main.66cbf22e.css",
-    "main.js": "/Hellmender/static/js/main.0f99bd70.js",
+    "main.css": "/Hellmender/static/css/main.32c0a66e.css",
+    "main.js": "/Hellmender/static/js/main.7289ed8e.js",
     "static/js/787.2838265d.chunk.js": "/Hellmender/static/js/787.2838265d.chunk.js",
     "static/media/impacttest.wav": "/Hellmender/static/media/impacttest.173a48ae2c3fc25cce5a.wav",
     "static/media/spellmisstest.wav": "/Hellmender/static/media/spellmisstest.618c6897166bfff9dc5c.wav",
@@ -12,7 +12,6 @@
     "static/media/border-image-grey.png": "/Hellmender/static/media/border-image-grey.2374b131df7f4287987f.png",
     "static/media/border-image-golden.png": "/Hellmender/static/media/border-image-golden.6cbd0e7070bf9898fb40.png",
     "static/media/button-golden-down.png": "/Hellmender/static/media/button-golden-down.775f4c0468a4a2139bb2.png",
-    "static/media/select-border-image.png": "/Hellmender/static/media/select-border-image.6f02dce319858ddf9c06.png",
     "static/media/button-hover.png": "/Hellmender/static/media/button-hover.d6f5e532f72e7277dc85.png",
     "static/media/button-golden-hover.png": "/Hellmender/static/media/button-golden-hover.a6d554ee93496aad398b.png",
     "static/media/button-golden.png": "/Hellmender/static/media/button-golden.322d6afaa05ba8a81cb2.png",
@@ -22,22 +21,19 @@
     "static/media/border-image.png": "/Hellmender/static/media/border-image.29ef5ac8930efc081267.png",
     "static/media/background-image-golden2.png": "/Hellmender/static/media/background-image-golden2.736b9deb5be5391a1e5b.png",
     "static/media/background-image-grey.png": "/Hellmender/static/media/background-image-grey.ca4a89bfa33ce7ea9edb.png",
-    "static/media/select-background-image.png": "/Hellmender/static/media/select-background-image.c307c70c3dd3aac04b3d.png",
     "static/media/scrollbar-button.png": "/Hellmender/static/media/scrollbar-button.81ff86a9f19d146b7a5d.png",
-    "static/media/progress-bar-right.png": "/Hellmender/static/media/progress-bar-right.0d9981df59bd7162725f.png",
-    "static/media/progress-bar-left.png": "/Hellmender/static/media/progress-bar-left.6637b30fecc048aa7fa7.png",
     "static/media/scrollbar-thumb.png": "/Hellmender/static/media/scrollbar-thumb.b7ceebf07f2387e968d5.png",
     "static/media/scrollbar-track.png": "/Hellmender/static/media/scrollbar-track.c8a57113bb0449f3af00.png",
     "static/media/hr-golden.png": "/Hellmender/static/media/hr-golden.802fec65853c4334f9ac.png",
     "static/media/hr.png": "/Hellmender/static/media/hr.ee00b33cf1362cc7fb65.png",
     "static/media/background-image.png": "/Hellmender/static/media/background-image.3328a65b91ea173c8b83.png",
     "index.html": "/Hellmender/index.html",
-    "main.66cbf22e.css.map": "/Hellmender/static/css/main.66cbf22e.css.map",
-    "main.0f99bd70.js.map": "/Hellmender/static/js/main.0f99bd70.js.map",
+    "main.32c0a66e.css.map": "/Hellmender/static/css/main.32c0a66e.css.map",
+    "main.7289ed8e.js.map": "/Hellmender/static/js/main.7289ed8e.js.map",
     "787.2838265d.chunk.js.map": "/Hellmender/static/js/787.2838265d.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.66cbf22e.css",
-    "static/js/main.0f99bd70.js"
+    "static/css/main.32c0a66e.css",
+    "static/js/main.7289ed8e.js"
   ]
 }
