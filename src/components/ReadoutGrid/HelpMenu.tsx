@@ -1,6 +1,6 @@
 import InterfaceAudio from "audio/InterfaceAudio";
-import { HelpBox, HelpShell } from "./styles/HelpMenu_styles";
-import { GeneralButton } from "./styles/Readout_styles";
+import { HelpBox, HelpShell } from "./readout-styles/HelpMenu_styles";
+import { GeneralButton } from "./readout-styles/Readout_styles";
 
 function HelpMenu({ setHelpToggle }) {
   const interfaceAudio = new InterfaceAudio();

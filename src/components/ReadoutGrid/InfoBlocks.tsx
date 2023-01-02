@@ -10,7 +10,7 @@ import {
   MonsterIcon,
   MonsterName,
   MonsterHPShell,
-} from "./styles/InfoBlocks_styles";
+} from "./readout-styles/InfoBlocks_styles";
 
 function InfoBlocks({ monsters }) {
   const interfaceAudio = new InterfaceAudio();

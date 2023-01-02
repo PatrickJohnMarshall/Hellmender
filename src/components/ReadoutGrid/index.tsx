@@ -3,7 +3,11 @@ import InfoBlocks from "./InfoBlocks";
 import PlayerStatsReadout from "./PlayerStatsReadout";
 import InterfaceAudio from "audio/InterfaceAudio";
 
-import { ReadoutShell, ReadoutBox, HelpButton } from "./styles/Readout_styles";
+import {
+  ReadoutShell,
+  ReadoutBox,
+  HelpButton,
+} from "./readout-styles/Readout_styles";
 
 function ReadoutGrid({
   monsters,

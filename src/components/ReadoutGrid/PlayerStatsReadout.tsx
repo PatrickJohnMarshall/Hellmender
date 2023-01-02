@@ -4,7 +4,7 @@ import {
   PlayerStatBox,
   PlayerStatGrid,
   LowerStatGrid,
-} from "./styles/PlayerStats_styles";
+} from "./readout-styles/PlayerStats_styles";
 
 function PlayerStatsReadout({ playerStats }) {
   return (

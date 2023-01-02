@@ -3,7 +3,7 @@ import {
   StatBarGlass,
   StatReadout,
   StatBarFluid,
-} from "./styles/StatBar_styles";
+} from "./readout-styles/StatBar_styles";
 
 function StatBar({ entity, statType }) {
   let entityMortality;
