@@ -6,25 +6,24 @@ import React, {
   ChangeEvent,
   ReactNode,
 } from "react";
+
+import {
+  TerminalWrapper,
+  TerminalComp,
+  ReactTerminalLine,
+  TerminalHiddenInput,
+} from "./terminal-styles/TerminalIndex_styles";
+
 import TerminalInput from "./linetypes/TerminalInput";
 import TerminalOutput from "./linetypes/TerminalOutput";
-import "styles/_terminal.scss";
 
 export interface Props {
-  name?: string;
-  prompt?: string;
   children?: ReactNode;
   onInput?: ((input: string) => void) | null | undefined;
   startingInputValue?: string;
 }
 
-const Terminal = ({
-  name,
-  prompt,
-  onInput,
-  children,
-  startingInputValue = "",
-}: Props) => {
+const Terminal = ({ onInput, children }: Props) => {
   const [currentLineInput, setCurrentLineInput] = useState("");
 
   const scrollIntoViewRef = useRef<HTMLDivElement>(null);
@@ -40,24 +39,16 @@ const Terminal = ({
     }
   };
 
-  useEffect(() => {
-    setCurrentLineInput(startingInputValue.trim());
-  }, [startingInputValue]);
-
   // An effect that handles scrolling into view the last line of terminal input or output
   const performScrolldown = useRef(false);
   useEffect(() => {
     if (performScrolldown.current) {
       // skip scrolldown when the component first loads
-      setTimeout(
-        () =>
-          scrollIntoViewRef?.current?.scrollIntoView({
-            behavior: "smooth",
-            block: "nearest",
-          }),
-        500
-      );
+      scrollIntoViewRef?.current?.scrollIntoView({
+        block: "nearest",
+      });
     }
+
     performScrolldown.current = true;
   }, [children]);
 
@@ -66,21 +57,24 @@ const Terminal = ({
     if (onInput == null) {
       return;
     }
+
     // keep reference to listeners so we can perform cleanup
     const elListeners: {
       terminalEl: Element;
       listener: EventListenerOrEventListenerObject;
     }[] = [];
+
     for (const terminalEl of document.getElementsByClassName(
       "react-terminal-wrapper"
     )) {
       const listener = () =>
         (
-          terminalEl?.querySelector(".terminal-hidden-input") as HTMLElement
+          terminalEl?.querySelector("#terminal-hidden-input") as HTMLElement
         )?.focus();
       terminalEl?.addEventListener("click", listener);
       elListeners.push({ terminalEl, listener });
     }
+
     return function cleanup() {
       elListeners.forEach((elListener) => {
         elListener.terminalEl.removeEventListener("click", elListener.listener);
@@ -88,31 +82,26 @@ const Terminal = ({
     };
   }, [onInput]);
 
-  const classes = ["react-terminal-wrapper"];
   return (
-    <div className={classes.join(" ")} data-terminal-name={name}>
-      <div className="react-terminal" style={{ overflowWrap: "break-word" }}>
+    <TerminalWrapper className="react-terminal-wrapper">
+      <TerminalComp>
         {children}
         {onInput && (
-          <div
-            className="react-terminal-line react-terminal-input react-terminal-active-input"
-            data-terminal-prompt={prompt || "$"}
-            key="terminal-line-prompt"
-          >
+          <ReactTerminalLine key="terminal-line-prompt">
             {currentLineInput}
-          </div>
+          </ReactTerminalLine>
         )}
         <div ref={scrollIntoViewRef}></div>
-      </div>
-      <input
-        className="terminal-hidden-input"
+      </TerminalComp>
+      <TerminalHiddenInput
+        id="terminal-hidden-input"
         placeholder="Terminal Hidden Input"
         value={currentLineInput}
         autoFocus={onInput != null}
         onChange={updateCurrentLineInput}
         onKeyDown={handleEnter}
       />
-    </div>
+    </TerminalWrapper>
   );
 };
 
