@@ -13,7 +13,7 @@ type Dialog = (
   | { text: string }
   | { text: string; answer: { answText: string; next: string }[] }
   | { id: string; text: string; next: string }
-  | { id: string }
+  | { id: string; text: string }
 )[];
 
 const mockDialog: Dialog = [
@@ -26,11 +26,13 @@ const mockDialog: Dialog = [
     answer: [
       { answText: "We're shit out of luck, captain.", next: "answ_failure" },
       { answText: "God I hope so.", next: "answ_success" },
+      { answText: "Wrong way.", next: "answ_not_real" },
     ],
   },
 
   { id: "answ_failure", text: "Oh god no.", next: "answ_end" },
   { id: "answ_success", text: "Thank god.", next: "answ_end" },
+  { id: "answ_not_real", text: "You fucked up.", next: "answ_end" },
 
   { id: "answ_end", text: "Fin." },
 ];
