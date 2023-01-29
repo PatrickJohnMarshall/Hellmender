@@ -24,6 +24,7 @@ const mockInitialStats = {
 
 const mockInventory = {
   addWeapon: () => {},
+  addKeyItem: () => {},
   getWeapons: () => [] as Weapon[],
   equipWeapon: () => {},
   getEquippedWeaponID: () => "fist",
