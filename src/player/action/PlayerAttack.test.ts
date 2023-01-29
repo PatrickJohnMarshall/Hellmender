@@ -5,6 +5,7 @@ import Spell from "spells/types/Spell";
 
 const mockInventory = {
   addWeapon: () => {},
+  addKeyItem: () => {},
   getWeapons: () => [] as Weapon[],
   equipWeapon: () => {},
   getEquippedWeaponID: () => "",

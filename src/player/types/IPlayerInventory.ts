@@ -1,8 +1,10 @@
 import Weapon from "../../items/types/Weapon";
 import Spell from "spells/types/Spell";
+import KeyItems from "items/types/KeyItems";
 
 type IPlayerInventory = {
   addWeapon: (weapon: Weapon) => void;
+  addKeyItem: (keyItem: KeyItems) => void;
   getWeapons: () => Weapon[];
   equipWeapon: (weaponID: string) => void;
   getEquippedWeaponID: () => string;

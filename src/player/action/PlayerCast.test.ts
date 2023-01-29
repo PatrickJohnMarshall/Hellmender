@@ -5,6 +5,7 @@ import Weapon from "items/types/Weapon";
 
 const mockInventory = {
   addWeapon: () => {},
+  addKeyItem: () => {},
   getWeapons: () => [] as Weapon[],
   equipWeapon: () => {},
   getEquippedWeaponID: () => "",
