@@ -2,6 +2,12 @@ type Dialog = (
   | { text: string }
   | { text: string; answer: { answText: string; next: string }[] }
   | { id: string; text: string; next: string }
+  | {
+      id: string;
+      text: string;
+      rep: { target: string; value: number };
+      next: string;
+    }
   | { id: string; text: string }
 )[];
 
@@ -17,16 +23,14 @@ class DialogBranch {
     return this.#curStep;
   }
 
-  step(steps?: number) {
+  step() {
     const startDialog = this.#dialog[this.#curStep];
 
-    if ("next" in startDialog && !("answer" in startDialog)) {
+    if ("next" in startDialog) {
       const findStepIndex = (e) => e.id === startDialog.next;
 
       this.#curStep = this.#dialog.findIndex(findStepIndex);
-    } else if (!steps) {
-      this.#curStep += 1;
-    } else this.#curStep += steps;
+    } else this.#curStep += 1;
   }
 
   answer(playerAnswer: string) {
@@ -38,10 +42,12 @@ class DialogBranch {
       );
 
       const findStepIndex = (e) => e.id === selectedAnswer.next;
-
       this.#curStep = this.#dialog.findIndex(findStepIndex);
 
-      return this.getCurDialog();
+      const newDialog = this.#dialog[this.#curStep];
+      if ("rep" in newDialog) {
+        return newDialog.rep;
+      }
     }
   }
 
