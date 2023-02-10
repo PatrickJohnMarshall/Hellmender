@@ -1,4 +1,19 @@
-type IPlayerStats = {
+export type Stats = {
+  str: number;
+  dex: number;
+  con: number;
+  int: number;
+  wis: number;
+  cha: number;
+  maxHP: number;
+  hp: number;
+  maxMana: number;
+  mana: number;
+  ac: number;
+};
+
+export type IPlayerStats = {
+  toSave: () => Stats;
   setStr: (hp: number) => void;
   setDex: (hp: number) => void;
   setCon: (hp: number) => void;
@@ -30,5 +45,3 @@ type IPlayerStats = {
   _equalizeToMaxMana: () => void;
   _equalizeToMaxHP: () => void;
 };
-
-export default IPlayerStats;

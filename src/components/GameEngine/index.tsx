@@ -11,45 +11,8 @@ import { TerminalOutput } from "../Terminal";
 
 import { GameState } from "state/GameState";
 
-// import buildLayout from "../../tower-layout/buildLayout";
-// import generateMonsters from "../../monsters/generateMonsters";
-
-// import FireBolt from "spells/spells/FireBolt";
-
-// import PlayerAction from "../../player/PlayerAction";
-// import PlayerLocation from "../../player/PlayerLocation";
-// import PlayerInventory from "../../player/PlayerInventory";
-// import PlayerStats from "player/PlayerStats";
 import HelpMenu from "components/ReadoutGrid/HelpMenu";
-// import generateItems from "items/generateItems";
 import getRoomItemDescriptions from "util/getRoomItemDescriptions";
-
-// const startingRoom = buildLayout();
-// const startingSpell = new FireBolt();
-// const items = generateItems();
-// const monsters = generateMonsters();
-
-// const playerLocation = new PlayerLocation(startingRoom);
-// const playerInventory = new PlayerInventory(items.defaultWeapon);
-// playerInventory.learnSpell(startingSpell);
-
-// const playerStats = new PlayerStats({
-//   str: 10,
-//   dex: 10,
-//   con: 10,
-//   int: 10,
-//   wis: 10,
-//   cha: 10,
-//   mana: 10,
-//   hp: 10,
-//   ac: 10,
-// });
-
-// const playerAction = new PlayerAction(
-//   playerLocation,
-//   playerInventory,
-//   playerStats
-// );
 
 const State = new GameState();
 

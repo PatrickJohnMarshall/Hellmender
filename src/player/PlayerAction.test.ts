@@ -2,6 +2,7 @@ import PlayerAction from "player/PlayerAction";
 import PlayerStats from "player/PlayerStats";
 import IPlayerInventory from "./types/IPlayerInventory";
 import Weapon from "../items/types/Weapon";
+import KeyItems from "items/types/KeyItems";
 import Spell from "spells/types/Spell";
 
 import PlayerLocation from "player/PlayerLocation";
@@ -22,7 +23,16 @@ const mockInitialStats = {
   ac: 10,
 };
 
+type ItemTypeArray = Weapon[] | KeyItems[] | Spell[];
+
 const mockInventory = {
+  makeItemTypeArray: () => [] as ItemTypeArray,
+  toSave: () => ({
+    weapons: [""],
+    keyItems: [""],
+    spells: [""],
+    equippedWeapon: "",
+  }),
   addWeapon: () => {},
   addKeyItem: () => {},
   getWeapons: () => [] as Weapon[],
@@ -139,7 +149,12 @@ describe("PlayerAction", () => {
     const items = generateItems();
 
     const playerLocation = new PlayerLocation(startingRoom);
-    const playerInventory = new PlayerInventory(items.defaultWeapon);
+    const playerInventory = new PlayerInventory({
+      equippedWeapon: items.equippedWeapon,
+      invWeapons: [],
+      invKeyItems: [],
+      invSpells: [],
+    });
 
     const playerStats = new PlayerStats({
       str: 10,
@@ -177,7 +192,12 @@ describe("PlayerAction", () => {
     const items = generateItems();
 
     const playerLocation = new PlayerLocation(startingRoom);
-    const playerInventory = new PlayerInventory(items.defaultWeapon);
+    const playerInventory = new PlayerInventory({
+      equippedWeapon: items.equippedWeapon,
+      invWeapons: [],
+      invKeyItems: [],
+      invSpells: [],
+    });
 
     const playerStats = new PlayerStats({
       str: 10,

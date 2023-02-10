@@ -6,6 +6,10 @@ class PlayerLocation {
     this.#location = location;
   }
 
+  toSave(): string {
+    return this.#location.getID();
+  }
+
   getID(): string {
     return this.#location.getID();
   }
