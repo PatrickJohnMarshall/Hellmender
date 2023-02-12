@@ -1,15 +1,4 @@
-type InitialStats = {
-  str: number;
-  dex: number;
-  con: number;
-  int: number;
-  wis: number;
-  cha: number;
-  hp: number;
-  mana: number;
-  ac: number;
-};
-
+import { Stats } from "player/types/IPlayerStats";
 class PlayerStats {
   #str: number;
   #dex: number;
@@ -23,7 +12,7 @@ class PlayerStats {
   #hp: number;
   #ac: number;
 
-  constructor(initialStats: InitialStats) {
+  constructor(initialStats: Omit<Stats, "maxHP" | "maxMana">) {
     this.#str = initialStats.str;
     this.#con = initialStats.con;
     this.#dex = initialStats.dex;
@@ -35,6 +24,26 @@ class PlayerStats {
     this.#maxHP = initialStats.hp;
     this.#hp = initialStats.hp;
     this.#ac = initialStats.ac;
+  }
+
+  static fromSave(savedStats: Stats) {
+    return new PlayerStats(savedStats);
+  }
+
+  toSave(): Stats {
+    return {
+      str: this.#str,
+      con: this.#con,
+      dex: this.#dex,
+      int: this.#int,
+      wis: this.#wis,
+      cha: this.#cha,
+      maxMana: this.#maxMana,
+      mana: this.#mana,
+      maxHP: this.#maxHP,
+      hp: this.#hp,
+      ac: this.#ac,
+    };
   }
 
   setStr(value: number) {

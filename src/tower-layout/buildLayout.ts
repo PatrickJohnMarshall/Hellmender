@@ -5,8 +5,9 @@ import Kitchen from "./rooms/Kitchen";
 import Bathroom from "./rooms/Bathroom";
 import ToiletArena from "./rooms/ToiletArena";
 import LibraryLanding from "./rooms/LibraryLanding";
+import TypeRoom from "./types/Room";
 
-export default function buildLayout() {
+export default function buildLayout(id: string = "bedroom") {
   const bedroom = new Bedroom();
   const outsideWindow = new OutsideWindow();
   const study = new Study();
@@ -14,6 +15,16 @@ export default function buildLayout() {
   const bathroom = new Bathroom();
   const toiletArena = new ToiletArena();
   const libraryLanding = new LibraryLanding();
+
+  const rooms: TypeRoom[] = [
+    bedroom,
+    outsideWindow,
+    study,
+    kitchen,
+    bathroom,
+    toiletArena,
+    libraryLanding,
+  ];
 
   bedroom.addConnections({ forward: outsideWindow, down: study });
   study.addConnections({
@@ -27,5 +38,11 @@ export default function buildLayout() {
   toiletArena.addConnections({ up: bathroom });
   libraryLanding.addConnections({ up: study });
 
-  return bedroom;
+  for (const room in rooms) {
+    if (rooms[room].getID() === id) {
+      return rooms[room];
+    }
+  }
+
+  throw new Error("Invalid Room ID");
 }

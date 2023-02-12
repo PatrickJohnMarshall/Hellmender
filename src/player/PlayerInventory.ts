@@ -2,17 +2,58 @@ import Weapon from "../items/types/Weapon";
 import KeyItems from "items/types/KeyItems";
 import Spell from "spells/types/Spell";
 
+type PlayerInvArgs = {
+  equippedWeapon: Weapon;
+  invWeapons: Weapon[];
+  invKeyItems: KeyItems[];
+  invSpells: Spell[];
+};
+
 class PlayerInventory {
   #weapons: Weapon[] = [];
   #keyItems: KeyItems[] = [];
   #spells: Spell[] = [];
 
-  #equipedWeapon: Weapon;
+  #equippedWeapon: Weapon;
 
-  constructor(defaultWeapon: Weapon) {
-    this.#equipedWeapon = defaultWeapon;
-    this.#weapons.push(defaultWeapon);
-    this.#spells = [];
+  constructor(args: PlayerInvArgs) {
+    this.#equippedWeapon = args.equippedWeapon;
+
+    this.#weapons.push(this.#equippedWeapon);
+    this.#spells = args.invSpells;
+
+    for (const weapon in args.invWeapons) {
+      if (this.#weapons.includes(args.invWeapons[weapon])) {
+        continue;
+      }
+
+      this.#weapons.push(args.invWeapons[weapon]);
+    }
+
+    for (const keyItem in args.invKeyItems) {
+      if (this.#keyItems.includes(args.invKeyItems[keyItem])) {
+        continue;
+      }
+
+      this.#keyItems.push(args.invKeyItems[keyItem]);
+    }
+  }
+
+  makeItemTypeArray(itemArray: Weapon[] | KeyItems[] | Spell[]) {
+    let idList = [];
+    for (const item in itemArray) {
+      idList.push(itemArray[item].getID());
+    }
+    return idList;
+  }
+
+  toSave() {
+    return {
+      weapons: this.makeItemTypeArray(this.#weapons),
+      keyItems: this.makeItemTypeArray(this.#keyItems),
+      spells: this.makeItemTypeArray(this.#spells),
+      equippedWeapon: this.#equippedWeapon.getID(),
+    };
   }
 
   addWeapon(weapon: Weapon) {
@@ -37,15 +78,15 @@ class PlayerInventory {
     const equipped = this.#weapons.find(
       (weapon) => weapon.getID() === weaponID
     );
-    if (equipped) this.#equipedWeapon = equipped;
+    if (equipped) this.#equippedWeapon = equipped;
   }
 
   getEquippedWeaponStats() {
-    return this.#equipedWeapon.getAttackStats();
+    return this.#equippedWeapon.getAttackStats();
   }
 
   getEquippedWeaponID() {
-    return this.#equipedWeapon.getID();
+    return this.#equippedWeapon.getID();
   }
 
   learnSpell(spell: Spell) {

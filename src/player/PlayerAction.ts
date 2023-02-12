@@ -12,7 +12,7 @@ import Weapon from "items/types/Weapon";
 
 import IPlayerLocation from "./types/IPlayerLocation";
 import IPlayerInventory from "./types/IPlayerInventory";
-import IPlayerStats from "./types/IPlayerStats";
+import { IPlayerStats } from "./types/IPlayerStats";
 import {
   EventType,
   AttackHit,
@@ -61,13 +61,49 @@ type DoActionImputs = {
 };
 
 class PlayerAction {
-  #previousMoveCommand;
+  #previousMoveCommand: string | undefined;
+  #playerLocation: IPlayerLocation;
+  #playerInventory: IPlayerInventory;
+  #playerStats: IPlayerStats;
 
   constructor(
-    private playerLocation: IPlayerLocation,
-    private playerInventory: IPlayerInventory,
-    private playerStats: IPlayerStats
-  ) {}
+    playerLocation: IPlayerLocation,
+    playerInventory: IPlayerInventory,
+    playerStats: IPlayerStats
+  ) {
+    this.#playerLocation = playerLocation;
+    this.#playerInventory = playerInventory;
+    this.#playerStats = playerStats;
+  }
+
+  toSave() {
+    return this.#previousMoveCommand;
+  }
+
+  static fromSave({
+    previousMoveCommand,
+    playerLocation,
+    playerInventory,
+    playerStats,
+  }: {
+    previousMoveCommand: string | undefined;
+    playerLocation: IPlayerLocation;
+    playerInventory: IPlayerInventory;
+    playerStats: IPlayerStats;
+  }) {
+    const playerActionFromSave = new PlayerAction(
+      playerLocation,
+      playerInventory,
+      playerStats
+    );
+
+    playerActionFromSave.previousMove = previousMoveCommand;
+    return playerActionFromSave;
+  }
+
+  set previousMove(move: string) {
+    this.#previousMoveCommand = move;
+  }
 
   action({
     input,
@@ -119,8 +155,8 @@ class PlayerAction {
         return {
           event: "LOOK",
           eventData: {
-            location: this.playerLocation.getID(),
-            description: this.playerLocation.describe(),
+            location: this.#playerLocation.getID(),
+            description: this.#playerLocation.describe(),
           },
         };
 
@@ -139,7 +175,10 @@ class PlayerAction {
             this.#previousMoveCommand
           )[0];
 
-          const playerMove = new PlayerMove(this.playerLocation, backDirection);
+          const playerMove = new PlayerMove(
+            this.#playerLocation,
+            backDirection
+          );
 
           playerMove.move();
 
@@ -148,8 +187,8 @@ class PlayerAction {
           return {
             event: "MOVE",
             eventData: {
-              location: this.playerLocation.getID(),
-              description: this.playerLocation.describe(),
+              location: this.#playerLocation.getID(),
+              description: this.#playerLocation.describe(),
             },
           };
         }
@@ -162,7 +201,7 @@ class PlayerAction {
         }
 
         const playerMove = new PlayerMove(
-          this.playerLocation,
+          this.#playerLocation,
           inputs.direction[0]
         ).move();
 
@@ -178,8 +217,8 @@ class PlayerAction {
         return {
           event: "MOVE",
           eventData: {
-            location: this.playerLocation.getID(),
-            description: this.playerLocation.describe(),
+            location: this.#playerLocation.getID(),
+            description: this.#playerLocation.describe(),
           },
         };
 
@@ -219,7 +258,7 @@ class PlayerAction {
           };
         }
 
-        const weaponToAdd = this.playerInventory
+        const weaponToAdd = this.#playerInventory
           .getWeapons()
           .find((item) => item.getID() === inputs.nouns[0]);
 
@@ -232,7 +271,7 @@ class PlayerAction {
           };
         }
 
-        this.playerInventory.equipWeapon(inputs.nouns[0]);
+        this.#playerInventory.equipWeapon(inputs.nouns[0]);
 
         return {
           event: "EQUIP",
@@ -270,7 +309,7 @@ class PlayerAction {
           };
         }
 
-        if (!this.playerInventory.getKnownSpellStats(inputs.nouns[0])) {
+        if (!this.#playerInventory.getKnownSpellStats(inputs.nouns[0])) {
           return {
             event: "INVALID",
             eventData: { status: "INCOMPLETE_SPELL_INFORMATION" },
@@ -330,11 +369,16 @@ class PlayerAction {
     keyItems: KeyItems[];
     weapons: Weapon[];
   }): ActionReturn {
-    const keyItemToAdd = keyItems.find((item) => item.getID() === itemID);
-    const weaponToAdd = weapons.find((item) => item.getID() === itemID);
+    const keyItemToAdd = Array.from(keyItems).find(
+      (item) => item.getID() === itemID
+    );
+
+    const weaponToAdd = Array.from(weapons).find(
+      (item) => item.getID() === itemID
+    );
 
     if (keyItemToAdd) {
-      this.playerInventory.addKeyItem(keyItemToAdd);
+      this.#playerInventory.addKeyItem(keyItemToAdd);
       return {
         event: "TAKE",
         eventData: { itemName: keyItemToAdd.getID() },
@@ -342,7 +386,7 @@ class PlayerAction {
     }
 
     if (weaponToAdd) {
-      this.playerInventory.addWeapon(weaponToAdd);
+      this.#playerInventory.addWeapon(weaponToAdd);
       return {
         event: "TAKE",
         eventData: { itemName: weaponToAdd.getID() },
@@ -361,7 +405,7 @@ class PlayerAction {
         monster.getID() === secondaryCommand.toLowerCase().replace(" ", "")
     );
 
-    const playerAttack = new PlayerAttack(this.playerInventory);
+    const playerAttack = new PlayerAttack(this.#playerInventory);
 
     const attackResults = playerAttack.attack();
 
@@ -384,7 +428,7 @@ class PlayerAction {
         eventData: {
           attackValue: attackResults.attackValue,
           damageValue: attackResults.damageValue,
-          weaponName: this.playerInventory.getEquippedWeaponID(),
+          weaponName: this.#playerInventory.getEquippedWeaponID(),
           monsterName: targetMonster.getName(),
         },
       };
@@ -396,7 +440,7 @@ class PlayerAction {
         eventData: {
           attackValue: attackResults.attackValue,
           damageValue: attackResults.damageValue,
-          weaponName: this.playerInventory.getEquippedWeaponID(),
+          weaponName: this.#playerInventory.getEquippedWeaponID(),
           monsterName: targetMonster.getName(),
           monsterHP: targetMonster.getHP(),
         },
@@ -407,7 +451,7 @@ class PlayerAction {
       event: "ATTACK_MISS",
       eventData: {
         attackValue: attackResults.attackValue,
-        weaponName: this.playerInventory.getEquippedWeaponID(),
+        weaponName: this.#playerInventory.getEquippedWeaponID(),
         monsterName: targetMonster.getName(),
       },
     };
@@ -418,9 +462,9 @@ class PlayerAction {
       (monster) => monster.getID() === spellTarget
     );
 
-    const playerCast = new PlayerCast(this.playerInventory);
+    const playerCast = new PlayerCast(this.#playerInventory);
 
-    this.playerStats.changeMana(-1);
+    this.#playerStats.changeMana(-1);
 
     const attackResults = playerCast.attack(spellID);
 

@@ -1,14 +1,24 @@
 import PlayerAttack from "./PlayerAttack";
 import IPlayerInventory from "../types/IPlayerInventory";
 import Weapon from "../../items/types/Weapon";
+import KeyItems from "items/types/KeyItems";
 import Spell from "spells/types/Spell";
 
+type ItemTypeArray = Weapon[] | KeyItems[] | Spell[];
+
 const mockInventory = {
+  makeItemTypeArray: () => [] as ItemTypeArray,
+  toSave: () => ({
+    weapons: [""],
+    keyItems: [""],
+    spells: [""],
+    equippedWeapon: "",
+  }),
   addWeapon: () => {},
   addKeyItem: () => {},
   getWeapons: () => [] as Weapon[],
   equipWeapon: () => {},
-  getEquippedWeaponID: () => "",
+  getEquippedWeaponID: () => "fist",
   getEquippedWeaponStats: () => ({
     attackBonus: 4,
     damage: { min: 1, max: 8 },
@@ -16,7 +26,7 @@ const mockInventory = {
   learnSpell: () => {},
   getSpells: () => [] as Spell[],
   getKnownSpellStats: () => ({
-    attackBonus: 1,
+    attackBonus: 0,
     damage: { min: 6, max: 36 },
   }),
 } as IPlayerInventory;
