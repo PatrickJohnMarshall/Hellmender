@@ -7,7 +7,12 @@ describe("PlayerInventory", () => {
   test("adds a weapon", () => {
     const fist = new Fist();
 
-    const playerInventory = new PlayerInventory(fist);
+    const playerInventory = new PlayerInventory({
+      equippedWeapon: fist,
+      invWeapons: [],
+      invKeyItems: [],
+      invSpells: [],
+    });
 
     playerInventory.addWeapon(fist);
 
@@ -19,7 +24,12 @@ describe("PlayerInventory", () => {
     const fist = new Fist();
     const shortSword = new ShortSword();
 
-    const playerInventory = new PlayerInventory(fist);
+    const playerInventory = new PlayerInventory({
+      equippedWeapon: fist,
+      invWeapons: [],
+      invKeyItems: [],
+      invSpells: [],
+    });
 
     playerInventory.addWeapon(shortSword);
 
@@ -33,7 +43,12 @@ describe("PlayerInventory", () => {
 
   test("learn a spell", () => {
     const fist = new Fist();
-    const playerInventory = new PlayerInventory(fist);
+    const playerInventory = new PlayerInventory({
+      equippedWeapon: fist,
+      invWeapons: [],
+      invKeyItems: [],
+      invSpells: [],
+    });
 
     const firebolt = new FireBolt();
 
@@ -44,7 +59,12 @@ describe("PlayerInventory", () => {
 
   test("give stats of known spell", () => {
     const fist = new Fist();
-    const playerInventory = new PlayerInventory(fist);
+    const playerInventory = new PlayerInventory({
+      equippedWeapon: fist,
+      invWeapons: [],
+      invKeyItems: [],
+      invSpells: [],
+    });
 
     const firebolt = new FireBolt();
 

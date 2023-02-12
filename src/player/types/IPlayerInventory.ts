@@ -3,6 +3,15 @@ import Spell from "spells/types/Spell";
 import KeyItems from "items/types/KeyItems";
 
 type IPlayerInventory = {
+  makeItemTypeArray: (
+    itemArray: Weapon[] | KeyItems[] | Spell[]
+  ) => Weapon[] | KeyItems[] | Spell[];
+  toSave: () => {
+    weapons: string[];
+    keyItems: string[];
+    spells: string[];
+    equippedWeapon: string;
+  };
   addWeapon: (weapon: Weapon) => void;
   addKeyItem: (keyItem: KeyItems) => void;
   getWeapons: () => Weapon[];
