@@ -134,7 +134,7 @@ describe("PlayerAction", () => {
       mockPlayerStats
     );
     await playerAction.action({
-      input: "cast fireBall on grumpkin",
+      input: "cast firebolt on grumpkin",
       validMonsters: [{ ...mockMonster, takeDamage: mockTakeDamage }],
       keyItems: [],
       weapons: [],

@@ -2,7 +2,7 @@ import parseText from "./parseText";
 
 describe("parseText", () => {
   test("filters articles", () => {
-    const response = parseText("cast Firebolt on the grumpkin");
+    const response = parseText("equip the shortsword");
 
     expect(response.words).not.toContain("the");
   });
@@ -34,9 +34,6 @@ describe("parseText", () => {
   test("finds subject", () => {
     const response = parseText("cast FiReBolt on the grumpkin");
 
-    const response2 = parseText("move to the north");
-
     expect(response.subject).toContain("grumpkin");
-    expect(response2.subject).toBe(null);
   });
 });

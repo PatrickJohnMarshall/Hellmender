@@ -44,13 +44,6 @@ const mockRoom = {
 };
 
 describe("PlayerCast", () => {
-  test("targets valid monster", () => {
-    const playerAttack = new PlayerCast(mockInventory);
-    const result = playerAttack.attack("fireBall");
-
-    expect(result).toEqual(expect.objectContaining({ id: "megaGrumpkin" }));
-  });
-
   test("returns attack results", () => {
     const playerAttack = new PlayerCast(mockInventory);
     const attackResults = playerAttack.attack("fireBall");

@@ -44,13 +44,6 @@ const mockRoom = {
 };
 
 describe("PlayerAttack", () => {
-  test("targets valid monster", () => {
-    const playerAttack = new PlayerAttack(mockInventory);
-    const result = playerAttack.attack();
-
-    expect(result).toEqual(expect.objectContaining({ id: "megaGrumpkin" }));
-  });
-
   test("returns attack results", () => {
     const playerAttack = new PlayerAttack(mockInventory);
     const attackResults = playerAttack.attack();

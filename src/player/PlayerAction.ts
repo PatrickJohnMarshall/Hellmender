@@ -309,6 +309,8 @@ class PlayerAction {
           };
         }
 
+        console.log('made it past "nothing past cast"');
+
         if (!this.#playerInventory.getKnownSpellStats(inputs.nouns[0])) {
           return {
             event: "INVALID",
@@ -316,8 +318,11 @@ class PlayerAction {
           };
         }
 
+        console.log('made it past "dont know what spell"');
+
         if (!inputs.subject) {
           if (!inputs.prepositions) {
+            console.log("no preposition and no subject");
             return {
               event: "INVALID",
               eventData: {
@@ -326,6 +331,7 @@ class PlayerAction {
               },
             };
           }
+          console.log("nothing to cast on / no subject");
           return {
             event: "INVALID",
             eventData: {
@@ -334,6 +340,9 @@ class PlayerAction {
             },
           };
         }
+
+        console.log("made it past 'no subject'");
+        console.log(inputs.nouns);
 
         const monsterCheckSpell = validMonsters.find(
           (monster) => monster.getID() === inputs.nouns[1]
@@ -345,6 +354,8 @@ class PlayerAction {
             eventData: { status: "INVALID_SPELL_TARGET" },
           };
         }
+
+        console.log('made it past "invalid spell target"');
 
         return this._doSpellAttack(
           inputs.nouns[0],
