@@ -15,18 +15,38 @@ import {
   ForwardButton,
 } from "./introStyles";
 
+import { GameState } from "state/GameState";
+
 import Intro1 from "./Intro1";
 import Intro2 from "./Intro2";
 import Intro3 from "./Intro3";
 import Intro4 from "./Intro4";
 
-function Intro({
-  setGameState,
-}: {
-  setGameState: (state: "start" | "game" | "intro") => void;
-}) {
+type Props = {
+  setGameState: (state: "start" | "game" | "intro" | "saves") => void;
+  state: GameState;
+};
+
+const Intro: React.FC<Props> = ({ setGameState, state }) => {
   const [introState, setIntroState] = useState(1);
+  const [newName, setNewName] = useState<string>("are you?");
+  const [submittedName, setSubmittedName] = useState<string>("");
+  const [wrongness, increaseWrongness] = useState(0);
+
   const interfaceAudio = new InterfaceAudio();
+
+  function handleNameSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    if (newName === "are you?") {
+      increaseWrongness(wrongness + 1);
+    }
+
+    if (newName !== "are you?" && newName !== "") {
+      state.playerName = newName;
+      setSubmittedName(newName);
+    }
+  }
 
   const introNum = {
     1: Intro1,
@@ -35,7 +55,61 @@ function Intro({
     4: Intro4,
   };
 
-  const IntroText = introNum[introState]();
+  const IntroText = introNum[introState]({
+    handleNameSubmit: handleNameSubmit,
+    newName: newName,
+    setNewName: setNewName,
+    submittedName: submittedName,
+    wrongness: wrongness,
+  });
+
+  const goForward = () => {
+    interfaceAudio.playButton();
+
+    if (introState === 4) {
+      return setGameState("game");
+    }
+
+    setIntroState(introState + 1);
+  };
+
+  const goBack = () => {
+    interfaceAudio.playButton();
+
+    if (introState === 1) {
+      return setGameState("start");
+    }
+
+    setIntroState(introState - 1);
+  };
+
+  function backButtonReadout() {
+    if (introState === 1) {
+      return <BackButton onClick={goBack}>Home</BackButton>;
+    }
+
+    return <BackButton onClick={goBack}>Back</BackButton>;
+  }
+
+  function forwardButtonReadout() {
+    if (introState === 2 && (!submittedName || submittedName === "are you?")) {
+      return "";
+    }
+
+    if (introState === 2) {
+      return (
+        <ForwardButton onClick={goForward}>
+          {`Welcome, ${submittedName}`}
+        </ForwardButton>
+      );
+    }
+
+    if (introState === 4) {
+      return <ForwardButton onClick={goForward}>Accept</ForwardButton>;
+    }
+
+    return <ForwardButton onClick={goForward}>Next</ForwardButton>;
+  }
 
   return (
     <IntroScreen>
@@ -45,34 +119,15 @@ function Intro({
             {makeTextComponent(IntroText)}
           </IntroShellText>
 
+          {backButtonReadout()}
+
           <PageBox>{`${introState}/4`}</PageBox>
 
-          <BackButton
-            onClick={() => {
-              introState === 1
-                ? setGameState("start")
-                : setIntroState(introState - 1);
-
-              interfaceAudio.playButton();
-            }}
-          >
-            {introState === 1 ? "Menu" : "Back"}
-          </BackButton>
-
-          <ForwardButton
-            onClick={() => {
-              introState === 4
-                ? setGameState("game")
-                : setIntroState(introState + 1);
-              interfaceAudio.playButton();
-            }}
-          >
-            {introState === 4 ? `"Accept"` : "Next"}
-          </ForwardButton>
+          {forwardButtonReadout()}
         </IntroBox>
       </IntroShell>
     </IntroScreen>
   );
-}
+};
 
 export default Intro;

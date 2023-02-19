@@ -3,11 +3,11 @@ import "../styles/_start_screen.scss";
 import "../styles/_button.scss";
 import InterfaceAudio from "audio/InterfaceAudio";
 
-function StartScreen({
-  setGameState,
-}: {
-  setGameState: (state: "start" | "game" | "intro") => void;
-}) {
+type Props = {
+  setGameState: (state: "start" | "game" | "intro" | "saves") => void;
+};
+
+const StartScreen: React.FC<Props> = ({ setGameState }) => {
   const interfaceAudio = new InterfaceAudio();
 
   return (
@@ -49,11 +49,22 @@ function StartScreen({
             interfaceAudio.playButton();
           }}
         >
-          <p style={{ marginTop: `15px` }}>Continue</p>
+          <p style={{ marginTop: `15px` }}>Test</p>
+        </button>
+
+        <button
+          className="rpgui-button golden"
+          style={{ gridColumn: 2, fontSize: "18px" }}
+          onClick={() => {
+            setGameState("saves");
+            interfaceAudio.playButton();
+          }}
+        >
+          <p style={{ marginTop: `15px` }}>Load</p>
         </button>
       </div>
     </div>
   );
-}
+};
 
 export default StartScreen;
