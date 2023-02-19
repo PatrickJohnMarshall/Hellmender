@@ -62,6 +62,7 @@ const BackButton = styled.button.attrs(() => ({
   grid-row: 2;
   font-size: 18px;
   justify-self: flex-end;
+  padding-bottom: 5px;
 `;
 
 const ForwardButton = styled.button.attrs(() => ({
@@ -70,9 +71,10 @@ const ForwardButton = styled.button.attrs(() => ({
   grid-column: 4;
   grid-row: 2;
   font-size: 18px;
+  padding-bottom: 5px;
 `;
 
-const TextBlock = styled.p`
+const TextBlock = styled.div`
   grid-row: ${(props) => props.row};
 `;
 
@@ -85,11 +87,11 @@ const NameInput = styled.input`
   }
 `;
 
-const NameSubmit = styled.input`
-  && {
-    width: 5em;
-    padding: 0;
-  }
+const NameSubmit = styled.button.attrs(() => ({
+  className: "rpgui-button golden help-button",
+}))`
+  font-size: 18px;
+  padding-bottom: 6px;
 `;
 
 const TextDiv = styled.div`

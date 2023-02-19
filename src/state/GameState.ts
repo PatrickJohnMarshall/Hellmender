@@ -9,6 +9,32 @@ import PlayerStats from "player/PlayerStats";
 
 /////
 
+export type FileType = {
+  playerName: string | undefined;
+  date: string;
+  playerLocation: string;
+  playerInventory: {
+    weapons: string[];
+    keyItems: string[];
+    spells: string[];
+    equippedWeapon: string;
+  };
+  playerStats: {
+    str: number;
+    con: number;
+    dex: number;
+    int: number;
+    wis: number;
+    cha: number;
+    maxMana: number;
+    mana: number;
+    maxHP: number;
+    hp: number;
+    ac: number;
+  };
+  previousMove: string;
+};
+
 export class GameState {
   #items;
   #monsters;
@@ -17,6 +43,7 @@ export class GameState {
   #playerStats;
   #playerAction;
   #storage;
+  #playerName;
   #saveSlots = [];
 
   constructor(storage = localStorage) {
@@ -58,6 +85,18 @@ export class GameState {
     return this.#saveSlots;
   }
 
+  set playerName(name: string) {
+    if (name.length < 1 || name.length > 32) {
+      this.#playerName = "Invalid Name";
+    }
+
+    this.#playerName = name;
+  }
+
+  get playerName() {
+    return this.#playerName;
+  }
+
   get items() {
     return this.#items;
   }
@@ -83,9 +122,13 @@ export class GameState {
   }
 
   saveState(saveSlot: number) {
-    const saveObject = {
-      items: this.#items,
-      monsters: this.#monsters,
+    let date = new Date();
+
+    const saveObject: FileType = {
+      // items: this.#items,
+      // monsters: this.#monsters,
+      playerName: this.#playerName,
+      date: date.toLocaleDateString() + " - " + date.toLocaleTimeString(),
       playerLocation: this.#playerLocation.toSave(),
       playerInventory: this.#playerInventory.toSave(),
       playerStats: this.#playerStats.toSave(),
@@ -105,7 +148,7 @@ export class GameState {
       equippedWeaponID: saveFile.playerInventory.equippedWeapon,
     });
 
-    this.#monsters = saveFile.monsters;
+    // this.#monsters = saveFile.monsters;
 
     this.#playerLocation = PlayerLocation.formSave(
       buildLayout(saveFile.playerLocation)

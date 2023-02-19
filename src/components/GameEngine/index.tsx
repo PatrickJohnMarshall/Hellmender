@@ -9,20 +9,22 @@ import { TerminalController } from "../TerminalController";
 import TerminalLogContext from "../../context/TerminalLog";
 import { TerminalOutput } from "../Terminal";
 
-import { GameState } from "state/GameState";
-
 import HelpMenu from "components/ReadoutGrid/HelpMenu";
 import getRoomItemDescriptions from "util/getRoomItemDescriptions";
+import { GameState } from "state/GameState";
 
-const State = new GameState();
+type Props = {
+  setGameState: (state: "start" | "game" | "intro" | "saves") => void;
+  state: GameState;
+};
 
-function GameEngine({ setGameState }) {
+const GameEngine: React.FC<Props> = ({ setGameState, state }) => {
   const [terminalLog, setTerminalLog] = useState([
     <TerminalOutput>{`${
-      State.playerLocation.describe() +
+      state.playerLocation.describe() +
       getRoomItemDescriptions(
-        State.playerLocation.getID(),
-        State.items.activeItems
+        state.playerLocation.getID(),
+        state.items.activeItems
       )
     }`}</TerminalOutput>,
   ]);
@@ -53,34 +55,34 @@ function GameEngine({ setGameState }) {
         ) : (
           <TerminalController
             setGameState={setGameState}
-            playerAction={State.playerAction}
-            allItems={State.items.activeItems}
+            playerAction={state.playerAction}
+            allItems={state.items.activeItems}
             itemsInRoom={{
-              keyItems: State.items.activeItems.getKeyItemsForRoom(
-                State.playerLocation.getID()
+              keyItems: state.items.activeItems.getKeyItemsForRoom(
+                state.playerLocation.getID()
               ),
-              weapons: State.items.activeItems.getWeaponsForRoom(
-                State.playerLocation.getID()
+              weapons: state.items.activeItems.getWeaponsForRoom(
+                state.playerLocation.getID()
               ),
             }}
-            monsters={State.monsters.getMonstersForRoom(
-              State.playerLocation.getID()
+            monsters={state.monsters.getMonstersForRoom(
+              state.playerLocation.getID()
             )}
           />
         )}
         <ReadoutGrid
-          playerStats={State.playerStats}
-          monsters={State.monsters.getMonstersForRoom(
-            State.playerLocation.getID()
+          playerStats={state.playerStats}
+          monsters={state.monsters.getMonstersForRoom(
+            state.playerLocation.getID()
           )}
-          weapons={State.playerInventory.getWeapons()}
-          keyItems={State.playerInventory.getKeyItems()}
-          spells={State.playerInventory.getSpells()}
+          weapons={state.playerInventory.getWeapons()}
+          keyItems={state.playerInventory.getKeyItems()}
+          spells={state.playerInventory.getSpells()}
           setHelpToggle={setHelpToggle}
         />
       </div>
     </TerminalLogContext.Provider>
   );
-}
+};
 
 export default GameEngine;
