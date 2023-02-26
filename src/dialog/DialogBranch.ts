@@ -19,7 +19,7 @@ class DialogBranch {
     this.#dialog = dialog;
   }
 
-  getStep() {
+  get currentStep() {
     return this.#curStep;
   }
 
@@ -51,7 +51,7 @@ class DialogBranch {
     }
   }
 
-  getCurDialog() {
+  curDialog() {
     const curDialog = this.#dialog[this.#curStep];
 
     if ("answer" in curDialog) {
