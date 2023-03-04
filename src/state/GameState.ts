@@ -7,8 +7,6 @@ import PlayerLocation from "player/PlayerLocation";
 import PlayerInventory from "player/PlayerInventory";
 import PlayerStats from "player/PlayerStats";
 
-/////
-
 export type FileType = {
   playerName: string | undefined;
   date: string;

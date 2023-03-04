@@ -5,6 +5,8 @@ import "styles/_scrollbars.scss";
 import "styles/_hr.scss";
 import "styles/_input.scss";
 
+import Dialog from "components/Dialog";
+
 import { TerminalController } from "../TerminalController";
 import TerminalLogContext from "../../context/TerminalLog";
 import { TerminalOutput } from "../Terminal";
@@ -29,7 +31,16 @@ const GameEngine: React.FC<Props> = ({ setGameState, state }) => {
     }`}</TerminalOutput>,
   ]);
 
+  const [dialogToggle, setDialogToggle] = useState<boolean>(true);
   const [helpToggle, setHelpToggle] = useState<boolean>(false);
+
+  function displayDialog() {
+    if (dialogToggle) {
+      return <Dialog state={state} setDialogToggle={setDialogToggle} />;
+    }
+
+    return;
+  }
 
   return (
     <TerminalLogContext.Provider
@@ -50,6 +61,8 @@ const GameEngine: React.FC<Props> = ({ setGameState, state }) => {
           height: "100vh",
         }}
       >
+        {displayDialog()}
+
         {helpToggle ? (
           <HelpMenu setHelpToggle={setHelpToggle} />
         ) : (

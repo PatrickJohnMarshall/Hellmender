@@ -77,8 +77,8 @@ describe("PlayerStats", () => {
   test("sets starting attitudes", () => {
     const dialogState = new DialogState(mockDialogStates);
 
-    expect(dialogState.getStates().grumpkin).toEqual(50);
-    expect(dialogState.getStates().gamCube).toEqual(0);
+    expect(dialogState.states.grumpkin).toEqual(50);
+    expect(dialogState.states.gamCube).toEqual(0);
   });
 
   test("changes state value", () => {
@@ -87,8 +87,8 @@ describe("PlayerStats", () => {
     dialogState.changeState("grumpkin", -10);
     dialogState.changeState("gamCube", 10);
 
-    expect(dialogState.getStates().grumpkin).toEqual(40);
-    expect(dialogState.getStates().gamCube).toEqual(10);
+    expect(dialogState.states.grumpkin).toEqual(40);
+    expect(dialogState.states.gamCube).toEqual(10);
   });
 
   test("steps through dialog", () => {
@@ -96,7 +96,7 @@ describe("PlayerStats", () => {
 
     grumpkinDialog.step();
 
-    expect(grumpkinDialog.getCurDialog().text).toEqual("Yep.");
+    expect(grumpkinDialog.curDialog().text).toEqual("Yep.");
   });
 
   test("answers question", () => {
@@ -107,7 +107,7 @@ describe("PlayerStats", () => {
     grumpkinDialog.step();
     grumpkinDialog.answer("God I hope so.");
 
-    expect(grumpkinDialog.getCurDialog().text).toEqual("Thank god.");
+    expect(grumpkinDialog.curDialog().text).toEqual("Thank god.");
   });
 
   test("ends dialog", () => {
@@ -119,7 +119,7 @@ describe("PlayerStats", () => {
     grumpkinDialog.answer("God I hope so.");
     grumpkinDialog.step();
 
-    expect(grumpkinDialog.getCurDialog().text).toEqual("Fin.");
+    expect(grumpkinDialog.curDialog().text).toEqual("Fin.");
   });
 
   test("navigates branches", () => {
@@ -132,7 +132,7 @@ describe("PlayerStats", () => {
     grumpkinDialog.answer("Naw man. Get pranked.");
     grumpkinDialog.step();
 
-    expect(grumpkinDialog.getCurDialog().text).toEqual("Fin.");
+    expect(grumpkinDialog.curDialog().text).toEqual("Fin.");
   });
 
   test("change rep based off of answers", () => {
@@ -155,6 +155,6 @@ describe("PlayerStats", () => {
 
     dialogState.changeState(answRes.target, answRes.value);
 
-    expect(dialogState.getStates().grumpkin).toEqual(20);
+    expect(dialogState.states.grumpkin).toEqual(20);
   });
 });

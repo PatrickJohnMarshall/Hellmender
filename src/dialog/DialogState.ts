@@ -1,24 +1,24 @@
 class DialogState {
-  constructor(private states: Record<string, number>) {}
+  constructor(private _states: Record<string, number>) {}
 
   setState(entity: string, stateVal: number) {
-    this.states[entity] = stateVal;
+    this._states[entity] = stateVal;
   }
 
   changeState(entity: string, stateVal: number) {
-    this.states[entity] += stateVal;
+    this._states[entity] += stateVal;
 
-    if (this.states[entity] < 0) {
-      this.states[entity] = 0;
+    if (this._states[entity] < 0) {
+      this._states[entity] = 0;
     }
 
-    if (this.states[entity] > 100) {
-      this.states[entity] = 100;
+    if (this._states[entity] > 100) {
+      this._states[entity] = 100;
     }
   }
 
-  getStates() {
-    return this.states;
+  get states() {
+    return this._states;
   }
 }
 
