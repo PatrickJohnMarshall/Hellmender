@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import { DialogBox } from "components/Dialog/dialog-styles/dialog-styles";
 
@@ -11,30 +11,58 @@ type Props = {
 
 const Dialog: React.FC<Props> = ({ state, setDialogToggle }) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
+  const draggableRef = useRef(null);
+  const isDraggingRef = useRef(false);
+  const offsetRef = useRef({ x: 0, y: 0 });
 
-  function handleDrag(event) {
-    event.dataTransfer.setDragImage(new Image(), 0, 0);
-    const x = event.clientX - 75;
-    const y = event.clientY - 75;
-    setPosition({ x, y });
-  }
+  const handleMouseDown = (e) => {
+    const element = draggableRef.current;
+    const rect = element.getBoundingClientRect();
 
-  const handleDragEnd = (event) => {
-    const x = event.clientX - 75;
-    const y = event.clientY - 75;
-    setPosition({ x, y });
+    offsetRef.current = {
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    };
+
+    isDraggingRef.current = true;
   };
+
+  const handleMouseMove = (e) => {
+    if (!isDraggingRef.current) {
+      return;
+    }
+
+    setPosition({
+      x: e.clientX - offsetRef.current.x,
+      y: e.clientY - offsetRef.current.y,
+    });
+  };
+
+  const handleMouseUp = () => {
+    isDraggingRef.current = false;
+  };
+
+  useEffect(() => {
+    const draggableElement = draggableRef.current;
+
+    draggableElement.addEventListener("mousedown", handleMouseDown);
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
+
+    return () => {
+      draggableElement.removeEventListener("mousedown", handleMouseDown);
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, []);
 
   return (
     <DialogBox
-      style={{ left: position.x, top: position.y }}
-      draggable
-      onDrag={handleDrag}
-      onDragEnd={handleDragEnd}
-      left={position.x}
-      top={position.y}
+      className="draggable"
+      ref={draggableRef}
+      style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
     >
-      Pog
+      Dialog Placeholder
     </DialogBox>
   );
 };
