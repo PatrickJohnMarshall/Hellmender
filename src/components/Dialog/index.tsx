@@ -1,6 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 
-import { DialogBox } from "components/Dialog/dialog-styles/dialog-styles";
+import {
+  DialogBox,
+  DialogInnerBox,
+} from "components/Dialog/dialog-styles/dialog-styles";
 
 import { GameState } from "state/GameState";
 
@@ -62,7 +65,7 @@ const Dialog: React.FC<Props> = ({ state, setDialogToggle }) => {
       ref={draggableRef}
       style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
     >
-      Dialog Placeholder
+      <DialogInnerBox>{`${state.playerName}`}</DialogInnerBox>
     </DialogBox>
   );
 };

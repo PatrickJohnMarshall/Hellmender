@@ -6,9 +6,11 @@ import { Saves } from "components/Saves";
 
 import { GameState } from "state/GameState";
 
-function App() {
-  const state = new GameState();
+import GameStateContext from "context/GameStateContext";
 
+const state = new GameState();
+
+function App() {
   if (!localStorage.getItem("saveFiles")) {
     localStorage.setItem("saveFiles", JSON.stringify([]));
   }
@@ -17,19 +19,27 @@ function App() {
     "start" | "game" | "intro" | "saves"
   >("start");
 
-  if (gameState === "game") {
-    return <GameEngine setGameState={setGameState} state={state} />;
+  function gameWindow() {
+    if (gameState === "game") {
+      return <GameEngine setGameState={setGameState} />;
+    }
+
+    if (gameState === "intro") {
+      return <Intro setGameState={setGameState} />;
+    }
+
+    if (gameState === "saves") {
+      return <Saves setGameState={setGameState} />;
+    }
+
+    return <StartScreen setGameState={setGameState} />;
   }
 
-  if (gameState === "intro") {
-    return <Intro setGameState={setGameState} state={state} />;
-  }
-
-  if (gameState === "saves") {
-    return <Saves setGameState={setGameState} state={state}></Saves>;
-  }
-
-  return <StartScreen setGameState={setGameState} />;
+  return (
+    <GameStateContext.Provider value={state}>
+      {gameWindow()}
+    </GameStateContext.Provider>
+  );
 }
 
 export default App;

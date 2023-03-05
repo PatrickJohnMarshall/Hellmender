@@ -1,5 +1,8 @@
 import { GameState } from "state/GameState";
 import InterfaceAudio from "audio/InterfaceAudio";
+import { useContext } from "react";
+
+import GameStateContext from "context/GameStateContext";
 
 import {
   SaveScreen,
@@ -14,10 +17,10 @@ import { SaveSlot } from "./SaveSlots";
 
 type Props = {
   setGameState: (state: "start" | "game" | "intro" | "saves") => void;
-  state: GameState;
 };
 
-export const Saves: React.FC<Props> = ({ setGameState, state }) => {
+export const Saves: React.FC<Props> = ({ setGameState }) => {
+  const state = useContext<GameState>(GameStateContext);
   const interfaceAudio = new InterfaceAudio();
 
   function saveSlotPrint() {

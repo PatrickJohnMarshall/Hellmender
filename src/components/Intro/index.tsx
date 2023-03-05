@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import InterfaceAudio from "audio/InterfaceAudio";
 import makeTextComponent from "util/makeTextComponent";
 
@@ -16,6 +16,7 @@ import {
 } from "./introStyles";
 
 import { GameState } from "state/GameState";
+import GameStateContext from "context/GameStateContext";
 
 import Intro1 from "./Intro1";
 import Intro2 from "./Intro2";
@@ -24,10 +25,11 @@ import Intro4 from "./Intro4";
 
 type Props = {
   setGameState: (state: "start" | "game" | "intro" | "saves") => void;
-  state: GameState;
 };
 
-const Intro: React.FC<Props> = ({ setGameState, state }) => {
+const Intro: React.FC<Props> = ({ setGameState }) => {
+  const state = useContext<GameState>(GameStateContext);
+
   const [introState, setIntroState] = useState(1);
   const [newName, setNewName] = useState<string>("are you?");
   const [submittedName, setSubmittedName] = useState<string>("");
@@ -44,6 +46,7 @@ const Intro: React.FC<Props> = ({ setGameState, state }) => {
 
     if (newName !== "are you?" && newName !== "") {
       state.playerName = newName;
+      console.log(state.playerName);
       setSubmittedName(newName);
     }
   }
