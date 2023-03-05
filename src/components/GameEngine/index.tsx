@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import ReadoutGrid from "../ReadoutGrid";
 
 import "styles/_scrollbars.scss";
@@ -15,12 +15,15 @@ import HelpMenu from "components/ReadoutGrid/HelpMenu";
 import getRoomItemDescriptions from "util/getRoomItemDescriptions";
 import { GameState } from "state/GameState";
 
+import GameStateContext from "context/GameStateContext";
+
 type Props = {
   setGameState: (state: "start" | "game" | "intro" | "saves") => void;
-  state: GameState;
 };
 
-const GameEngine: React.FC<Props> = ({ setGameState, state }) => {
+const GameEngine: React.FC<Props> = ({ setGameState }) => {
+  const state = useContext<GameState>(GameStateContext);
+
   const [terminalLog, setTerminalLog] = useState([
     <TerminalOutput>{`${
       state.playerLocation.describe() +
