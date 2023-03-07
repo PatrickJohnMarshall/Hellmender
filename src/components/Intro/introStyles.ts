@@ -61,7 +61,7 @@ const BackButton = styled.button.attrs(() => ({
   grid-column: 2;
   grid-row: 2;
   font-size: 18px;
-  justify-self: flex-end;
+  /* justify-self: flex-end; */
   padding-bottom: 5px;
 `;
 

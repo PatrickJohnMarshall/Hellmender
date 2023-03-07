@@ -8,6 +8,7 @@ import {
   TalkerBox,
   AnswerList,
   Answer,
+  QuitDialogButton,
 } from "components/Dialog/dialog-styles/dialog-styles";
 
 import { GameState } from "state/GameState";
@@ -85,6 +86,7 @@ const Dialog: React.FC<Props> = ({ state, setDialogToggle }) => {
           </AnswerList>
         </DialogChoiceBox>
 
+        <QuitDialogButton>Goodbye</QuitDialogButton>
         <TalkerBox />
       </DialogInnerBox>
     </DialogBox>
