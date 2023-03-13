@@ -3,6 +3,12 @@ import React, { useState, useRef, useEffect } from "react";
 import {
   DialogBox,
   DialogInnerBox,
+  DialogTextBox,
+  DialogChoiceBox,
+  TalkerBox,
+  AnswerList,
+  Answer,
+  QuitDialogButton,
 } from "components/Dialog/dialog-styles/dialog-styles";
 
 import { GameState } from "state/GameState";
@@ -65,7 +71,24 @@ const Dialog: React.FC<Props> = ({ state, setDialogToggle }) => {
       ref={draggableRef}
       style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
     >
-      <DialogInnerBox>{`${state.playerName}`}</DialogInnerBox>
+      <DialogInnerBox>
+        <DialogTextBox />
+
+        <DialogChoiceBox>
+          <AnswerList>
+            <Answer
+              onClick={() => {
+                setDialogToggle(false);
+              }}
+            >
+              Test 1
+            </Answer>
+          </AnswerList>
+        </DialogChoiceBox>
+
+        <QuitDialogButton>Goodbye</QuitDialogButton>
+        <TalkerBox />
+      </DialogInnerBox>
     </DialogBox>
   );
 };
